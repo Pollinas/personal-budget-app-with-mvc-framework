@@ -1,11 +1,26 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block title %}Forgot password{% endblock %}
+{% block title %}Resetowanie hasła{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="/stylesheet/home.css" />
+{% endblock %}
 
 {% block body %}
 
-<h1>Resetowanie hasła zakończone sukcesem.</h1>
+<div class="container main d-flex flex-column flex-lg-row py-5 px-4 my-5">
+    <img src="https://images.pexels.com/photos/3807737/pexels-photo-3807737.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+        alt="" class="img-fluid img-thumbnail order-md-first order-last ">
+    <div class="container yey align-items-center justify-content-center align-self-center text-center d-flex flex-column py-5 expired px-4 my-5"
+        id="content">
+        <p>Resetowanie hasła zakończone sukcesem.
 
-<p>Możesz teraz <a href="/login">zalogować się</a> na swoje konto.</p>
+            Możesz teraz <a href="/login">zalogować się</a> na swoje konto.</p>
+
+    </div>
+
+</div>
+
 
 {% endblock %}
