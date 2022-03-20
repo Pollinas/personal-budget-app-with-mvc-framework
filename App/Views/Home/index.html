@@ -31,7 +31,7 @@
     <div class="nav-links">
         {% if current_user %}
         <a href="/mainmenu/new" class="link">Menu główne</a>
-        <a href="" class="link">Zainspiruj się</a>
+        <a href="https://www.youtube.com/watch?v=3Td8aeugXhY" class="link">Zainspiruj się</a>
         <a href="/login/destroy" class="link">Wyloguj się</a>
         {% endif %}
         {% if not current_user %}
@@ -42,12 +42,12 @@
     </div>
 </nav>
 
-<div class="container main d-flex flex-column flex-md-row py-5 px-4 my-5">
+<div class="container main d-flex flex-column flex-md-row py-5 my-5">
     <img src="https://images.pexels.com/photos/5909801/pexels-photo-5909801.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
         alt="" class="img-fluid img-thumbnail order-md-first order-last ">
-    <div class="container align-items-center justify-content-center align-self-center d-flex flex-column py-5 px-4 my-5"
+    <div class="container align-items-center justify-content-center align-self-center d-flex flex-column py-5 my-5"
         id="content">
-        <span class="text-center m-2 fs-5 ">
+        <span class="text-center my-2 fs-5 ">
             <figure class="text-center">
                 <blockquote class="blockquote">
                     <p>„Zrobić budżet to wskazać swoim pieniądzom, dokąd mają iść,
@@ -57,16 +57,68 @@
                     <cite title="Source Title" class="fw-bold">John C. Maxwell</cite>
                 </figcaption>
             </figure>
-            <h1>Witaj{% if current_user %}, {{ current_user.name }}{% endif %}!</h1>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis error optio, nostrum quia, quod iure,
-            molestias laboriosam eaque illo impedit facere? Qui quae quasi facere maxime ex illo fugiat sapiente.
-            Dolorem, odio. Nobis accusamus neque nisi unde, veniam officiis incidunt qui, repudiandae porro expedita
-            quidem quam reiciendis, itaque possimus optio error natus iste tempora. Dicta aspernatur alias ab voluptatum
-            quam.
+            <h1 class="my-5">Witaj{% if current_user %}, {{ current_user.name }}{% endif %}!</h1>
+            {% if not current_user %}<span>W aplikacji do zarządzania budźetem personalnym; miejscu, które może stać się
+                jednym z podstawowych narzędzi na Twojej drodze do
+                osiągnięcia <a class="free"
+                    href="https://businessinsider.com.pl/poradnik-finansowy/oszczedzanie/co-to-jest-wolnosc-finansowa-i-dlaczego-warto-do-niej-dazyc/yx5fn3t">wolności
+                    finansowej</a>. Aby założyć konto, kliknij na ikonę w lewym górnym rogu, wybierz opcję 'Zarejestruj
+                się'. </span>
+            <hr>
+            <span> Nie jesteś tu pierwszy raz? Wybierz opcję 'Zaloguj się' i działaj! </span>{% endif %}
+
+            {% if current_user %}
+            <span>Kliknij na ikonę w lewym górnym rogu, przejdź do menu głównego i wybierz
+                interesującą Cię opcję. </span>
+
+            <hr> <span>Potrzebujesz odrobiny inpiracji? Podczas korzystania z
+                aplikacji napotkasz kilka linków do rozmów z wybitnymi osobami. Jeden z nich znajduje się na tej
+                stronie!
+                Jeśli chcesz
+                pogłębić swoją wiedzę na temat oszczędzania, kilknij <button type="button" class="btn btn-dark"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    tutaj
+                </button> i przeglądaj stale uzupełnianą listę książek i
+                artykułów. </span>{% endif %}
+
         </span>
 
     </div>
 
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li><a
+                            href="https://www.empik.com/najbogatszy-czlowiek-w-babilonie-clason-george-s,p1136509418,ksiazka-p">Najbogatszy
+                            człowiek w Babilonie</a> <i>George S. Clason</i></li>
+                    <li> <a
+                            href="https://www.empik.com/the-index-card-why-personal-finance-doesn-t-have-to-be-complicated-olen-helaine,p1153829036,ksiazka-p">The
+                            Index Card</a> <i>Helaine Olen, Harold Pollack</i></li>
+                    <li><a
+                            href="https://www.empik.com/the-automatic-millionaire-workbook-a-personalized-plan-to-live-and-finish-rich-automatically-bach-david,p1147097469,ksiazka-p">
+                            The Automatic Millionaire</a> <i>David Bach</i></li>
+                    <li><a href="https://www.taniaksiazka.pl/kobiety-i-finanse-orman-suze-p-301026.html">Kobieta
+                            i finanse</a> <i>Suze Orman</i></li>
+                    <li><a
+                            href="https://www.empik.com/finansowy-kozak-zarabiaj-ile-chcesz-i-spelniaj-marzenia-sincero-jen,p1220164743,ebooki-i-mp3-p">Finansowy
+                            kozak</a> <i>Jen Sincero</i>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Zamknij</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 

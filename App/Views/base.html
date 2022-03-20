@@ -20,7 +20,7 @@
 <body>
 
     {% for message in flash_messages %}
-    <div class="text-center alert alert-{{ message.type }} alert-dismissible fade show" role="alert">
+    <div class="text-center alert alert-{{ message.type }} alert-dismissible fade show" role="alert" style="z-index:1;">
         {{ message.body }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
