@@ -1,12 +1,28 @@
 {% extends 'base.html' %}
 
-{% block title %}Forgot password{% endblock %}
+{% block title %}Resetowanie hasła{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="/stylesheet/home.css" />
+{% endblock %}
 
 {% block body %}
 
-<h1>Resetowanie hasła</h1>
+<div class="container main d-flex flex-column flex-lg-row py-5 px-4 my-5">
+    <img src="https://images.unsplash.com/photo-1639953855866-e4008dd10a93?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bm8lMjBhY2Nlc3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+        alt="" class="img-fluid img-thumbnail order-md-first order-last ">
+    <div class="container align-items-center justify-content-center align-self-center text-center d-flex flex-column py-5 expired px-4 my-5"
+        id="content">
+        <h1>Resetowanie hasła</h1>
 
-<p>Link do resetowania hasła wygasł lub jest nieprawidłowy. Kliknij <a href="/password/forgot">tutaj</a> ,aby uzyskać
-    kolejny.</p>
+        <p>Link do resetowania hasła wygasł lub jest nieprawidłowy. Kliknij <a href="/password/forgot">tutaj</a> ,aby
+            uzyskać
+            kolejny.</p>
+
+    </div>
+
+</div>
+
 
 {% endblock %}
