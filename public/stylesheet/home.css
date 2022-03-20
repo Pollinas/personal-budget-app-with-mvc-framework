@@ -174,12 +174,20 @@ nav .nav-links .link:hover {
     }
 }
 
-.active a{
+@media(max-height:800px)
+{
+    .expired h1{
+        color: #84A59D;
+        text-shadow: none;
+    }
+}
+
+.active a, .expired a{
     text-decoration: none;
     color: rgba(0,0,0,0.9);
 }
 
-.active a:hover{
+.active a:hover, .expired a:hover{
     color: rgba(0, 0, 0, .5);
 }
 
