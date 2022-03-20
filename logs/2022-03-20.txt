@@ -1,0 +1,253 @@
+[20-Mar-2022 10:54:23 UTC] Uncaught exception: 'Exception' with message 'Method cookieAction not found in controller App\Controllers\Password'
+Stack trace: #0 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#1 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#2 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Controller.php' on line 55
+[20-Mar-2022 10:54:38 UTC] Uncaught exception: 'Exception' with message 'Method cookieAction not found in controller App\Controllers\Password'
+Stack trace: #0 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#1 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#2 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Controller.php' on line 55
+[20-Mar-2022 11:33:24 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 11:33:28 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 11:33:32 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 11:33:35 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 11:34:34 UTC] Uncaught exception: 'ErrorException' with message 'Trying to access array offset on value of type bool'
+Stack trace: #0 C:\Program Files\Ampps\www\App\Models\PassTablesWithCategories.php(34): Core\Error::errorHandler()
+#1 C:\Program Files\Ampps\www\App\Models\PassTablesWithCategories.php(47): App\Models\PassTablesWithCategories::findUserIDByToken()
+#2 C:\Program Files\Ampps\www\App\Models\User.php(386): App\Models\PassTablesWithCategories::passTablesAfterActivation()
+#3 C:\Program Files\Ampps\www\App\Controllers\Signup.php(67): App\Models\User::activate()
+#4 [internal function]: App\Controllers\Signup->activateAction()
+#5 C:\Program Files\Ampps\www\Core\Controller.php(51): call_user_func_array()
+#6 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#7 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#8 {main}
+Thrown in 'C:\Program Files\Ampps\www\App\Models\PassTablesWithCategories.php' on line 34
+[20-Mar-2022 11:43:25 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 11:43:48 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 11:44:13 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 16:37:55 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 16:40:17 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 16:42:07 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 16:45:13 UTC] Uncaught exception: 'ErrorException' with message 'Undefined index: email'
+Stack trace: #0 C:\Program Files\Ampps\www\App\Controllers\Password.php(33): Core\Error::errorHandler()
+#1 [internal function]: App\Controllers\Password->requestResetAction()
+#2 C:\Program Files\Ampps\www\Core\Controller.php(51): call_user_func_array()
+#3 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#4 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#5 {main}
+Thrown in 'C:\Program Files\Ampps\www\App\Controllers\Password.php' on line 33
+[20-Mar-2022 16:45:24 UTC] Uncaught exception: 'ErrorException' with message 'Undefined index: email'
+Stack trace: #0 C:\Program Files\Ampps\www\App\Controllers\Password.php(33): Core\Error::errorHandler()
+#1 [internal function]: App\Controllers\Password->requestResetAction()
+#2 C:\Program Files\Ampps\www\Core\Controller.php(51): call_user_func_array()
+#3 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#4 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#5 {main}
+Thrown in 'C:\Program Files\Ampps\www\App\Controllers\Password.php' on line 33
+[20-Mar-2022 16:45:59 UTC] Uncaught exception: 'ErrorException' with message 'Undefined index: token'
+Stack trace: #0 C:\Program Files\Ampps\www\App\Controllers\Password.php(61): Core\Error::errorHandler()
+#1 [internal function]: App\Controllers\Password->resetPasswordAction()
+#2 C:\Program Files\Ampps\www\Core\Controller.php(51): call_user_func_array()
+#3 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#4 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#5 {main}
+Thrown in 'C:\Program Files\Ampps\www\App\Controllers\Password.php' on line 61
+[20-Mar-2022 16:50:26 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 16:52:32 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 16:55:03 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 16:56:17 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 16:56:55 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 16:57:18 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:08:28 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:10:30 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:10:36 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:11:04 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:11:08 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:11:12 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:11:36 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:11:45 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:12:25 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:12:37 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:13:19 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:16:32 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:16:49 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:17:09 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:17:13 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:17:21 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:17:32 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:17:37 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:17:47 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:26:40 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:29:33 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:29:43 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:29:46 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:30:33 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:30:43 UTC] Uncaught exception: 'ErrorException' with message 'Undefined index: token'
+Stack trace: #0 C:\Program Files\Ampps\www\App\Controllers\Password.php(61): Core\Error::errorHandler()
+#1 [internal function]: App\Controllers\Password->resetPasswordAction()
+#2 C:\Program Files\Ampps\www\Core\Controller.php(51): call_user_func_array()
+#3 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#4 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#5 {main}
+Thrown in 'C:\Program Files\Ampps\www\App\Controllers\Password.php' on line 61
+[20-Mar-2022 18:33:27 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:37:23 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:38:23 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:39:28 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:40:02 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:41:29 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 18:42:38 UTC] Uncaught exception: 'ErrorException' with message 'Undefined index: email'
+Stack trace: #0 C:\Program Files\Ampps\www\App\Controllers\Password.php(33): Core\Error::errorHandler()
+#1 [internal function]: App\Controllers\Password->requestResetAction()
+#2 C:\Program Files\Ampps\www\Core\Controller.php(51): call_user_func_array()
+#3 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#4 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#5 {main}
+Thrown in 'C:\Program Files\Ampps\www\App\Controllers\Password.php' on line 33
+[20-Mar-2022 18:42:40 UTC] Uncaught exception: 'ErrorException' with message 'Undefined index: email'
+Stack trace: #0 C:\Program Files\Ampps\www\App\Controllers\Password.php(33): Core\Error::errorHandler()
+#1 [internal function]: App\Controllers\Password->requestResetAction()
+#2 C:\Program Files\Ampps\www\Core\Controller.php(51): call_user_func_array()
+#3 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#4 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#5 {main}
+Thrown in 'C:\Program Files\Ampps\www\App\Controllers\Password.php' on line 33

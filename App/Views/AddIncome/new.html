@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Main Menu{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+
+<link rel="stylesheet" type="text/css" href="/stylesheet/add-income.css" />
+
+{% endblock %}
+
+{% block footer %}
+
+<script src="/js/add-income.js"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div
+    class="container-fluid align-items-center justify-content-center align-self-center main d-flex flex-column py-5 px-4 my-5">
+    <h1 class="display-6 text-center align-self-center p-3 ">PRZYCHÓD</h1>
+
+    {% if income.errors is not empty %}
+    <p class="align-self-center text-center">
+    <ul class="error">
+        {% for error in income.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    </p>
+    {% endif %}
+
+    <form method="post" action="/addincome/create" id="formIncome">
+        <div class="container d-flex flex-md-row flex-column align-items-center justify-content-center px-5 p-md-1">
+            <div class="input-group">
+                <label for="amount" class="form-label align-self-center m-1">KWOTA PRZYCHODU</label>
+                <span class="input-group-text">PLN</span>
+                <input type="number" step="0.1" min="0.1" class="form-control" name="amount" id="amount" required
+                    value="{{ income.amount }}">
+            </div>
+            <div class="input-group m-2 my-3 my-md-2">
+                <label for="date" class="form-label align-self-center m-1">DATA PRZYCHODU</label>
+                <input type="date" class="form-control" id="date" name="date" onchange="myFunction(event)" required
+                    value="{{ income.date }}">
+            </div>
+        </div>
+
+        <div
+            class="container d-flex align-items-center justify-content-center flex-column mx-auto my-3 px-md-5 py-md-3">
+            <div class="input-group  m-3 px-5">
+                <label for="category"></label>
+                <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                        <path
+                            d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                    </svg></span>
+                <select class="form-select" id="category" name="category" aria-label="Default select example">
+                    <option selected value="">WYBIERZ KATEGORIĘ</option>
+                    {% for category in categories %}
+                    <option value="{{ category }}"> {{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="m-2">
+                <input type="text" class="form-control" name="comment" id="comment"
+                    placeholder="Komentarz (opcjonalnie)">
+            </div>
+
+
+        </div>
+
+        <div class="container d-flex align-items-center justify-content-center flex-column m-3">
+            <button type="submit" id="submit" class="btn m-3 p-3">DODAJ PRZYCHÓD</button>
+            <a href="/mainmenu/new" class="m-2">Wróć do menu głównego</a>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

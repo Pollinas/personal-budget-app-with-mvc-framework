@@ -1,0 +1,80 @@
+body {
+
+	background-color: #84A59D;
+	font-family: 'Catamaran', sans-serif;
+
+}
+.main{
+	border-radius: 15px;
+}
+
+.main, nav{
+	background: rgba(255, 255, 255, 0.8);
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
+}
+
+
+.modal{
+	font-family: 'Catamaran', sans-serif;
+}
+
+#time{
+	min-width: 20px;
+}
+
+a{
+	text-decoration: none;
+	color: #84A59D;
+	font-size: 120%;
+	font-weight: bolder;
+	display: inline-block;
+	transition: all 1s ease-out;
+	cursor: pointer;
+}
+
+a:hover, a:focus{
+	color: #F28482;
+
+}
+
+
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+	}
+
+
+	.calculate_good{
+		background-color: green;
+	}
+	.calculate_bad{
+		background-color:red;
+	}
+
+	.calculate_good, .calculate_bad{
+		border-radius: 15px;
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+		transform: scale(1);
+		animation: pulse 2s infinite;
+	}
+
+
+
+
+
+
+
+

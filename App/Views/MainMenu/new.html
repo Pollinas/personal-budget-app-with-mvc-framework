@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Main Menu{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+
+<link rel="stylesheet" type="text/css" href="/stylesheet/main-menu.css" />
+
+{% endblock %}
+
+{% block footer %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="/js/main-menu.js"></script>
+
+{% endblock %}
+
+{% block body %}
+
+
+<div id="preloader">
+    <div id="status">
+
+        <i class="fa-solid fa-hand-holding-dollar fa-5x fa-fade" style="color: #F5CAC3;"></i>
+
+    </div>
+</div>
+
+<div id="description" class="p-md-5 m-md-5 p-2 m-2 fs-3"></div>
+
+
+<nav class="menu">
+    <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
+    <label class="menu-open-button" for="menu-open">
+        <span class="lines line-1"></span>
+        <span class="lines line-2"></span>
+        <span class="lines line-3"></span>
+    </label>
+
+    <a href="https://www.youtube.com/watch?v=aNdgTWjOaxI" class="menu-item inspiration">
+        <i class="bi bi-gem"></i> </a>
+    <a href="/displaybalance/new" class="menu-item balance"> <i class="bi bi-pie-chart-fill"></i> </a>
+    <a href="/addexpense/new" class="menu-item expense"><i class="bi bi-cart4"></i></a>
+    <a href="/addincome/new" class="menu-item income"><i class="bi bi-cash"></i> </a>
+    <a href="#" class="menu-item settings"> <i class="bi bi-gear"></i> </a>
+    <a href="/login/destroy" class="menu-item logOut"> <i class="bi bi-box-arrow-left"></i> </a>
+</nav>
+
+{% endblock %}

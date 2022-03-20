@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Rejestracja{% endblock %}
+
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="/stylesheet/home.css" />
+{% endblock %}
+
+{% block footer %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="/js/home.js"></script>
+{% endblock %}
+
+{% block body %}
+
+<div class="container main d-flex flex-column flex-md-row py-5 px-4 my-5">
+    <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3VjY2Vzc3xlbnwwfDF8MHx8&auto=format&fit=crop&w=500&q=60"
+        alt="" class="img-fluid img-thumbnail order-md-first order-last ">
+    <div class="container align-items-center justify-content-center align-self-center d-flex flex-column py-5 px-4 my-5"
+        id="content">
+        <span class="text-center mt-5 fs-2 active">
+
+            <h1>Sukces!</h1>
+
+            <p>Twoje konto jest już aktywne. Możesz teraz <a href="/login" class="">zalogować się</a> na swoje
+                konto.</p>
+        </span>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

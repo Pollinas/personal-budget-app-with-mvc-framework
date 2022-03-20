@@ -1,0 +1,106 @@
+body {
+
+	background-color: #84A59D;
+	font-family: 'Catamaran', sans-serif;
+
+}
+
+.bi:hover{
+	fill: #F6BD60;
+	transition: all 1s ease-out;
+	transform: scale(1.2);
+}
+
+.main{
+	max-width: 450px;
+	border-radius: 15px;
+	background: rgba(255, 255, 255, 0.8);
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
+}
+
+
+.btn{
+	border: 1px solid lightgrey;
+	border-radius: 15px; 
+	font-weight: bolder;
+	background: #F28482;
+	transform:scale(1.2);
+	transition: all 1s ease-out;
+}
+
+.btn:hover, .btn:focus{
+	background: #F5CAC3;
+	transform:scale(1.3);
+}
+
+
+#signIn, #signUp, #forgot{
+	text-decoration: none;
+	color: #84A59D;
+	font-size: 120%;
+	font-weight: bolder;
+	display: inline-block;
+	transition: all 1s ease-out;
+}
+
+#signIn:hover, #signIn:focus, #signUp:hover, #signUp:focus{
+	color: #F28482;
+}
+
+#forgot:hover, #forgot:focus{
+	color: #F5CAC3;
+}
+
+
+.error{
+	list-style-type: no;
+	color:red;
+	list-style-type: none;
+}
+
+/* preloader */
+#preloader {
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	 background: black ; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 100%;
+	z-index:99; /* makes sure it stays on top */
+  }
+  
+  #status {
+	position:fixed;
+	left:50%; /* centers the loading animation horizontally one the screen */
+	top:50%; /* centers the loading animation vertically one the screen */
+	margin:-25px 0 0 -15px; /* is width and height divided by two */
+  }
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
