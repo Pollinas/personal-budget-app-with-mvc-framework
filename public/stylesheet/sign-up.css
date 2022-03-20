@@ -5,11 +5,6 @@ body {
 
 }
 
-.bi:hover{
-	fill: #F6BD60;
-	transition: all 1s ease-out;
-	transform: scale(1.2);
-}
 
 .main{
 	max-width: 450px;
