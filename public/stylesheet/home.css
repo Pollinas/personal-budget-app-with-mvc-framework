@@ -182,12 +182,12 @@ nav .nav-links .link:hover {
     }
 }
 
-.active a, .expired a, .yey a{
+.active a, .expired a, .yey a, .free, .modal a{
     text-decoration: none;
     color: rgba(0,0,0,0.9);
 }
 
-.active a:hover, .expired a:hover, .yey a:hover{
+.active a:hover, .expired a:hover, .yey a:hover, .free:hover, .modal a:hover{
     color: rgba(0, 0, 0, .5);
 }
 
@@ -199,4 +199,8 @@ nav .nav-links .link:hover {
 .btn:hover{
     transform: scale(1.2);
     background: rgba(0, 0, 0, .5);
+}
+
+img { 
+    margin-top: 2%;
 }
