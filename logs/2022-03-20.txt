@@ -708,3 +708,57 @@ Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
 Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
 #1 {main}
 Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[20-Mar-2022 23:57:17 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[20-Mar-2022 23:57:17 UTC] PHP Fatal error:  Uncaught Twig\Error\SyntaxError: The block 'body' has already been defined line 12. in C:\Program Files\Ampps\www\App\Views\500.html:14
+Stack trace:
+#0 C:\Program Files\Ampps\www\vendor\twig\twig\src\Parser.php(171): Twig\TokenParser\BlockTokenParser->parse()
+#1 C:\Program Files\Ampps\www\vendor\twig\twig\src\TokenParser\BlockTokenParser.php(47): Twig\Parser->subparse()
+#2 C:\Program Files\Ampps\www\vendor\twig\twig\src\Parser.php(171): Twig\TokenParser\BlockTokenParser->parse()
+#3 C:\Program Files\Ampps\www\vendor\twig\twig\src\Parser.php(84): Twig\Parser->subparse()
+#4 C:\Program Files\Ampps\www\vendor\twig\twig\src\Environment.php(488): Twig\Parser->parse()
+#5 C:\Program Files\Ampps\www\vendor\twig\twig\src\Environment.php(516): Twig\Environment->parse()
+#6 C:\Program Files\Ampps\www\vendor\twig\twig\src\Environment.php(348): Twig\Environment->compileSource()
+#7 C:\Program Files\Ampps\www\vendor\twig\twig\src\Environment.php(309): Twig\Environment->loadTemplate()
+#8 C:\Program Files\Ampps\www\vendor\twig\t in C:\Program Files\Ampps\www\App\Views\500.html on line 14
+[20-Mar-2022 23:57:19 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[20-Mar-2022 23:57:19 UTC] PHP Fatal error:  Uncaught Twig\Error\SyntaxError: The block 'body' has already been defined line 12. in C:\Program Files\Ampps\www\App\Views\500.html:14
+Stack trace:
+#0 C:\Program Files\Ampps\www\vendor\twig\twig\src\Parser.php(171): Twig\TokenParser\BlockTokenParser->parse()
+#1 C:\Program Files\Ampps\www\vendor\twig\twig\src\TokenParser\BlockTokenParser.php(47): Twig\Parser->subparse()
+#2 C:\Program Files\Ampps\www\vendor\twig\twig\src\Parser.php(171): Twig\TokenParser\BlockTokenParser->parse()
+#3 C:\Program Files\Ampps\www\vendor\twig\twig\src\Parser.php(84): Twig\Parser->subparse()
+#4 C:\Program Files\Ampps\www\vendor\twig\twig\src\Environment.php(488): Twig\Parser->parse()
+#5 C:\Program Files\Ampps\www\vendor\twig\twig\src\Environment.php(516): Twig\Environment->parse()
+#6 C:\Program Files\Ampps\www\vendor\twig\twig\src\Environment.php(348): Twig\Environment->compileSource()
+#7 C:\Program Files\Ampps\www\vendor\twig\twig\src\Environment.php(309): Twig\Environment->loadTemplate()
+#8 C:\Program Files\Ampps\www\vendor\twig\t in C:\Program Files\Ampps\www\App\Views\500.html on line 14
+[20-Mar-2022 23:58:06 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[20-Mar-2022 23:58:10 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[20-Mar-2022 23:59:08 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[20-Mar-2022 23:59:12 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[20-Mar-2022 23:59:13 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[20-Mar-2022 23:59:52 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
