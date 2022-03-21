@@ -2,9 +2,19 @@
 
 {% block title %}Error{% endblock %}
 
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="/stylesheet/error.css" />
+<link href="https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Condensed:100,200,300,400" rel="stylesheet">
+{% endblock %}
+
+
 {% block body %}
 
-    <h1>An error occurred</h1>
-    <p>Sorry, an error has occurred.</p>
+<div id="main">
+    <div class="fof">
+        <h1>Error 500</h1>
+    </div>
+</div>
 
 {% endblock %}

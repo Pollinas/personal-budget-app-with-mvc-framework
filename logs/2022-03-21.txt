@@ -1,0 +1,99 @@
+[21-Mar-2022 00:00:30 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:00:32 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:01:14 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:07:14 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:07:15 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:07:19 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:09:29 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:09:34 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:10:12 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:11:11 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:11:35 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:29:01 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:29:01 UTC] PHP Fatal error:  Uncaught Twig\Error\SyntaxError: The block 'body' has already been defined line 16. in C:\Program Files\Ampps\www\App\Views\500.html:39
+Stack trace:
+#0 C:\Program Files\Ampps\www\vendor\twig\twig\src\Parser.php(171): Twig\TokenParser\BlockTokenParser->parse()
+#1 C:\Program Files\Ampps\www\vendor\twig\twig\src\TokenParser\BlockTokenParser.php(47): Twig\Parser->subparse()
+#2 C:\Program Files\Ampps\www\vendor\twig\twig\src\Parser.php(171): Twig\TokenParser\BlockTokenParser->parse()
+#3 C:\Program Files\Ampps\www\vendor\twig\twig\src\Parser.php(84): Twig\Parser->subparse()
+#4 C:\Program Files\Ampps\www\vendor\twig\twig\src\Environment.php(488): Twig\Parser->parse()
+#5 C:\Program Files\Ampps\www\vendor\twig\twig\src\Environment.php(516): Twig\Environment->parse()
+#6 C:\Program Files\Ampps\www\vendor\twig\twig\src\Environment.php(348): Twig\Environment->compileSource()
+#7 C:\Program Files\Ampps\www\vendor\twig\twig\src\Environment.php(309): Twig\Environment->loadTemplate()
+#8 C:\Program Files\Ampps\www\vendor\twig\t in C:\Program Files\Ampps\www\App\Views\500.html on line 39
+[21-Mar-2022 00:29:24 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:29:24 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 130
+[21-Mar-2022 00:30:29 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:31:19 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:31:23 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:31:53 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:33:36 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:33:40 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:36:14 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
+[21-Mar-2022 00:36:26 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Items not found'
+Stack trace: #0 C:\Program Files\Ampps\www\public\index.php(41): Core\Router->dispatch()
+#1 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Router.php' on line 127
