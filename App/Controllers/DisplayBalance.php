@@ -93,8 +93,4 @@ class DisplayBalance extends Authenticated
         unset($balance);
     }
 
-    public function hey()
-    {
-        return [300, 50, 100];
-    }
 }
