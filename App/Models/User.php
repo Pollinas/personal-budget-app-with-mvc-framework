@@ -6,6 +6,8 @@ use PDO;
 use \App\Token;
 use \App\Mail;
 use \Core\View;
+use \App\Models\Income;
+use \App\Models\Expense;
 
 /**
  * User model
@@ -78,10 +80,11 @@ class User extends \Core\Model
     public function validate()
     {
         // Name
+        if (isset($this->name) && (isset($this->email)) ) {
         if ($this->name == '') {
             $this->errors[] = 'Podaj imię.';
         }
-
+        
         // email address
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
             $this->errors[] = 'Nieprawidłowy adres e-mail.';
@@ -89,8 +92,11 @@ class User extends \Core\Model
         if (static::emailExists($this->email, $this->id ?? null)) {
             $this->errors[] = 'Podany adres e-mail istnieje już w bazie danych.';
         }
+    }
 
         // Password
+        if (isset($this->password)) {
+
         if (strlen($this->password) < 6) {
             $this->errors[] = 'Hasło musi zawierać co najmniej 6 znaków.';
         }
@@ -101,6 +107,8 @@ class User extends \Core\Model
 
         if (preg_match('/.*\d+.*/i', $this->password) == 0) {
             $this->errors[] = 'Hasło musi zawierać co najmniej jedną cyfrę.';
+        }
+
         }
     }
 
@@ -275,7 +283,7 @@ class User extends \Core\Model
      */
     protected function sendPasswordResetEmail()
     {
-        $url = 'https://' . $_SERVER['HTTP_HOST'] . '/Password/reset/' . $this->password_reset_token;
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/Password/reset/' . $this->password_reset_token;
 
         $text = View::getTemplate('Password/reset_email.txt', ['url' => $url]);
         $html = View::getTemplate('Password/reset_email.html', ['url' => $url]);
@@ -362,7 +370,7 @@ class User extends \Core\Model
      */
     public function sendActivationEmail()
     {
-        $url = 'https://' . $_SERVER['HTTP_HOST'] . '/Signup/activate/' . $this->activation_token;
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/Signup/activate/' . $this->activation_token;
 
         $text = View::getTemplate('Signup/activation_email.txt', ['url' => $url]);
         $html = View::getTemplate('Signup/activation_email.html', ['url' => $url]);
@@ -397,6 +405,129 @@ class User extends \Core\Model
 
         $stmt->execute();       
         
+    }
+
+     /**
+     * Update the user's profile
+     *
+     * @param array $data Data from the edit profile form
+     *
+     * @return boolean  True if the data was updated, false otherwise
+     */
+    public function updateProfile($data)
+    {
+        $this->name = $data['name'];
+        $this->email = $data['email'];
+
+        $this->validate();
+
+        if (empty($this->errors)) {
+
+            $sql = 'UPDATE users
+                    SET name = :name,
+                        email = :email';
+
+            $sql .= "\nWHERE id = :id";
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
+            $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        }
+        else{
+
+        $userCheck = User::findByID($_SESSION['user_id']);
+        $this->email = $userCheck->email;
+        $this->name = $userCheck->name;
+        return false;
+        }
+    }
+
+     /**
+     * Update the user's password
+     *
+     * @param  $password New password from the form
+     *
+     * @return boolean  True if the password was updated, false otherwise
+     */
+    public function updatePassword($password)
+    {
+       
+        if ($password != '') {
+            $this->password = $password;
+        }
+
+        $this->validate();
+
+        if (empty($this->errors)) {
+
+            $sql = 'UPDATE users
+                    SET  password_hash = :password_hash';
+            
+            $sql .= "\nWHERE id = :id";
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+                $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
+                $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+            
+
+            return $stmt->execute();
+        }
+
+        return false;
+        
+    }
+
+    /**
+     * delete the user and all data to connected to the account
+     * 
+     * @return boolean
+     */
+    public function deleteAccount()
+    {
+        if (! User::deleteAccountRemembering()) return false;
+        if (! Income::deleteLinkedIncomeCategories()) return false;
+        if (! Expense::deleteLinkedExpenseCategories()) return false;
+       if (! Expense::deleteLinkedPaymentMethods()) return false;
+        if (! Expense::deleteAllExpenses()) return false;
+        if (! Income::deleteAllIncomes()) return false;
+        
+        $sql = 'DELETE FROM users 
+                WHERE id = :user_id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+        return $stmt->execute();
+
+    }
+
+    /**
+     * delete the data from remembered logins when deleting the account
+     * 
+     * @return boolean
+     */
+    protected static function deleteAccountRemembering() 
+    {
+        $sql = 'DELETE FROM remembered_logins
+        WHERE user_id = :user_id ';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+        return $stmt->execute();
     }
 
 

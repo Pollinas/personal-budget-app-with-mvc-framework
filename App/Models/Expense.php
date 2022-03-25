@@ -177,7 +177,61 @@ class Expense extends \Core\Model
         return $method_id;
     }
 
+ /**
+     * delete all expense categories assigned to the user
+     * 
+     * @return boolean
+     */
+    public static function deleteLinkedExpenseCategories() 
+    {
+        $sql = 'DELETE FROM expenses_category_assigned_to_users
+        WHERE user_id = :user_id ';
 
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
+    /**
+     * delete all payment methods assigned to the user
+     * 
+     * @return boolean
+     */
+    public static function deleteLinkedPaymentMethods()
+    {
+        $sql = 'DELETE FROM payment_methods_assigned_to_users
+        WHERE user_id = :user_id ';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
+    /**
+     * delete all of the user's expenses
+     * 
+     * @return boolean
+     */
+    public static function deleteAllExpenses() 
+    {
+        $sql = 'DELETE FROM expenses
+        WHERE user_id = :user_id ';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
+  
 
 
 

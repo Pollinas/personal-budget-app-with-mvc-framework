@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="/stylesheet/profile.css">
+{% endblock %}
+
+{% block footer %}
+<!--<script src="/js/profile.js"></script>-->
+<script src="/js/modal.js"></script>
+<script src="/js/toggle-password.js"></script>
+
+{% endblock %}
+
+{% block body %}
+<h1>Profile</h1>
+
+<div class="d-none" id="userId">{{ user.id }}</div>
+
+<dl class="list-group  d-column d-flex">
+
+
+    {% if user.errors is not empty %}
+    <p class="align-self-center text-center">
+    <ul class="error">
+        {% for error in user.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    </p>
+    {% endif %}
+    <label class="list-group-item">
+        <dt>name</dt>
+        <dd>{{ user.name }}</dd>
+    </label>
+    <label class="list-group-item">
+        <dt>E-mail</dt>
+        <dd>{{ user.email }}</dd>
+    </label>
+</dl>
+
+<button class="modal-button" href="#myModal1">Edytuj dane</button>
+
+<!-- modal edit profile-->
+<div class="modal" tabindex="-1" id="myModal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" action="/Profile/updateProfile" id="formProfile">
+
+                    <div class="input-group align-self-center m-md-3 px-md-5 my-3 ">
+                        <label for="name" class="form-label"> </label>
+                        <span class="input-group-text"><svg xmlns="://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                            </svg></span>
+                        <input type="text" name="name" minlength="2" maxlength="20" class="form-control rounded"
+                            id="name" aria-describedby="name" placeholder="Wpisz swoje imię." value="{{ user.name }}"
+                            required>
+                    </div>
+
+                    <div class="input-group align-self-center m-md-3 px-md-5 my-3 ">
+                        <label for="email" class="form-label"> </label>
+                        <span class="input-group-text">@</span>
+                        <input type="email" name="email" class="form-control rounded" id="email"
+                            aria-describedby="email" required placeholder="Wpisz swój adres e-mail."
+                            value="{{ user.email }}" required>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- end of modal edit profile-->
+
+
+<button class="modal-button" href="#myModal2">Zmień hasło</button>
+
+<!-- modal edit password-->
+<div class="modal" tabindex="-1" id="myModal2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Profile/updatePassword" id="formPasswordReset">
+                    <div class=" input-group m-md-3 px-md-5 my-3 ">
+                        <label for="password" class="form-label"> </label>
+                        <input type="password" name="password" minlength="6" class="form-control rounded" id="password"
+                            aria-describedby="password" placeholder="Wpisz hasło" required
+                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+                            title="Hasło musi zawierać co najmniej 6 znaków, w tym przynajmniej 1 literę i 1 cyfrę.">
+                        <span class="input-group-text"><i class="bi bi-eye-slash" id="togglePassword"></i></span>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- end of modal edit password-->
+
+
+<button class="modal-button" href="#myModal4">Usuń konto</button>
+
+<div class="modal" tabindex="-1" id="myModal4">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/Profile/delete">
+                    <p>Czy na pewno chcesz usunąć konto?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                <button type="button submit" class="btn btn-primary">Usuń konto</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

@@ -145,6 +145,41 @@ class Income extends \Core\Model
 
     } 
 
+    /**
+     * delete all income categories assigned to the user
+     * 
+     * @return boolean
+     */
+    public static function deleteLinkedIncomeCategories() 
+    {
+        $sql = 'DELETE FROM incomes_category_assigned_to_users
+        WHERE user_id = :user_id ';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
+    /**
+     * delete all of the user's incomes
+     * 
+     * @return boolean
+     */
+    public static function deleteAllIncomes() 
+    {
+        $sql = 'DELETE FROM incomes
+        WHERE user_id = :user_id ';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
 
   
 }
