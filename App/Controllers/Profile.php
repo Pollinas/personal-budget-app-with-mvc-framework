@@ -97,6 +97,12 @@ class Profile extends Authenticated
             Flash::addMessage('Konto i wszystkie dane z nim powiązane zostały usunięte.');
             $this->redirect('/');
         }
+        else{
+            Flash::addMessage('Ups! Coś poszło nie tak.');
+            View::renderTemplate('Profile/show.html',[
+               'user' => $this->user 
+            ]);
+        }
     }
     
 }

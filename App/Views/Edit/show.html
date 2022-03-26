@@ -1,26 +1,69 @@
 {% extends "base.html" %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}Edit{% endblock %}
 
 {% block stylesheets %}
 {{ parent() }}
-
+<link rel="stylesheet" type="text/css" href="/stylesheet/edit.css">
 {% endblock %}
 
 {% block footer %}
-
-
+<script src="/js/edit.js"></script>
+<script src="/js/modal.js"></script>
 {% endblock %}
 
 {% block body %}
 
-<h1>Profile</h1>
+<div class="d-none" id="userId">{{ user.id }}</div>
 
-<dl>
-    <dt>Name</dt>
-    <dd>{{ user.name }}</dd>
+<button class="modal-button" href="#myModal1">Usuń wszystkie przychody</button>
 
-    <dt>E-mail</dt>
-    <dd>{{ user.email }}</dd>
-</dl>
+<!-- modal delete all incomes-->
+<div class="modal" tabindex="-1" id="myModal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Edit/deleteAllIncomes">
+                    Czy na pewno chcesz usunąć wszystkie przychody?
+                    Zmiany są nieodwaracalne.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
+                <button type="button submit" class="btn btn-primary">Tak</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<button class="modal-button" href="#myModal2">Usuń wszystkie wydatki</button>
+
+<!-- modal delete all expenses-->
+<div class="modal" tabindex="-1" id="myModal2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Edit/deleteAllExpenses">
+                    Czy na pewno chcesz usunąć wszystkie wydatki?
+                    Zmiany są nieodwaracalne.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
+                <button type="button submit" class="btn btn-primary">Tak</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
 {% endblock %}
