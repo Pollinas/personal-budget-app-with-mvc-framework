@@ -22,7 +22,11 @@ class Edit extends Authenticated
      */
     public function showAction()
     {
-        View::renderTemplate('Edit/show.html');
+        View::renderTemplate('Edit/show.html',[
+            'incomeCategories' => Income::getIncomeCategories(),
+            'expenseCategories' => Expense::getExpenseCategories(),
+            'methods' => Expense::getPaymentMethods()
+        ]);
     }
 
     /**
