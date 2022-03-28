@@ -48,10 +48,10 @@
             <label class="form-label m-3">METODA PŁATNOŚCI</label>
             {% for method in methods %}
             <div class="form-check form-check-inline">
-                <input class="form-check-input payment-methods" type="radio" name="method" id="{{ method }}"
-                    value="{{ method }}" checked>
-                <label class="form-check-label" for="{{ method }}">
-                    {{ method }}
+                <input class="form-check-input payment-methods" type="radio" name="method" id="{{ method.name }}"
+                    value="{{ method.name }}" checked>
+                <label class="form-check-label" for="{{ method.name }}">
+                    {{ method.name }}
                 </label>
             </div>
             {% endfor %}
@@ -70,7 +70,7 @@
                 <select class="form-select" id="category" name="category" aria-label="Default select example">
                     <option selected value="">WYBIERZ KATEGORIĘ</option>
                     {% for category in categories %}
-                    <option value="{{ category }}"> {{ category }}</option>
+                    <option value="{{ category.name }}"> {{ category.name }}</option>
                     {% endfor %}
                 </select>
             </div>

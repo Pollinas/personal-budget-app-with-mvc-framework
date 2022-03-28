@@ -44,7 +44,7 @@ class Income extends \Core\Model
     {
         $id= $_SESSION['user_id'];
 
-        $sql = 'SELECT name FROM incomes_category_assigned_to_users
+        $sql = 'SELECT name, id FROM incomes_category_assigned_to_users
         WHERE user_id = :id';
 
         $db = static::getDB();
@@ -52,7 +52,7 @@ class Income extends \Core\Model
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
-        $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        $categories = $stmt->fetchAll();
       
         return $categories;
     }

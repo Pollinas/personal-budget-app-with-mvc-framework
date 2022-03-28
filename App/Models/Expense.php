@@ -36,7 +36,7 @@ class Expense extends \Core\Model
     {
         $id= $_SESSION['user_id'];
 
-        $sql = 'SELECT name FROM expenses_category_assigned_to_users
+        $sql = 'SELECT id,name FROM expenses_category_assigned_to_users
         WHERE user_id = :id';
 
         $db = static::getDB();
@@ -44,7 +44,7 @@ class Expense extends \Core\Model
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
-        $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        $categories = $stmt->fetchAll();
       
         return $categories;
     }
@@ -53,7 +53,7 @@ class Expense extends \Core\Model
     {
         $id= $_SESSION['user_id'];
 
-        $sql = 'SELECT name FROM payment_methods_assigned_to_users
+        $sql = 'SELECT id, name FROM payment_methods_assigned_to_users
         WHERE user_id = :id';
 
         $db = static::getDB();
@@ -61,7 +61,7 @@ class Expense extends \Core\Model
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
-        $methods = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        $methods = $stmt->fetchAll();
       
         return $methods;
     }
