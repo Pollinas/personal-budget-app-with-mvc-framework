@@ -13,82 +13,79 @@
 {% endblock %}
 {% block body %}
 
+<!-- PRELOADER -->
 <div id="preloader">
-    <div id="status">
-
-        <i class="fa-solid fa-piggy-bank fa-shake fa-5x" style="color: #F28482;"></i>
-
-    </div>
+    <div><em></em><em></em><em></em><em></em></div>
 </div>
+<!-- //PRELOADER -->
 
-<nav>
-    <div class="menu-btn">
-        <div class="line line--1"></div>
-        <div class="line line--2"></div>
-        <div class="line line--3"></div>
-    </div>
 
-    <div class="nav-links">
-        {% if current_user %}
-        <a href="/mainmenu/new" class="link">Menu główne</a>
-        <a href="https://www.youtube.com/watch?v=3Td8aeugXhY" class="link">Zainspiruj się</a>
-        <a href="/login/destroy" class="link">Wyloguj się</a>
-        {% endif %}
-        {% if not current_user %}
-        <a href="/login/new" class="link">Zaloguj się</a>
-        <a href="/signup/new" class="link">Zarejestruj się</a>
-        <a href="https://www.youtube.com/watch?v=3Td8aeugXhY" class="link">Zainspiruj się</a>
-        {% endif %}
-    </div>
-</nav>
 
 <div class="container main d-flex flex-column flex-md-row py-5 my-5">
-    <img src="https://images.pexels.com/photos/5909801/pexels-photo-5909801.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-        alt="" class="img-fluid img-thumbnail order-md-first order-last ">
+
     <div class="container align-items-center justify-content-center align-self-center d-flex flex-column py-5 my-5"
         id="content">
-        <span class="text-center my-2 fs-5 ">
-            <figure class="text-center">
-                <blockquote class="blockquote">
-                    <p>„Zrobić budżet to wskazać swoim pieniądzom, dokąd mają iść,
-                        zamiast się zastanawiać, gdzie się rozeszły.”</p>
-                </blockquote>
-                <figcaption class="blockquote-footer">
-                    <cite title="Source Title" class="fw-bold">John C. Maxwell</cite>
-                </figcaption>
-            </figure>
-            <h1 class="my-5">Witaj{% if current_user %}, {{ current_user.name }}{% endif %}!</h1>
-            {% if not current_user %}<span>W aplikacji do zarządzania budźetem personalnym; miejscu, które może stać się
-                jednym z podstawowych narzędzi na Twojej drodze do
-                osiągnięcia <a class="free"
-                    href="https://businessinsider.com.pl/poradnik-finansowy/oszczedzanie/co-to-jest-wolnosc-finansowa-i-dlaczego-warto-do-niej-dazyc/yx5fn3t">wolności
-                    finansowej</a>. Aby założyć konto, kliknij na ikonę w lewym górnym rogu, wybierz opcję 'Zarejestruj
-                się'. </span>
-            <hr>
-            <span> Nie jesteś tu pierwszy raz? Wybierz opcję 'Zaloguj się' i działaj! </span>{% endif %}
-
-            {% if current_user %}
-            <span>Kliknij na ikonę w lewym górnym rogu, przejdź do menu głównego i wybierz
-                interesującą Cię opcję. </span>
-
-            <hr> <span>Potrzebujesz odrobiny inpiracji? Podczas korzystania z
-                aplikacji napotkasz kilka linków do rozmów z wybitnymi osobami. Jeden z nich znajduje się na tej
-                stronie!
-                Jeśli chcesz
-                pogłębić swoją wiedzę na temat oszczędzania, kilknij <button type="button" class="btn btn-dark"
-                    data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    tutaj
-                </button> i przeglądaj stale uzupełnianą listę książek i
-                artykułów. </span>{% endif %}
-
-        </span>
 
     </div>
 
 </div>
 
+<!-- motivational stuff -->
+<div class="motivation-panel-container">
+    <div class="motivation-panel">
+
+        <button class="close-btn"><span class="material-icons">
+                close
+            </span></button>
+        <h4>GARŚĆ MOTYWACJI</h4>
+        <ul>
+            <li>
+                <a href="https://www.youtube.com/watch?v=3Td8aeugXhY" target="_blank">
+                    <span class="material-icons">
+                        tips_and_updates
+                    </span>
+                </a>
+            </li>
+            <li>
+                <button data-bs-toggle="modal" data-bs-target="#bookList">
+                    <span class="material-icons">
+                        local_library
+                    </span>
+                </button>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/watch?v=aNdgTWjOaxI" target="_blank">
+                    <span class="material-icons">
+                        auto_awesome
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="https://marciniwuc.com/motywacja-w-finansach/" target="_blank">
+                    <span class="material-icons">
+                        psychology
+                    </span>
+
+                </a>
+            </li>
+            <li>
+                <a href="https://www.stashwealth.com/blog/how-i-fell-back-in-love-with-saving-money/" target="_blank">
+                    <span class="material-icons">
+                        volunteer_activism
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<button class="floating-btn">
+    <span class="material-icons">
+        emoji_objects
+    </span>
+</button>
+
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="bookList" tabindex="-1" aria-labelledby="bookList" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
