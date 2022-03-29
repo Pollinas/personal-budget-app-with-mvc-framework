@@ -1,14 +1,14 @@
 /*form styles*/
 #msform {
 	max-width: 600px;
-	min-height: 200px;
+	min-height: 480px;
 	margin: 100px auto;
 	text-align: center;
 	position: relative;
 }
 
 #msform #fieldset-wrapper {
-	min-height: 200px;
+	min-height: 500px;
 }
 
 #msform fieldset {
@@ -73,11 +73,10 @@
 	width: 20px;
 	line-height: 20px;
 	display: block;
-	font-size: 16px;
-    font-weight:bolder;
+	font-size: 17px;
 	color: black;
 	background: white;
-	border-radius: 50%;
+	border-radius: 3px;
 	margin: 0 auto 5px auto;
 	position: relative;
 	z-index: 2; /* Push the numbers over the progress line. */
@@ -103,7 +102,7 @@
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,
 #progressbar li.active:after {
-	background: #7dcfb675;
+	background: #7D83FF;
 	color: white;
 }
 
