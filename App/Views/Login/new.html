@@ -4,70 +4,218 @@
 {% block stylesheets %}
 {{ parent() }}
 
-<link rel="stylesheet" type="text/css" href="/stylesheet/sign-up.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheet/log-in.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheet/form.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheet/icon.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheet/panel.css" />
 
 {% endblock %}
 
 {% block footer %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="/js/sign-in.js"></script>
-<script src="/js/toggle-password.js"></script>
 
+<script src="/js/toggle-password.js"></script>
+<script src="/js/panel.js"></script>
+<script src="/js/form.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
 {% endblock %}
 
 {% block body %}
 
+<h1>Personal Budget App</h1>
 
-<div id="preloader">
-    <div id="status">
+<!-- multistep form -->
+<form id="msform" method="post" action="/login/create">
+    <!-- progressbar -->
+    <ul id="progressbar">
+        <li class="active">Wpisz adres-email</li>
+        <li>?</li>
+        <li>Wpisz hasło</li>
+    </ul>
+    <!-- fieldsets -->
+    <div id="fieldset-wrapper">
+        <fieldset>
+            <h2 class="step-title">Wpisz swój adres e-mail</h2>
 
-        <i class="fa-solid fa-money-bill-trend-up fa-bounce fa-5x" style="color: #84A59D;"></i>
+            <div class="input-group align-self-center m-md-3 px-md-5 my-3 ">
+                <label for="email" class="form-label"> </label>
+                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                <input type="email" name="email" class="form-control rounded" id="email" aria-describedby="email"
+                    required placeholder="Wpisz swój adres e-mail." value="{{ user.email }}" required>
+            </div>
+
+            <div class="button-wrapper">
+                <input type="button" name="next" class="next action-button" value="Następny krok" />
+            </div>
+        </fieldset>
+        <fieldset>
+            <h2 class="step-title">Co chcesz zrobić po zalogowaniu?</h2>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input direction" type="radio" name="direction" id="home" value="home">
+                <label class="form-check-label" for="home">
+                    Przejść do strony głównej
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input direction" type="radio" name="direction" id="balance" value="balance">
+                <label class="form-check-label" for="balance">
+                    Przeglądać bilans
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input direction" type="radio" name="direction" id="income" value="income">
+                <label class="form-check-label" for="income">
+                    Dodać przychód
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input direction" type="radio" name="direction" id="expense" value="expense">
+                <label class="form-check-label" for="expense">
+                    Dodać wydatek
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input direction" type="radio" name="direction" id="settings" value="settings">
+                <label class="form-check-label" for="settings">
+                    Pozmieniać ustawienia
+                </label>
+            </div>
+
+            <div class="button-wrapper">
+                <input type="button" name="previous" class="previous action-button" value="Poprzedni krok" />
+                <input type="button" name="next" class="next action-button" value="Następny krok" />
+            </div>
+        </fieldset>
+        <fieldset>
+            <h2 class="step-title">Wpisz hasło</h2>
+
+            <div class=" input-group m-md-3 px-md-5 my-3 ">
+                <label for="password" class="form-label"> </label>
+                <input type="password" name="password" minlength="6" class="form-control rounded" id="password"
+                    aria-describedby="password" placeholder="Wpisz hasło" required
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+                    title="Hasło musi zawierać co najmniej 6 znaków, w tym przynajmniej 1 literę i 1 cyfrę.">
+                <span class="input-group-text"><i class="bi bi-eye-slash" id="togglePassword"></i></span>
+            </div>
+
+
+            <div class="form-check d-flex justify-content-start align-items-start">
+                <input class="form-check-input mx-1" type="checkbox" value="" id="remember_me" name="remember_me" {% if
+                    remember_me %} checked {% endif %}>
+                <label class="form-check-label mx-1" for="remember_me">
+                    Pamiętaj mnie
+                </label>
+            </div>
+
+            <div class="button-wrapper">
+                <input type="button" name="previous" class="previous action-button" value="Poprzedni krok" />
+                <input type="submit" name="submit" class="submit  action-button" value="Zaloguj się" />
+            </div>
+            <a href="/password/forgot" id="forgot">Nie pamiętasz hasła?</a>
+
+        </fieldset>
+        <div class="ripple-loader">
+            <div class="lds-ripple" style="display: none">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+<!-- panel -->
+<div class="motivation-panel-container">
+    <div class="motivation-panel">
+
+        <button class="close-btn"><span class="material-icons">
+                close
+            </span></button>
+        <h4 class="text-center m-2">Nie masz jeszcze konta?<br>
+            <a href="/signup/new">Zrejestruj się!</a><br>
+            <hr>
+            Chcesz przejść do strony głównej? <br>
+            <a href="/">Kliknij na mnie!</a>
+        </h4>
+    </div>
+</div>
+<div class="floating-btn">
+    <div class="icon">
+
+        <svg width="138px" height="138px" viewBox="0 0 218 218" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+                <linearGradient x1="50%" y1="2.44140625%" x2="50%" y2="76.3080019%" id="linearGradient-122">
+                    <stop stop-color="#FFFFFF" stop-opacity="0.1" offset="0%"></stop>
+                    <stop stop-color="#FFFFFF" offset="100%"></stop>
+                </linearGradient>
+            </defs>
+            <g id="Site" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="PLAY">
+                    <circle id="bg-circle" fill="#BDF5E2" cx="109" cy="109" r="109"></circle>
+                    <g id="bouncey" transform="translate(86, 121)" fill="url(#linearGradient-122)">
+                        <g class="cloud-trail">
+                            <path
+                                d="M38.0637946,0.216145833 L25.1883554,0.216145833 C25.1883554,0.216145833 25.1883552,17.9472477 22.376075,36.8612737 C19.5637947,17.9472477 19.5637946,0.216145833 19.5637946,0.216145833 L6.68835535,0.216145833 C6.68835535,0.216145833 6.68835515,31.4388021 0.116926779,55.2161458 L44.6352231,55.2161458 C38.0637948,31.4388021 38.0637946,0.216145833 38.0637946,0.216145833 Z"
+                                class="cloud-stream"></path>
+                        </g>
+                    </g>
+                    <g class="bubble" transform="translate(61, 144)" fill="#FFFFFF">
+                        <g class="clouds">
+                            <circle class="cloud-back-1" fill-opacity="0.6" cx="50" cy="20.5" r="12"></circle>
+                            <circle class="cloud-back-2" fill-opacity="0.6" cx="22" cy="19" r="16"></circle>
+                            <circle class="cloud-back-3" fill-opacity="0.6" cx="69" cy="20" r="15"></circle>
+                            <circle class="cloud-front-1" cx="37" cy="24" r="24"></circle>
+                            <circle class="cloud-front-2" cx="60" cy="27" r="20"></circle>
+                            <circle class="cloud-front-3" cx="10" cy="25" r="14"></circle>
+                            <circle class="cloud-front-4" cx="84" cy="25.5" r="15"></circle>
+                        </g>
+                    </g>
+                    <g class="bouncey" transform="translate(70, 37)">
+                        <g class="toybot-toy">
+                            <path
+                                d="M21.9702577,66.8750004 C22.0710607,64.2712503 24.2706302,62.1604938 26.8826789,62.1604938 L32.7700988,62.1604938 C35.3823511,62.1604938 37.5,64.2805502 37.5,66.8916965 L37.5,87.9231183 C37.5,90.5360894 35.3899578,92.654321 32.7859209,92.654321 L25.6863013,92.654321 C23.0827873,92.654321 21.0542993,90.5342646 21.1547423,87.9398144 L21.9702577,66.8750004 Z M39.8611111,66.8916965 C39.8611111,64.2787254 41.9789635,62.1604938 44.5910123,62.1604938 L50.4784322,62.1604938 C53.0906844,62.1604938 55.2904104,64.2805502 55.3908535,66.8750004 L56.2063688,87.9398144 C56.3071718,90.5435645 54.2788467,92.654321 51.6748098,92.654321 L44.5751902,92.654321 C41.9716762,92.654321 39.8611111,90.5342646 39.8611111,87.9231183 L39.8611111,66.8916965 Z M62.553298,53.6925333 C60.8737125,55.6941853 57.8943598,55.9593664 55.8947587,54.2815019 L54.9902981,53.5225694 C52.9924739,51.8461958 52.7356633,48.8631691 54.4140758,46.862915 L69.4522199,28.9411526 C70.2926602,27.939555 71.7841478,27.8074182 72.7803288,28.6433133 L75.495813,30.9218751 C77.4936372,32.5982487 77.7504478,35.5812754 76.0720354,37.5815295 L62.553298,53.6925333 Z M14.8078131,53.6925333 L1.28907576,37.5815295 C-0.389336734,35.5812754 -0.132526127,32.5982487 1.86529813,30.9218751 L4.58078231,28.6433133 C5.57696333,27.8074182 7.06845094,27.939555 7.90889117,28.9411526 L22.9470354,46.862915 C24.6254478,48.8631691 24.3686372,51.8461958 22.370813,53.5225694 L21.4663524,54.2815019 C19.4667514,55.9593664 16.4873986,55.6941853 14.8078131,53.6925333 Z"
+                                class="arms-legs" fill="#41CCC3"></path>
+                            <path
+                                d="M59.7444237,55.3141277 C58.419416,55.5462046 57.0058391,55.2138091 55.8947587,54.2815019 L54.9902981,53.5225694 C52.9924739,51.8461958 52.7356633,48.8631691 54.4140758,46.862915 L63.4722222,36.0678364 L63.4722222,39.8270391 C63.4722222,42.5259182 61.9614417,44.8724172 59.7444237,46.0691452 L59.7444237,46.0691452 L59.7444237,55.3141277 Z M17.6166874,55.3141277 L17.6166874,55.3141277 L17.6166874,46.0691452 L17.6166874,46.0691452 C15.3996694,44.8724172 13.8888889,42.5259182 13.8888889,39.8270391 L13.8888889,36.0678364 L22.9470354,46.862915 C24.6254478,48.8631691 24.3686372,51.8461958 22.370813,53.5225694 L21.4663524,54.2815019 C20.355272,55.2138091 18.9416951,55.5462046 17.6166874,55.3141277 Z"
+                                class="arm-shadow" fill="#35C5BB"></path>
+                            <path
+                                d="M37.5,80.9259259 L37.5,69.2373755 C37.5,66.6262292 35.3823511,64.5061728 32.7700988,64.5061728 L26.8826789,64.5061728 C24.2706302,64.5061728 22.0710607,66.6169293 21.9702577,69.2206794 L21.7098458,75.947136 C24.3609237,79.0061012 28.2950437,80.9259259 32.7740309,80.9259259 L37.5,80.9259259 Z M55.6513122,75.9483471 L55.3908535,69.2206794 C55.2904104,66.6262292 53.0906844,64.5061728 50.4784322,64.5061728 L44.5910123,64.5061728 C41.9789635,64.5061728 39.8611111,66.6244044 39.8611111,69.2373755 L39.8611111,80.9259259 L44.5870802,80.9259259 C49.0639835,80.9259259 52.9992721,79.0076289 55.6513122,75.9483471 Z"
+                                class="leg-shadow" fill="#35C5BB"></path>
+                            <path
+                                d="M20.6164179,36.3797171 C20.8129232,33.7767712 23.0816326,31.6666667 25.6935883,31.6666667 L51.6675228,31.6666667 C54.2750613,31.6666667 56.5479473,33.7735846 56.7446932,36.3797171 L58.5979111,60.9277884 C59.3339103,70.676972 52.011374,78.5802469 42.2144792,78.5802469 L35.1466319,78.5802469 C25.3623131,78.5802469 18.0273461,70.6750472 18.7632,60.9277884 L20.6164179,36.3797171 L20.6164179,36.3797171 Z"
+                                class="robot-body" fill="#51D6CD"></path>
+                            <path
+                                d="M57.5190168,46.6365525 L56.7446932,36.3797171 C56.5479473,33.7735846 54.2750613,31.6666667 51.6675228,31.6666667 L25.6935883,31.6666667 C23.0816326,31.6666667 20.8129232,33.7767712 20.6164179,36.3797171 L19.8421114,46.6363262 C22.16095,48.2879362 24.9990012,49.2592593 28.0642937,49.2592593 L49.2968174,49.2592593 C52.3628774,49.2592593 55.2006375,48.2878787 57.5190207,46.6365497 L57.5190168,46.6365525 Z"
+                                class="robot-head-shadow" fill="#41CCC3"></path>
+                            <path
+                                d="M13.8888889,4.72735243 C13.8888889,2.11650778 16.0035611,0 18.6206868,0 L58.7404243,0 C61.3537241,0 63.4722222,2.11961986 63.4722222,4.72735243 L63.4722222,39.8405488 C63.4722222,42.4513935 61.35755,44.5679012 58.7404243,44.5679012 L18.6206868,44.5679012 C16.007387,44.5679012 13.8888889,42.4482814 13.8888889,39.8405488 L13.8888889,4.72735243 L13.8888889,4.72735243 Z"
+                                class="robot-head" fill="#51D6CD"></path>
+                            <path
+                                d="M26.875,27.3209877 C23.6149859,27.3209877 20.9722222,24.695497 20.9722222,21.4567901 C20.9722222,18.2180833 23.6149859,15.5925926 26.875,15.5925926 C30.1350141,15.5925926 32.7777778,18.2180833 32.7777778,21.4567901 C32.7777778,24.695497 30.1350141,27.3209877 26.875,27.3209877 Z M50.4861111,27.3209877 C47.226097,27.3209877 44.5833333,24.695497 44.5833333,21.4567901 C44.5833333,18.2180833 47.226097,15.5925926 50.4861111,15.5925926 C53.7461253,15.5925926 56.3888889,18.2180833 56.3888889,21.4567901 C56.3888889,24.695497 53.7461253,27.3209877 50.4861111,27.3209877 Z M31.5972222,32.0123457 L45.7638889,32.0123457 C45.7638889,35.8987939 42.5925725,39.0493827 38.6805556,39.0493827 C34.7685386,39.0493827 31.5972222,35.8987939 31.5972222,32.0123457 Z"
+                                class="facial-features" fill="#388C87"></path>
+                        </g>
+                    </g>
+                    <g class="bouncey" transform="translate(102, 4)" fill="#FFFFFF">
+                        <g class="toybot-bolt">
+                            <path
+                                d="M8.95763687,2.16553379 C9.22972991,-0.337718075 7.30677031,-0.829477382 6.35933386,1.53055119 L0.070971776,17.1946248 C-0.195130176,17.8574747 0.321399572,18.5697275 1.0479959,18.541862 L5.90211262,18.3393242 L5.12033253,25.7758725 C4.85361221,28.3130035 6.77501646,28.8603616 7.80848078,26.4709133 L13.9190837,12.3427341 C14.2021567,11.6882477 13.707336,10.9641226 12.9817056,10.9709666 L8.03084306,11.0176613 L8.95763687,2.16553379 Z"
+                                class="lightning-bolt"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>
+
+
 
     </div>
 </div>
 
-<div
-    class="container-fluid main d-flex flex-column p-4 align-self-center align-items-center justify-content-center my-5  ">
-    <h1 class="display-6 text-center p-3">Witaj z powrotem!</h1>
-    <form method="post" action="/login/create">
-
-
-        <div class="input-group d-flex align-self-center m-md-3 px-md-5">
-            <label for="email" class="form-label"> </label>
-            <span class="input-group-text">@</span>
-            <input type="email" name="email" class="form-control rounded" id="email" aria-describedby="email"
-                placeholder="Wpisz swój adres e-mail" required value="{{ email }}" autofocus>
-        </div>
-
-        <div class="input-group d-flex m-md-3 px-md-5 my-3 align-self-center">
-            <label for="password" class="form-label"> </label>
-            <input type="password" name="password" class="form-control rounded" id="password"
-                aria-describedby="password" placeholder="Podaj hasło" required>
-            <span class="input-group-text"><i class="bi bi-eye-slash" id="togglePassword"></i></span>
-        </div>
-
-        <div class="form-check ml-3 px-5">
-            <input class="form-check-input" type="checkbox" value="" id="remember_me" name="remember_me" {% if
-                remember_me %} checked {% endif %}>
-            <label class="form-check-label text-center" for="remember_me">
-                Pamiętaj mnie
-            </label>
-        </div>
-
-
-        <div class=" d-flex justify-content-center">
-            <button type="submit" class="btn m-3 p-3" id="register">ZALOGUJ SIĘ</button>
-        </div>
-        <div class="d-flex align-items-center justify-content-center text-center my-3">
-            <a href=" /password/forgot" id="forgot">Nie pamiętasz hasła?</a>
-        </div>
-        <div class="container d-flex align-items-center justify-content-evenly text-center flex-column flex-md-row"">
-            Nie masz jeszcze konta? <a href=" /signup/new" id="signUp">Zarejestruj się </a>
-        </div>
-    </form>
-
-
-</div>
 
 {% endblock %}
