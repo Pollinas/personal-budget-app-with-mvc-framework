@@ -1,4 +1,7 @@
 
+.modal a{
+    color:black;
+}
 
  /* Preloader */
  .preloader_hide {opacity:0; width:100%; overflow-x:hidden;}
@@ -569,22 +572,22 @@ h1{
 }
 
 #card-1 .back{
-	background: #E91E63;
+	background: #98f5e1a2;
 }
 #card-2 .back{
-	background: #039BE5;
+	background: #645E9D;
 }
 #card-3 .back{
-	background: #4CAF50;
+	background: #306BAC;
 }
 #card-4 .back{
-	background: #FF5722;
+	background: #3C6E71;
 }
 #card-5 .back{
-	background: #AA00FF;
+	background: #20A4F3;
 }
 #card-6 .back{
-	background: #FBC02D;
+	background: #e8b4bcd8;
 }
 
 
