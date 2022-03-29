@@ -20,7 +20,7 @@ $(document).ready(function () {
     /**
      * Validate the form
      */
-    $('#formSignup').validate({
+    $('.formSignup').validate({
         rules: {
             name: 'required',
             email: {
@@ -42,4 +42,5 @@ $(document).ready(function () {
         }
     });
 });
+
 
