@@ -5,10 +5,12 @@
 {% block stylesheets %}
 {{ parent() }}
 <link rel="stylesheet" type="text/css" href="/stylesheet/home.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheet/shiny-btn.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheet/icon.css" />
 {% endblock %}
 
 {% block footer %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 <script src="/js/home.js"></script>
 {% endblock %}
 {% block body %}
@@ -19,104 +21,368 @@
 </div>
 <!-- //PRELOADER -->
 
+<h1>Personal Budget App</h1>
+<!-- content for non-logged-->
+{% if not current_user %}
 
-
-<div class="container main d-flex flex-column flex-md-row py-5 my-5">
-
-    <div class="container align-items-center justify-content-center align-self-center d-flex flex-column py-5 my-5"
-        id="content">
-
-    </div>
-
-</div>
-
-<!-- motivational stuff -->
-<div class="motivation-panel-container">
-    <div class="motivation-panel">
-
-        <button class="close-btn"><span class="material-icons">
-                close
-            </span></button>
-        <h4>GARŚĆ MOTYWACJI</h4>
-        <ul>
-            <li>
-                <a href="https://www.youtube.com/watch?v=3Td8aeugXhY" target="_blank">
-                    <span class="material-icons">
-                        tips_and_updates
-                    </span>
-                </a>
-            </li>
-            <li>
-                <button data-bs-toggle="modal" data-bs-target="#bookList">
-                    <span class="material-icons">
-                        local_library
-                    </span>
-                </button>
-            </li>
-            <li>
-                <a href="https://www.youtube.com/watch?v=aNdgTWjOaxI" target="_blank">
-                    <span class="material-icons">
-                        auto_awesome
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a href="https://marciniwuc.com/motywacja-w-finansach/" target="_blank">
-                    <span class="material-icons">
-                        psychology
-                    </span>
-
-                </a>
-            </li>
-            <li>
-                <a href="https://www.stashwealth.com/blog/how-i-fell-back-in-love-with-saving-money/" target="_blank">
-                    <span class="material-icons">
-                        volunteer_activism
-                    </span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
-<button class="floating-btn">
-    <span class="material-icons">
-        emoji_objects
-    </span>
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="bookList" tabindex="-1" aria-labelledby="bookList" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="not-logged container">
+    <div class="inner-container">
+        <div class="card inactive-1"></div>
+        <div class="card inactive-2"></div>
+        <div class="card">
+            <div class="content active">
+                <h2 class="text-center m-1">Krok 1</h2>
+                <p class="m-2 text-center">Przygotuj swój ulubiony napój. <br> Załóż konto.
+                </p>
+                <br><br>
+                <div class="cup">
+                    <div class="coffee"></div>
+                </div>
+                <div class="smoke"></div>
+                <br>
+                <p class="mt-3 mb-1 text-center">Otrzymasz maila z linkiem aktywacyjnym.
+                </p>
+                <br>
+                <a class="button align-items-end" href="#"><span class="material-icons">
+                        arrow_forward
+                    </span></a>
             </div>
-            <div class="modal-body">
-                <ul>
-                    <li><a
-                            href="https://www.empik.com/najbogatszy-czlowiek-w-babilonie-clason-george-s,p1136509418,ksiazka-p">Najbogatszy
-                            człowiek w Babilonie</a> <i>George S. Clason</i></li>
-                    <li> <a
-                            href="https://www.empik.com/the-index-card-why-personal-finance-doesn-t-have-to-be-complicated-olen-helaine,p1153829036,ksiazka-p">The
-                            Index Card</a> <i>Helaine Olen, Harold Pollack</i></li>
-                    <li><a
-                            href="https://www.empik.com/the-automatic-millionaire-workbook-a-personalized-plan-to-live-and-finish-rich-automatically-bach-david,p1147097469,ksiazka-p">
-                            The Automatic Millionaire</a> <i>David Bach</i></li>
-                    <li><a href="https://www.taniaksiazka.pl/kobiety-i-finanse-orman-suze-p-301026.html">Kobieta
-                            i finanse</a> <i>Suze Orman</i></li>
-                    <li><a
-                            href="https://www.empik.com/finansowy-kozak-zarabiaj-ile-chcesz-i-spelniaj-marzenia-sincero-jen,p1220164743,ebooki-i-mp3-p">Finansowy
-                            kozak</a> <i>Jen Sincero</i>
-                    </li>
-                </ul>
+            <div class="content">
+                <h2 class="text-center">Krok 2</h2>
+                <p class="m-2 text-center">Zaloguj się i zacznij działać!
+                    <br><br>
+                    Potraktuj to miejsce jako jedno z Twoich narzędzi do osiągnięcia wolności finansowej.
+                    <br>
+                    Albo pomoc w zaoszczędzeniu na wymarzone wakacje.
+                    <br>
+                    Albo... jakkolwiek zechcesz!
+                </p>
+                <a class="button" href="#"><span class="material-icons">
+                        arrow_forward
+                    </span></a>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Zamknij</button>
+            <div class="content">
+                <h2 class="text-center">Krok 3</h2>
+                <br>
+                <p class="m-2 text-center">Nadal masz wątpliwości, czy chcesz zacząć oszczędzać?<br>
+                    Kliknij na ikonę w prawym dolnym rogu!</p>
+                <br><br>
+                <a class="button" href="#"><span class="material-icons">
+                        redo
+                    </span></a>
             </div>
+
         </div>
     </div>
 </div>
 
+<<div class="button-container d-flex mx-auto align-items-center justify-center flex-column">
+    <a href="/signup/new" class="shiny-btn signup">
+        ZAŁÓŻ KONTO
+    </a>
+    <a href="/login" class="shiny-btn login">
+        <div class="draw-btn from-bottom">ZALOGUJ SIĘ</div>
+    </a>
+    </div>
 
-{% endblock %}
+    {% endif %}
+
+    <!-- end of content for non-logged-->
+
+    <!-- content for logged users-->
+    {% if current_user %}
+
+    <div id="masonry-grid">
+
+        <a href="#" class="flip-container" id="card-1">
+            <div class="flipper">
+                <div class="front">
+                    <h4>Jak zacząć?</h4>
+                </div>
+                <div class="back">
+                    <h3>Jak zacząć?</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer diam sapien, semper et lobortis
+                        ac,
+                        pulvinar ut dui. Mauris interdum mattis pellentesque. Praesent hendrerit eu velit eget
+                        dignissim.
+                    </p>
+                    <p class="more">Learn More</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/displaybalance/new" class="flip-container" id="card-2">
+            <div class="flipper">
+                <div class="front">
+                    <h4>Bilans</h4>
+                </div>
+                <div class="back">
+                    <h3>Bilans</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer diam sapien, semper et lobortis
+                        ac,
+                        pulvinar ut dui. Mauris interdum mattis pellentesque. Praesent hendrerit eu velit eget
+                        dignissim.
+                    </p>
+                    <p class="more">Learn More</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="#" class="flip-container" id="card-3">
+            <div class="flipper">
+                <div class="front">
+                    <h4>Ustawienia</h4>
+                </div>
+                <div class="back">
+                    <h3>Ustawienia</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer diam sapien, semper et lobortis
+                        ac,
+                        pulvinar ut dui. Mauris interdum mattis pellentesque. Praesent hendrerit eu velit eget
+                        dignissim.
+                    </p>
+                    <p class="more">Learn More</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/addincome/new" class="flip-container" id="card-4">
+            <div class="flipper">
+                <div class="front">
+                    <h4 class="text-center">Dodaj przychód</h4>
+                </div>
+                <div class="back">
+                    <h3>Dodaj przychód</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer diam sapien, semper et lobortis
+                        ac,
+                        pulvinar ut dui. Mauris interdum mattis pellentesque. Praesent hendrerit eu velit eget
+                        dignissim.
+                    </p>
+                    <p class="more">Learn More</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/addexpense/new" class="flip-container" id="card-5">
+            <div class="flipper">
+                <div class="front">
+                    <h4>Dodaj wydatek</h4>
+                </div>
+                <div class="back">
+                    <h3>Dodaj wydatek</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer diam sapien, semper et lobortis
+                        ac,
+                        pulvinar ut dui. Mauris interdum mattis pellentesque. Praesent hendrerit eu velit eget
+                        dignissim.
+                    </p>
+                    <p class="more">Learn More</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="/logout" class="flip-container" id="card-6">
+            <div class="flipper">
+                <div class="front">
+                    <h4>Wyloguj się</h4>
+                </div>
+                <div class="back">
+                    <h3>Wyloguj się</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer diam sapien, semper et lobortis
+                        ac,
+                        pulvinar ut dui. Mauris interdum mattis pellentesque. Praesent hendrerit eu velit eget
+                        dignissim.
+                    </p>
+                    <p class="more">Learn More</p>
+                </div>
+            </div>
+        </a>
+
+    </div>
+    {% endif %}
+
+    <!-- end of content for logged users-->
+
+
+    <!-- motivational stuff -->
+    <div class="motivation-panel-container">
+        <div class="motivation-panel">
+
+            <button class="close-btn"><span class="material-icons">
+                    close
+                </span></button>
+            <h4 class="text-center m-2">HEJ{% if current_user %}, {{ current_user.name}}{% endif %}! <br> ŁAP GARŚĆ
+                MOTYWACJI!
+            </h4>
+            <ul>
+                <li>
+                    <a href="https://www.youtube.com/watch?v=3Td8aeugXhY" target="_blank">
+                        <span class="material-icons">
+                            tips_and_updates
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <button data-bs-toggle="modal" data-bs-target="#bookList">
+                        <span class="material-icons">
+                            local_library
+                        </span>
+                    </button>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/watch?v=aNdgTWjOaxI" target="_blank">
+                        <span class="material-icons">
+                            auto_awesome
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://marciniwuc.com/motywacja-w-finansach/" target="_blank">
+                        <span class="material-icons">
+                            psychology
+                        </span>
+
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.stashwealth.com/blog/how-i-fell-back-in-love-with-saving-money/"
+                        target="_blank">
+                        <span class="material-icons">
+                            volunteer_activism
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="floating-btn">
+        <div class="icon">
+            <?xml version="1.0" encoding="UTF-8"?>
+            <svg width="138px" height="138px" viewBox="0 0 218 218" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                <defs>
+                    <path
+                        d="M60,62.9928014 C60,61.3399228 61.3422643,60 62.9987856,60 L67.9924559,60 C70.7580461,60 73,57.7609162 73,55.0016655 L73,55.0016655 C73,53.3438914 74.3335964,52 76.0096345,52 L144.990365,52 C146.652541,52 148,53.3390201 148,55.0016655 L148,55.0016655 C148,57.7621694 150.228985,60 153.002186,60 L157.002848,60 C158.658129,60 160,61.3380125 160,62.9928014 L160,157.007199 C160,158.660077 158.661987,160 157.007199,160 L62.9928014,160 C61.3399228,160 60,158.661987 60,157.007199 L60,62.9928014 Z"
+                        id="path-111"></path>
+                    <filter x="-2.5%" y="-2.3%" width="105.0%" height="104.6%" filterUnits="objectBoundingBox"
+                        id="filter-211">
+                        <feGaussianBlur stdDeviation="2.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+                        <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+                        <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1"
+                            result="shadowInnerInner1"></feComposite>
+                        <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix"
+                            in="shadowInnerInner1"></feColorMatrix>
+                    </filter>
+                    <circle id="path-311" cx="154" cy="170" r="4"></circle>
+                    <filter x="-45.0%" y="-45.0%" width="190.0%" height="190.0%" filterUnits="objectBoundingBox"
+                        id="filter-411">
+                        <feMorphology radius="0.6" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1">
+                        </feMorphology>
+                        <feOffset dx="0" dy="0" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+                        <feMorphology radius="1" operator="erode" in="SourceAlpha" result="shadowInner"></feMorphology>
+                        <feOffset dx="0" dy="0" in="shadowInner" result="shadowInner"></feOffset>
+                        <feComposite in="shadowOffsetOuter1" in2="shadowInner" operator="out"
+                            result="shadowOffsetOuter1"></feComposite>
+                        <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1">
+                        </feGaussianBlur>
+                        <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.8 0" type="matrix"
+                            in="shadowBlurOuter1"></feColorMatrix>
+                    </filter>
+                    <filter x="-45.0%" y="-45.0%" width="190.0%" height="190.0%" filterUnits="objectBoundingBox"
+                        class="filter-511">
+                        <feGaussianBlur stdDeviation="1" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+                        <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+                        <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1"
+                            result="shadowInnerInner1"></feComposite>
+                        <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.8 0" type="matrix"
+                            in="shadowInnerInner1"></feColorMatrix>
+                    </filter>
+                </defs>
+                <g class="Site" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g class="PRINT">
+                        <circle class="Oval-1" fill="#BDF5E2" cx="109" cy="109" r="109"></circle>
+                        <rect class="Rectangle-3" fill="#ECECEC" x="56" y="47" width="106" height="114" rx="3"></rect>
+                        <path d="M87,50 L93,50 L93,162 L87,162 L87,50 Z M125,50 L131,50 L131,162 L125,162 L125,50 Z"
+                            class="Combined-Shape" fill-opacity="0.08" fill="#000000"></path>
+                        <path
+                            d="M108.269231,121.802469 L108.269231,127.625609 C108.269231,129.236955 106.952681,130.54321 105.337503,130.54321 L100.970189,130.54321 C99.3510408,130.54321 98.0886903,129.241506 98.1510427,127.625609 L98.5352129,117.669635 C98.3249262,117.378563 98.1301265,117.075414 97.951832,116.761283 L97.463429,118.720161 C97.2690791,119.499656 96.4763084,119.973183 95.6952523,119.778444 L93.5661758,119.247606 C91.999781,118.857059 91.0448777,117.277421 91.4357986,115.709523 L94.605718,102.995671 C94.9358046,101.671766 96.1169739,100.785512 97.4277168,100.783474 L97.8192294,95.5802655 C97.940308,93.9711293 99.3441961,92.6666667 100.961009,92.6666667 L117.038991,92.6666667 C118.65307,92.6666667 120.059996,93.9751736 120.180771,95.5802655 L120.572283,100.783474 C121.883026,100.785512 123.064195,101.671766 123.394282,102.995671 L126.564201,115.709523 C126.955122,117.277421 126.000219,118.857059 124.433824,119.247606 L122.304748,119.778444 C121.523692,119.973183 120.730921,119.499656 120.536571,118.720161 L120.047477,116.758511 C119.869321,117.072293 119.674703,117.37513 119.464644,117.665929 L119.848957,127.625609 C119.911134,129.236955 118.644989,130.54321 117.029811,130.54321 L112.662497,130.54321 C111.043348,130.54321 109.730769,129.241506 109.730769,127.625609 L109.730769,121.802469 L108.269231,121.802469 Z"
+                            class="Combined-Shape" fill="#41CCC3"></path>
+                        <path
+                            d="M97.4277168,100.783474 C96.8102467,100.784434 96.2215317,100.98162 95.7370004,101.328345 L95.9129661,110.849736 C95.9548529,113.1162 96.6843961,115.223208 97.8994019,116.971569 L97.951832,116.761283 C98.1451226,117.101835 98.3578117,117.429481 98.5886018,117.742823 L98.4945802,120.179443 C100.135997,122.071374 102.571397,123.259259 105.343835,123.259259 L108.269231,123.259259 L108.269231,121.802469 L109.730769,121.802469 L109.730769,123.259259 L112.656165,123.259259 C115.427307,123.259259 117.86346,122.073008 119.505487,120.181173 L119.411256,117.739127 C119.641813,117.42605 119.85432,117.098713 120.047477,116.758511 L120.100598,116.971569 C121.315604,115.223208 122.045147,113.1162 122.087034,110.849736 L122.263,101.328345 C121.778468,100.98162 121.189753,100.784434 120.572283,100.783474 L120.180771,95.5802655 C120.059996,93.9751736 118.65307,92.6666667 117.038991,92.6666667 L100.961009,92.6666667 C99.3441961,92.6666667 97.940308,93.9711293 97.8192294,95.5802655 L97.4277168,100.783474 L97.4277168,100.783474 Z"
+                            class="Combined-Shape" fill="#35C5BB"></path>
+                        <path
+                            d="M97.8192294,95.5802655 C97.940308,93.9711293 99.3441961,92.6666667 100.961009,92.6666667 L117.038991,92.6666667 C118.65307,92.6666667 120.059996,93.9751736 120.180771,95.5802655 L121.331274,110.870478 C121.785568,116.90805 117.236432,121.802469 111.187515,121.802469 L106.812485,121.802469 C100.755948,121.802469 96.2143326,116.909367 96.6687256,110.870478 L97.8192294,95.5802655 L97.8192294,95.5802655 Z"
+                            class="body" fill="#51D6CD"></path>
+                        <path
+                            d="M120.661522,101.969461 L120.180771,95.5802655 C120.059996,93.9751736 118.65307,92.6666667 117.038991,92.6666667 L100.961009,92.6666667 C99.3441961,92.6666667 97.940308,93.9711293 97.8192294,95.5802655 L97.3385369,101.968676 C98.7739806,102.991529 100.530889,103.592593 102.428486,103.592593 L115.571514,103.592593 C117.471165,103.592593 119.227302,102.991475 120.661522,101.969461 L120.661522,101.969461 Z"
+                            class="Mask" fill="#41CCC3"></path>
+                        <path
+                            d="M93.6538462,90 L124.346154,90 L124.346154,97.7609253 C124.346154,99.3725403 123.046948,100.679012 121.431026,100.679012 L96.5689744,100.679012 C94.9589935,100.679012 93.6538462,99.3695558 93.6538462,97.7609253 L93.6538462,90 L93.6538462,90 Z"
+                            class="head" fill="#51D6CD"></path>
+                        <rect class="Rectangle-3" fill="#9E9E9E" x="77" y="130" width="64" height="9" rx="1"></rect>
+                        <g class="side-to-side" transform="translate(91, 46)">
+                            <g class="extruder-head">
+                                <rect class="Rectangle-3" fill="#000000" opacity="0.12" x="6" y="2" width="24"
+                                    height="37" rx="3"></rect>
+                                <path
+                                    d="M0,3.0069809 C0,1.34627121 1.34553934,0 3.00741988,0 L32.9925801,0 C34.6535323,0 36,1.34085738 36,3.0069809 L36,40.9930191 C36,42.6537288 34.6544607,44 32.9925801,44 L3.00741988,44 C1.34646775,44 0,42.6591426 0,40.9930191 L0,3.0069809 Z M19.9576369,10.1655338 C20.2297299,7.66228193 18.3067703,7.17052262 17.3593339,9.53055119 L11.0709718,25.1946248 C10.8048698,25.8574747 11.3213996,26.5697275 12.0479959,26.541862 L16.9021126,26.3393242 L16.1203325,33.7758725 C15.8536122,36.3130035 17.7750165,36.8603616 18.8084808,34.4709133 L24.9190837,20.3427341 C25.2021567,19.6882477 24.707336,18.9641226 23.9817056,18.9709666 L19.0308431,19.0176613 L19.9576369,10.1655338 Z"
+                                    class="Combined-Shape" fill="#FFFFFF"></path>
+                            </g>
+                        </g>
+                        <path
+                            d="M44,42.0095985 C44,37.5860194 47.578542,34 52.009531,34 L165.990469,34 C170.414011,34 174,37.5851145 174,42.0095985 L174,173.990402 C174,178.413981 170.421458,182 165.990469,182 L52.009531,182 C47.5859892,182 44,178.414885 44,173.990402 L44,42.0095985 Z M60,62.9928014 L60,157.007199 C60,158.661987 61.3399228,160 62.9928014,160 L157.007199,160 C158.661987,160 160,158.660077 160,157.007199 L160,62.9928014 C160,61.3380125 158.658129,60 157.002848,60 L153.002186,60 C150.228985,60 148,57.7621694 148,55.0016655 C148,53.3390201 146.652541,52 144.990365,52 L76.0096345,52 C74.3335964,52 73,53.3438914 73,55.0016655 C73,57.7609162 70.7580461,60 67.9924559,60 L62.9987856,60 C61.3422643,60 60,61.3399228 60,62.9928014 Z"
+                            class="Rectangle-22" fill="#FFFFFF"></path>
+                        <g class="Rectangle-22-Copy-3" fill-opacity="1" fill="black">
+                            <use filter="url(#filter-211)" xlink:href="#path-111"></use>
+                        </g>
+                        <circle class="Oval-2" fill="#D8D8D8" cx="154" cy="170" r="6"></circle>
+                        <g class="Oval-2">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-411)" xlink:href="#path-311"></use>
+                            <use fill="black" fill-opacity="1" filter="url(#filter-511)" xlink:href="#path-311"></use>
+                            <use stroke="#FFFFFF" stroke-width="1.2" xlink:href="#path-311"></use>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+
+
+
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="bookList" tabindex="-1" aria-labelledby="bookList" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li><a
+                                href="https://www.empik.com/najbogatszy-czlowiek-w-babilonie-clason-george-s,p1136509418,ksiazka-p">Najbogatszy
+                                człowiek w Babilonie</a> <i>George S. Clason</i></li>
+                        <li> <a
+                                href="https://www.empik.com/the-index-card-why-personal-finance-doesn-t-have-to-be-complicated-olen-helaine,p1153829036,ksiazka-p">The
+                                Index Card</a> <i>Helaine Olen, Harold Pollack</i></li>
+                        <li><a
+                                href="https://www.empik.com/the-automatic-millionaire-workbook-a-personalized-plan-to-live-and-finish-rich-automatically-bach-david,p1147097469,ksiazka-p">
+                                The Automatic Millionaire</a> <i>David Bach</i></li>
+                        <li><a href="https://www.taniaksiazka.pl/kobiety-i-finanse-orman-suze-p-301026.html">Kobieta
+                                i finanse</a> <i>Suze Orman</i></li>
+                        <li><a
+                                href="https://www.empik.com/finansowy-kozak-zarabiaj-ile-chcesz-i-spelniaj-marzenia-sincero-jen,p1220164743,ebooki-i-mp3-p">Finansowy
+                                kozak</a> <i>Jen Sincero</i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Zamknij</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% endblock %}

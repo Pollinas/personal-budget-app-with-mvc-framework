@@ -1,0 +1,25 @@
+.shiny-btn {
+	flex: 1 1 auto;
+	margin: 10px;
+	padding: 30px;
+	text-align: center;
+	text-transform: uppercase;
+	transition: 0.5s;
+	background-size: 200% auto;
+	color: white;
+   /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+	box-shadow: 0 0 20px #eee;
+	border-radius: 10px;
+   }
+
+   .shiny-btn:hover {
+	background-position: right center; /* change the direction of the change here */
+  }
+
+  .shiny-btn.signup {
+	background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+  }
+
+  .shiny-btn.login{
+	background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+  }
