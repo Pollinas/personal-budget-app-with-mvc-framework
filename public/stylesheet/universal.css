@@ -1,12 +1,10 @@
 body,
 html {
 	height: 100%;
-	display: grid;
+	
 	background-image: linear-gradient(to right, #434343 0%, black 100%);
 	font-family: 'Lato', sans-serif;
-    overflow: hidden;
-    margin:0;
-    padding:0;
+   
 }
 
 
@@ -14,5 +12,15 @@ html {
     box-sizing: border-box;
 }
 
+a{
+	text-decoration: none;
+	color: white;
+	font-weight: bolder;
+	letter-spacing: 1px;
+}
+
+a:hover{
+	color:black;
+}
 
 
