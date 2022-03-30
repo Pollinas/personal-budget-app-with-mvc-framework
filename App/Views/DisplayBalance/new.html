@@ -18,6 +18,7 @@
 
 {% block body %}
 
+<h1>Personal Budget App</h1>
 
 <nav class="navbar navbar-dark d-flex align-items-center justify-content-center p-3">
     <form method="post" class="d-flex" action="/displaybalance/create">
@@ -37,212 +38,260 @@
 </nav>
 
 
+<!-- when container start-->
 
 <div
-    class="container-fluid main d-flex flex-column align-items-center justify-content-center py-5 my-5 align-self-center">
+    class="container-fluid main d-flex flex-column align-items-center justify-content-center mt-5 mb-3 align-self-center">
 
     {% if balance.begin %}
-    <div class="mx-auto">
+    <div class="mx-auto my-3" id="when">
         <p>Bilans od <b>{{ balance.begin }}</b> do <b>{{ balance.end }}</b> </p>
     </div>
     {% endif %}
 
 
-    <div class="container d-flex flex-column flex-lg-row">
-        <div class="container  m-2">
-            <table class="table table-dark">
-                <thead>
-                    <tr>
-                        <th class="text-center" scope="col" colspan="3">Przychody</th>
-                    </tr>
-                    <tr>
-                        <th scope="col">Data</th>
-                        <th scope="col">Kwota [PLN]</th>
-                        <th scope="col">Kategoria</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% if incomes %}
-                    {% for income in incomes %}
-                    <tr>
-                        <td> {{ income.date_of_income }} </td>
-                        <td> {{ income.amount }}</td>
-                        <td> {{ income.name }} {% if income.income_comment != '' %} /Komentarz: {{ income.income_comment
-                            }} {% endif %}</td>
-                    </tr>
-                    {% endfor %}
-                    {% endif %}
-
-                </tbody>
-
-            </table>
-
-            {% if current_month %}
-            <div>
-                <canvas id="currentMonthIncomesChart"></canvas>
-                <div class="d-none" id="currentMonthIncomesSumsNames">{% for income_sum in incomes_sums %}{{
-                    income_sum.name
-                    }},{% endfor %}</div>
-                <div class="d-none" id="currentMonthIncomesAmounts">{% for income_sum in incomes_sums %}{{
-                    income_sum.sum }},{% endfor %}
-                </div>
-            </div>
-            {% endif %}
-
-            {% if previous_month %}
-            <div>
-                <canvas id="previousMonthIncomesChart"></canvas>
-                <div class="d-none" id="previousMonthIncomesSumsNames">{% for income_sum in incomes_sums %}{{
-                    income_sum.name
-                    }},{% endfor %}</div>
-                <div class="d-none" id="previousMonthIncomesAmounts">{% for income_sum in incomes_sums %}{{
-                    income_sum.sum }},{% endfor %}
-                </div>
-            </div>
-            {% endif %}
-
-            {% if current_year %}
-            <div>
-                <canvas id="currentYearIncomesChart"></canvas>
-                <div class="d-none" id="currentYearIncomesSumsNames">{% for income_sum in incomes_sums %}{{
-                    income_sum.name
-                    }},{% endfor %}</div>
-                <div class="d-none" id="currentYearIncomesAmounts">{% for income_sum in incomes_sums %}{{
-                    income_sum.sum }},{% endfor %}
-                </div>
-            </div>
-            {% endif %}
-
-            {% if custom %}
-            <div>
-                <canvas id="customIncomesChart"></canvas>
-                <div class="d-none" id="customIncomesSumsNames">{% for income_sum in incomes_sums %}{{
-                    income_sum.name
-                    }},{% endfor %}</div>
-                <div class="d-none" id="customIncomesAmounts">{% for income_sum in incomes_sums %}{{
-                    income_sum.sum }},{% endfor %}
-                </div>
-            </div>
-            {% endif %}
-
-
-        </div>
-
-        <div class="container m-2">
-
-            <table class="table table-dark">
-                <thead>
-                    <tr>
-                        <th class="text-center" scope="col" colspan="4">Wydatki</th>
-                    </tr>
-                    <tr>
-                        <th scope="col">Data</th>
-                        <th scope="col">Kwota [PLN]</th>
-                        <th scope="col">Kategoria</th>
-                        <th scope="col">Metoda płatności</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    {% if expenses %}
-                    {% for expense in expenses %}
-                    <tr>
-                        <td> {{ expense.date_of_expense }} </td>
-                        <td> {{ expense.amount }}</td>
-                        <td> {{ expense.category }} {% if expense.expense_comment != '' %} /Komentarz: {{
-                            expense.expense_comment
-                            }} {% endif %}</td>
-                        <td> {{ expense.method }} </td>
-                    </tr>
-                    {% endfor %}
-                    {% endif %}
-                </tbody>
-            </table>
-
-            {% if current_month %}
-            <div>
-                <canvas id="currentMonthExpensesChart"></canvas>
-                <div class="d-none" id="currentMonthExpensesSumsNames">{% for expense_sum in expenses_sums %}{{
-                    expense_sum.name
-                    }},{% endfor %}</div>
-                <div class="d-none" id="currentMonthExpensesAmounts">{% for expense_sum in expenses_sums %}{{
-                    expense_sum.sum }},{% endfor %}
-                </div>
-            </div>
-            {% endif %}
-
-            {% if previous_month %}
-            <div>
-                <canvas id="previousMonthExpensesChart"></canvas>
-                <div class="d-none" id="previousMonthExpensesSumsNames">{% for expense_sum in expenses_sums %}{{
-                    expense_sum.name
-                    }},{% endfor %}</div>
-                <div class="d-none" id="previousMonthExpensesAmounts">{% for expense_sum in expenses_sums %}{{
-                    expense_sum.sum }},{% endfor %}
-                </div>
-            </div>
-            {% endif %}
-
-            {% if current_year %}
-            <div>
-                <canvas id="currentYearExpensesChart"></canvas>
-                <div class="d-none" id="currentYearExpensesSumsNames">{% for expense_sum in expenses_sums %}{{
-                    expense_sum.name
-                    }},{% endfor %}</div>
-                <div class="d-none" id="currentYearExpensesAmounts">{% for expense_sum in expenses_sums %}{{
-                    expense_sum.sum }},{% endfor %}
-                </div>
-            </div>
-            {% endif %}
-
-            {% if custom %}
-            <div>
-                <canvas id="customExpensesChart"></canvas>
-                <div class="d-none" id="customExpensesSumsNames">{% for expense_sum in expenses_sums %}{{
-                    expense_sum.name
-                    }},{% endfor %}</div>
-                <div class="d-none" id="customExpensesAmounts">{% for expense_sum in expenses_sums %}{{
-                    expense_sum.sum }},{% endfor %}
-                </div>
-            </div>
-            {% endif %}
-
-
-        </div>
-
+    {% if current_month %}
+    <div class="mx-auto my-3" id="when">
+        <p>Bilans z <b>bieżącego miesiąca</b> </p>
     </div>
+    {% endif %}
 
 
-    {% if balanceCalc %}
-    <div id="calculated">
-        Twój bilans wynosi: {% if balanceCalc %} <b>{{ balanceCalc }} PLN</b> {% endif %}
+    {% if previous_month %}
+    <div class="mx-auto my-3" id="when">
+        <p>Bilans z <b>zeszłego miesiąca</b> </p>
     </div>
+    {% endif %}
 
-    <div id="container">
-        {% if balanceCalc> 0 %} <div id="success-box">
 
-            <div class="face">
-                <div class="eye"></div>
-                <div class="eye right"></div>
-                <div class="mouth happy"></div>
-            </div>
-            <div class="shadow scale"></div>
-
-        </div>
-        {% endif %}
-        {% if balanceCalc <=0 %} <div id="error-box">
-
-            <div class="face2">
-                <div class="eye"></div>
-                <div class="eye right"></div>
-                <div class="mouth sad"></div>
-            </div>
-            <div class="shadow move"></div>
-
+    {% if current_year %}
+    <div class="mx-auto my-3" id="when">
+        <p>Bilans z <b>bieżącego roku</b> </p>
     </div>
     {% endif %}
 </div>
+
+<!-- main container start -->
+<div class="container d-flex flex-column flex-lg-row">
+    <!-- income container start -->
+    <div class="container m-2">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col" colspan="4">Przychody</th>
+                </tr>
+                <tr>
+                    <th scope="col">Data</th>
+                    <th scope="col">Kwota [PLN]</th>
+                    <th scope="col">Kategoria</th>
+                    <th scope="col">Komentarz</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if incomes %}
+                {% for income in incomes %}
+                <tr>
+                    <td> {{ income.date_of_income }} </td>
+                    <td> {{ income.amount }}</td>
+                    <td> {{ income.name }}</td>
+                    <td>{% if income.income_comment != '' %}{{ income.income_comment }} {% endif %}</td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+        {% if current_month %}
+        <div class="my-5">
+            <canvas id="currentMonthIncomesChart"></canvas>
+            <div class="d-none" id="currentMonthIncomesSumsNames">{% for income_sum in incomes_sums %}{{
+                income_sum.name
+                }},{% endfor %}</div>
+            <div class="d-none" id="currentMonthIncomesAmounts">{% for income_sum in incomes_sums %}{{
+                income_sum.sum }},{% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if previous_month %}
+        <div class="my-5">
+            <canvas id="previousMonthIncomesChart"></canvas>
+            <div class="d-none" id="previousMonthIncomesSumsNames">{% for income_sum in incomes_sums %}{{
+                income_sum.name
+                }},{% endfor %}</div>
+            <div class="d-none" id="previousMonthIncomesAmounts">{% for income_sum in incomes_sums %}{{
+                income_sum.sum }},{% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if current_year %}
+        <div class="my-5">
+            <canvas id="currentYearIncomesChart"></canvas>
+            <div class="d-none" id="currentYearIncomesSumsNames">{% for income_sum in incomes_sums %}{{
+                income_sum.name
+                }},{% endfor %}</div>
+            <div class="d-none" id="currentYearIncomesAmounts">{% for income_sum in incomes_sums %}{{
+                income_sum.sum }},{% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if custom %}
+        <div class="my-5">
+            <canvas id="customIncomesChart"></canvas>
+            <div class="d-none" id="customIncomesSumsNames">{% for income_sum in incomes_sums %}{{
+                income_sum.name
+                }},{% endfor %}</div>
+            <div class="d-none" id="customIncomesAmounts">{% for income_sum in incomes_sums %}{{
+                income_sum.sum }},{% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+
+    </div>
+    <!-- income container end-->
+
+
+    <!-- expense container start -->
+    <div class="container m-2">
+
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col" colspan="5">Wydatki</th>
+                </tr>
+                <tr>
+                    <th scope="col">Data</th>
+                    <th scope="col">Kwota [PLN]</th>
+                    <th scope="col">Kategoria</th>
+                    <th scope="col">Metoda płatności</th>
+                    <th scope="col">Komentarz</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% if expenses %}
+                {% for expense in expenses %}
+                <tr>
+                    <td> {{ expense.date_of_expense }} </td>
+                    <td> {{ expense.amount }}</td>
+                    <td> {{ expense.category }}</td>
+                    <td> {{ expense.method }} </td>
+                    <td>{% if expense.expense_comment != '' %}{{ expense.expense_comment }} {% endif %}</td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+
+        {% if current_month %}
+        <div class="my-5">
+            <canvas id="currentMonthExpensesChart"></canvas>
+            <div class="d-none" id="currentMonthExpensesSumsNames">{% for expense_sum in expenses_sums %}{{
+                expense_sum.name
+                }},{% endfor %}</div>
+            <div class="d-none" id="currentMonthExpensesAmounts">{% for expense_sum in expenses_sums %}{{
+                expense_sum.sum }},{% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if previous_month %}
+        <div class="my-5">
+            <canvas id="previousMonthExpensesChart"></canvas>
+            <div class="d-none" id="previousMonthExpensesSumsNames">{% for expense_sum in expenses_sums %}{{
+                expense_sum.name
+                }},{% endfor %}</div>
+            <div class="d-none" id="previousMonthExpensesAmounts">{% for expense_sum in expenses_sums %}{{
+                expense_sum.sum }},{% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if current_year %}
+        <div class="my-5">
+            <canvas id="currentYearExpensesChart"></canvas>
+            <div class="d-none" id="currentYearExpensesSumsNames">{% for expense_sum in expenses_sums %}{{
+                expense_sum.name
+                }},{% endfor %}</div>
+            <div class="d-none" id="currentYearExpensesAmounts">{% for expense_sum in expenses_sums %}{{
+                expense_sum.sum }},{% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if custom %}
+        <div class="my-5">
+            <canvas id="customExpensesChart"></canvas>
+            <div class="d-none" id="customExpensesSumsNames">{% for expense_sum in expenses_sums %}{{
+                expense_sum.name
+                }},{% endfor %}</div>
+            <div class="d-none" id="customExpensesAmounts">{% for expense_sum in expenses_sums %}{{
+                expense_sum.sum }},{% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+
+    </div>
+    <!-- expense container end-->
+
+
+</div>
+
+<!-- main container end-->
+
+<!-- display balance sum start -->
+{% if balanceCalc %}
+<div id="calculated" class="text-center">
+    Twój bilans wynosi: {% if balanceCalc %} <b>{{ balanceCalc }} PLN</b> {% endif %}
+</div>
 {% endif %}
+<!-- end of display balance sum-->
+
+<!-- show faces and messages start-->
+<!-- begin main faces container-->
+{% if balanceCalc %}
+<div id="container">
+
+    <!-- left box start-->
+    <div id="success-box">
+        {% if balanceCalc> 0 %}
+        <div class="face">
+            <div class="eye"></div>
+            <div class="eye right"></div>
+            <div class="mouth happy"></div>
+        </div>
+        <div class="shadow scale"></div>
+        {% endif %}
+        {% if balanceCalc <=0 %} <h2 class="alert">O nie!</h2>
+            <p>Oddalasz się od zamierzonego celu.</p>
+            {% endif %}
+    </div>
+    <!-- left box end-->
+
+    <!-- right box start-->
+    <div id="error-box">
+        {% if balanceCalc <=0 %} <div class="face2">
+            <div class="eye"></div>
+            <div class="eye right"></div>
+            <div class="mouth sad"></div>
+    </div>
+    <div class="shadow move"></div>
+    {% endif %}
+    {% if balanceCalc >0 %}
+    <h2 class="alert">Super!</h2>
+    <p>Jesteś na najlepszej drodze do osiągnięcia zamierzonego celu.</p>
+    {% endif %}
+    <!-- right box end-->
+
+</div>
+{% endif %}
+<!-- end od the main container for faces-->
 
 <!-- small menu-->
 
@@ -531,9 +580,6 @@
 
 <!-- end of small menu-->
 
-
-
-</div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

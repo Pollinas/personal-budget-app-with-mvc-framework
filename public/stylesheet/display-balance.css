@@ -11,6 +11,14 @@
 	font-size: 25px;
 }
 
+#when{
+  color:white;
+  font-size: 20px;
+}
+
+
+
+
 /** faces **/
 #container {
   position: relative;
@@ -19,8 +27,6 @@
   width: 700px;
   height: 250px;
 }
-
-
 
 
 #success-box {
@@ -170,6 +176,29 @@
 }
 
 
+
+h2 {
+  font-size: 20px;
+  font-weight: 100;
+  letter-spacing: 3px;
+  padding-top: 5px;
+  color: #fbc2eb;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.alert {
+  font-weight: 700;
+  letter-spacing: 5px;
+}
+
+p {
+  margin-top: -5px;
+  font-size: 20px;
+  font-weight: 100;
+  color: white;
+  letter-spacing: 1px;
+}
 
 
 
