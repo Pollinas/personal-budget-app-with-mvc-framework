@@ -56,7 +56,7 @@ class Login extends \Core\Controller
 
             }else if($_POST['direction'] == 'income')
             {
-                $this->redirect('/addexpense/new');
+                $this->redirect('/addincome/new');
 
             } else if($_POST['direction'] == 'expense')
             {

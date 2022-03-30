@@ -40,7 +40,7 @@ class AddExpense extends Authenticated
           if($expense->save())
         {
             Flash::addMessage('Dodawanie wydatku zakończone sukcesem.');
-            $this->redirect('/MainMenu/new');
+            $this->newAction();
 
         } else {
 
