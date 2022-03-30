@@ -20,7 +20,14 @@ class DisplayBalance extends Authenticated
      */
     public function newAction()
     {
-        View::renderTemplate('DisplayBalance/new.html');
+        View::renderTemplate('displayBalance/new.html', [
+            'incomes' => Balance::getCurrentMonthIncomes(),
+            'expenses' => Balance::getCurrentMonthExpenses(),
+            'balanceCalc' => Balance::getCurrentMonthBalance(),
+            'current_month' => 'true',
+            'incomes_sums' => Balance::getCurrentMonthIncomesSumsDivedIntoCategories(),
+            'expenses_sums' => Balance::getCurrentMonthExpensesSumsDivedIntoCategories()
+            ]);
     }
 
     /**
@@ -32,15 +39,7 @@ class DisplayBalance extends Authenticated
 
         if ($balance->time ===  "current_month")
         {
-
-            View::renderTemplate('displayBalance/new.html', [
-                'incomes' => Balance::getCurrentMonthIncomes(),
-                'expenses' => Balance::getCurrentMonthExpenses(),
-                'balanceCalc' => Balance::getCurrentMonthBalance(),
-                'current_month' => 'true',
-                'incomes_sums' => Balance::getCurrentMonthIncomesSumsDivedIntoCategories(),
-                'expenses_sums' => Balance::getCurrentMonthExpensesSumsDivedIntoCategories()
-                ]);
+            $this->newAction();
 
         }
 

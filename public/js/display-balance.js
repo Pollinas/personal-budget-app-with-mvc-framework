@@ -61,7 +61,7 @@ function drawChart(labels, data, id) {
     };
 
     const Config = {
-        type: 'doughnut',
+        type: 'pie',
         data: Data
     };
 

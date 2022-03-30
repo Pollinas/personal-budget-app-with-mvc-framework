@@ -1,42 +1,41 @@
 {% extends 'base.html' %}
 
-{% block title %}Main Menu{% endblock %}
+{% block title %}Display Balance{% endblock %}
+
 {% block stylesheets %}
 {{ parent() }}
-
 <link rel="stylesheet" type="text/css" href="/stylesheet/display-balance.css" />
-
+<link rel="stylesheet" type="text/css" href="/stylesheet/icon.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheet/panel.css" />
 {% endblock %}
 
 {% block footer %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" type="text/javascript"></script>
 <script src="/js/display-balance.js"></script>
-
+<script src="/js/panel.js"></script>
 
 {% endblock %}
+
 {% block body %}
 
 
-<nav class="navbar navbar-light">
-    <div class="container-fluid">
-        <h1 class="navbar-brand display-1 fs-2 m-3">Przeglądaj bilans</h1>
-        <form method="post" class="d-flex" action="/displaybalance/create">
-            <select class="form-select fs-4" id="time" name="time" onchange='myFunction(event)'
-                aria-label="Default select example">
-                <option selected value="current_month"> Bieżący miesiąc </option>
-                <option value="previous_month"> Ubiegły miesiąc </option>
-                <option value="current_year"> Bieżący rok </option>
-                <option value="custom"> Niestandardowy </option>
-            </select>
-            <button class="btn btn-outline-success p-2  px-4 m-3" type="submit"><svg xmlns="http://www.w3.org/2000/svg"
-                    width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-                    <path
-                        d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
-                </svg></button>
-        </form>
-        <a class="m-3" href="/mainmenu/new">Wróć do menu głównego</a>
-    </div>
+<nav class="navbar navbar-dark d-flex align-items-center justify-content-center p-3">
+    <form method="post" class="d-flex" action="/displaybalance/create">
+        <select class="form-select fs-4" id="time" name="time" onchange='myFunction(event)'
+            aria-label="Default select example">
+            <option selected value="current_month"> Bieżący miesiąc </option>
+            <option value="previous_month"> Ubiegły miesiąc </option>
+            <option value="current_year"> Bieżący rok </option>
+            <option value="custom"> Niestandardowy </option>
+        </select>
+        <button class="btn btn-outline-success m-3" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                <path
+                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+            </svg></button>
+    </form>
 </nav>
+
 
 
 <div
@@ -51,7 +50,7 @@
 
     <div class="container d-flex flex-column flex-lg-row">
         <div class="container  m-2">
-            <table class="table">
+            <table class="table table-dark">
                 <thead>
                     <tr>
                         <th class="text-center" scope="col" colspan="3">Przychody</th>
@@ -131,7 +130,7 @@
 
         <div class="container m-2">
 
-            <table class="table">
+            <table class="table table-dark">
                 <thead>
                     <tr>
                         <th class="text-center" scope="col" colspan="4">Wydatki</th>
@@ -214,14 +213,325 @@
     </div>
 
 
-
-    <div class=" fs-4 p-3 {% if balanceCalc and balanceCalc <=0 %}calculate_bad{% endif %} {% if balanceCalc and
-            balanceCalc> 0 %}calculate_good{% endif %}">
-
+    {% if balanceCalc %}
+    <div id="calculated">
         Twój bilans wynosi: {% if balanceCalc %} <b>{{ balanceCalc }} PLN</b> {% endif %}
     </div>
 
-    <a href=" /mainmenu/new" class="m-4">Wróć do menu głównego</a>
+    <div id="container">
+        {% if balanceCalc> 0 %} <div id="success-box">
+
+            <div class="face">
+                <div class="eye"></div>
+                <div class="eye right"></div>
+                <div class="mouth happy"></div>
+            </div>
+            <div class="shadow scale"></div>
+
+        </div>
+        {% endif %}
+        {% if balanceCalc <=0 %} <div id="error-box">
+
+            <div class="face2">
+                <div class="eye"></div>
+                <div class="eye right"></div>
+                <div class="mouth sad"></div>
+            </div>
+            <div class="shadow move"></div>
+
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+<!-- small menu-->
+
+<div class="motivation-panel-container">
+    <div class="motivation-panel">
+
+        <button class="close-btn"><span class="material-icons">
+                close
+            </span></button>
+        <h4 class="text-center m-2">HEJ{% if current_user %}, {{ current_user.name}}{% endif %}! <br> DOKĄD CHCESZ
+            PÓJŚĆ?
+        </h4>
+        <ul>
+            <li>
+                <a href="/">
+                    <span class="material-icons">
+                        home
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="/addincome/new">
+                    <span class="material-icons">
+                        attach_money
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="/addexpense/new">
+                    <span class="material-icons">
+                        shopping_cart
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="/settings/index">
+                    <span class="material-icons">
+                        settings_suggest
+                    </span>
+
+                </a>
+            </li>
+            <li>
+                <a href="/logout">
+                    <span class="material-icons">
+                        logout
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="floating-btn">
+    <div class="icon">
+        <?xml version="1.0" encoding="UTF-8"?>
+        <svg width="160px" height="256px" viewBox="0 0 218 289" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+                <clipPath id="clip-path" clipPathUnits="userSpaceOnUse">
+                    <rect id="screen-clip-path" x="0" y="0" width="74.7" height="113.12963"></rect>
+                </clipPath>
+
+                <rect id="path-1" x="0.15" y="0.935185185" width="63.85" height="36.0648148" rx="2"></rect>
+                <filter x="-18.0%" y="-26.3%" width="136.0%" height="163.8%" filterUnits="objectBoundingBox"
+                    id="filter-2">
+                    <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="3.5" in="shadowOffsetOuter1" result="shadowBlurOuter1">
+                    </feGaussianBlur>
+                    <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix"
+                        in="shadowBlurOuter1"></feColorMatrix>
+                </filter>
+                <rect id="path-3" x="0.15" y="0.935185185" width="63.85" height="36.0648148" rx="2"></rect>
+                <filter x="-18.0%" y="-26.3%" width="136.0%" height="163.8%" filterUnits="objectBoundingBox"
+                    id="filter-4">
+                    <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="3.5" in="shadowOffsetOuter1" result="shadowBlurOuter1">
+                    </feGaussianBlur>
+                    <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix"
+                        in="shadowBlurOuter1"></feColorMatrix>
+                </filter>
+                <rect id="path-5" x="0.15" y="0.935185185" width="63.85" height="36.0648148" rx="2"></rect>
+                <filter x="-18.0%" y="-26.3%" width="136.0%" height="163.8%" filterUnits="objectBoundingBox"
+                    id="filter-6">
+                    <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="3.5" in="shadowOffsetOuter1" result="shadowBlurOuter1">
+                    </feGaussianBlur>
+                    <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix"
+                        in="shadowBlurOuter1"></feColorMatrix>
+                </filter>
+                <rect id="path-7" x="0.15" y="0.935185185" width="63.85" height="36.0648148" rx="2"></rect>
+                <filter x="-18.0%" y="-26.3%" width="136.0%" height="163.8%" filterUnits="objectBoundingBox"
+                    id="filter-8">
+                    <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="3.5" in="shadowOffsetOuter1" result="shadowBlurOuter1">
+                    </feGaussianBlur>
+                    <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix"
+                        in="shadowBlurOuter1"></feColorMatrix>
+                </filter>
+                <rect id="path-9" x="0.15" y="0.935185185" width="63.85" height="36.0648148" rx="2"></rect>
+                <filter x="-18.0%" y="-26.3%" width="136.0%" height="163.8%" filterUnits="objectBoundingBox"
+                    id="filter-10">
+                    <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="3.5" in="shadowOffsetOuter1" result="shadowBlurOuter1">
+                    </feGaussianBlur>
+                    <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix"
+                        in="shadowBlurOuter1"></feColorMatrix>
+                </filter>
+                <rect id="path-11" x="0.15" y="0.935185185" width="63.85" height="36.0648148" rx="2"></rect>
+                <filter x="-18.0%" y="-26.3%" width="136.0%" height="163.8%" filterUnits="objectBoundingBox"
+                    id="filter-12">
+                    <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="3.5" in="shadowOffsetOuter1" result="shadowBlurOuter1">
+                    </feGaussianBlur>
+                    <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix"
+                        in="shadowBlurOuter1"></feColorMatrix>
+                </filter>
+                <rect id="path-13" x="73.15" y="39.9351852" width="74.7" height="113.12963"></rect>
+                <filter x="-2.0%" y="-1.3%" width="104.0%" height="102.7%" filterUnits="objectBoundingBox"
+                    id="filter-14">
+                    <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+                    <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+                    <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1"
+                        result="shadowInnerInner1"></feComposite>
+                    <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix"
+                        in="shadowInnerInner1"></feColorMatrix>
+                </filter>
+            </defs>
+            <g class="Site" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g class="FIND">
+                    <circle class="Oval-1" fill="#BDF5E2" cx="109" cy="109" r="109"></circle>
+                    <path
+                        d="M143,122.19885 L143,149.501587 C143,172.972812 123.977263,192 100.5,192 L78.6303663,192 C67.2365296,192 58,182.767641 58,171.373383 L58,112.498413 C58,89.0271878 77.0227373,70 100.5,70 L106.21127,70 C105.621918,67.7286166 106.102206,65.2166565 107.720533,63.2880089 C108.765898,62.0421923 110.130761,61.2222882 111.595184,60.8470799 L105.650155,55.8586086 C102.474226,53.1936876 102.063438,48.4546123 104.720533,45.2880089 C107.383047,42.1149489 112.118174,41.7048118 115.291969,44.367942 L154.349845,77.1413914 C157.525774,79.8063124 157.936562,84.5453877 155.279467,87.7119911 C154.234102,88.9578077 152.869239,89.7777118 151.404816,90.1529201 L157.349845,95.1413914 C160.525774,97.8063124 160.936562,102.545388 158.279467,105.711991 C155.804111,108.662005 151.537283,109.223876 148.399206,107.148212 L154.349845,112.141391 C157.525774,114.806312 157.936562,119.545388 155.279467,122.711991 C152.616953,125.885051 147.881826,126.295188 144.708031,123.632058 L143,122.19885 L143,122.19885 Z"
+                        class="Combined-Shape" fill="#FFA599"></path>
+                    <path
+                        d="M142.328676,157.067416 C140.913461,164.944948 137.327739,172.068856 132.212241,177.797753 L71.7096774,177.797753 L71.7096774,157.067416 L142.328676,157.067416 L142.328676,157.067416 Z"
+                        class="Mask" fill-opacity="0.1" fill="#000000"></path>
+                    <rect class="screen-bg" fill="#F3F3F3" x="73.15" y="39.9351852" width="74.7" height="113.12963">
+                    </rect>
+                    <g class="scroll" clip-path="url(#clip-path)" transform="translate(78, 33)">
+                        <g class="display-screen">
+                            <g class="Group-13">
+                                <g class="Rectangle-22-Copy">
+                                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1">
+                                    </use>
+                                    <use fill="#FAFAFA" fill-rule="evenodd" xlink:href="#path-1"></use>
+                                </g>
+                                <path
+                                    d="M0.15,2.93716813 C0.15,1.83150348 1.05260367,0.935185185 2.14860339,0.935185185 L62.0013966,0.935185185 C63.1051948,0.935185185 64,1.83239511 64,2.93716813 L64,27 L0.15,27 L0.15,2.93716813 Z"
+                                    class="Rectangle-22-Copy" fill="#FD8460"></path>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="4" y="30" width="23" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="56" y="30" width="4" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="50" y="30" width="4" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="44" y="30" width="4" height="4" rx="1">
+                                </rect>
+                            </g>
+                            <g class="Group-14" transform="translate(0, 42)">
+                                <g class="Rectangle-22-Copy">
+                                    <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3">
+                                    </use>
+                                    <use fill="#FAFAFA" fill-rule="evenodd" xlink:href="#path-3"></use>
+                                </g>
+                                <path
+                                    d="M0.15,2.93716813 C0.15,1.83150348 1.05260367,0.935185185 2.14860339,0.935185185 L62.0013966,0.935185185 C63.1051948,0.935185185 64,1.83239511 64,2.93716813 L64,27 L0.15,27 L0.15,2.93716813 Z"
+                                    class="Rectangle-22-Copy" fill="#FFC233"></path>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="4" y="30" width="23" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="56" y="30" width="4" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="50" y="30" width="4" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="44" y="30" width="4" height="4" rx="1">
+                                </rect>
+                            </g>
+                            <g class="Group-15" transform="translate(0, 84)">
+                                <g class="Rectangle-22-Copy">
+                                    <use fill="black" fill-opacity="1" filter="url(#filter-6)" xlink:href="#path-5">
+                                    </use>
+                                    <use fill="#FAFAFA" fill-rule="evenodd" xlink:href="#path-5"></use>
+                                </g>
+                                <path
+                                    d="M0.15,2.93716813 C0.15,1.83150348 1.05260367,0.935185185 2.14860339,0.935185185 L62.0013966,0.935185185 C63.1051948,0.935185185 64,1.83239511 64,2.93716813 L64,27 L0.15,27 L0.15,2.93716813 Z"
+                                    class="Rectangle-22-Copy" fill="#51D6CD"></path>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="4" y="30" width="23" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="56" y="30" width="4" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="50" y="30" width="4" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="44" y="30" width="4" height="4" rx="1">
+                                </rect>
+                            </g>
+                            <g class="Group-13" transform="translate(0, 126)">
+                                <g class="Rectangle-22-Copy">
+                                    <use fill="black" fill-opacity="1" filter="url(#filter-8)" xlink:href="#path-7">
+                                    </use>
+                                    <use fill="#FAFAFA" fill-rule="evenodd" xlink:href="#path-7"></use>
+                                </g>
+                                <path
+                                    d="M0.15,2.93716813 C0.15,1.83150348 1.05260367,0.935185185 2.14860339,0.935185185 L62.0013966,0.935185185 C63.1051948,0.935185185 64,1.83239511 64,2.93716813 L64,27 L0.15,27 L0.15,2.93716813 Z"
+                                    class="Rectangle-22-Copy" fill="#FD8460"></path>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="4" y="30" width="23" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="56" y="30" width="4" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="50" y="30" width="4" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="44" y="30" width="4" height="4" rx="1">
+                                </rect>
+                            </g>
+                            <g class="Group-14" transform="translate(0, 168)">
+                                <g class="Rectangle-22-Copy">
+                                    <use fill="black" fill-opacity="1" filter="url(#filter-10)" xlink:href="#path-9">
+                                    </use>
+                                    <use fill="#FAFAFA" fill-rule="evenodd" xlink:href="#path-9"></use>
+                                </g>
+                                <path
+                                    d="M0.15,2.93716813 C0.15,1.83150348 1.05260367,0.935185185 2.14860339,0.935185185 L62.0013966,0.935185185 C63.1051948,0.935185185 64,1.83239511 64,2.93716813 L64,27 L0.15,27 L0.15,2.93716813 Z"
+                                    class="Rectangle-22-Copy" fill="#FFC233"></path>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="4" y="30" width="23" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="56" y="30" width="4" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="50" y="30" width="4" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="44" y="30" width="4" height="4" rx="1">
+                                </rect>
+                            </g>
+                            <g class="Group-15" transform="translate(0, 210)">
+                                <g class="Rectangle-22-Copy">
+                                    <use fill="black" fill-opacity="1" filter="url(#filter-12)" xlink:href="#path-11">
+                                    </use>
+                                    <use fill="#FAFAFA" fill-rule="evenodd" xlink:href="#path-11"></use>
+                                </g>
+                                <path
+                                    d="M0.15,2.93716813 C0.15,1.83150348 1.05260367,0.935185185 2.14860339,0.935185185 L62.0013966,0.935185185 C63.1051948,0.935185185 64,1.83239511 64,2.93716813 L64,27 L0.15,27 L0.15,2.93716813 Z"
+                                    class="Rectangle-22-Copy" fill="#51D6CD"></path>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="4" y="30" width="23" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="56" y="30" width="4" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="50" y="30" width="4" height="4" rx="1">
+                                </rect>
+                                <rect class="Rectangle-53" fill="#D8D8D8" x="44" y="30" width="4" height="4" rx="1">
+                                </rect>
+                            </g>
+                        </g>
+                    </g>
+
+                    <g class="Rectangle-22-Copy" fill-opacity="1" fill="black">
+                        <use filter="url(#filter-14)" xlink:href="#path-13"></use>
+                    </g>
+                    <path
+                        d="M69,30.2498267 C69,25.6935732 72.7004973,22 77.2427004,22 L143.7573,22 C148.309617,22 152,25.7017319 152,30.2498267 L152,162.750173 C152,167.306427 148.299503,171 143.7573,171 L77.2427004,171 C72.6903827,171 69,167.298268 69,162.750173 L69,30.2498267 Z M73.15,39.9351852 L73.15,153.064815 L147.85,153.064815 L147.85,39.9351852 L73.15,39.9351852 Z"
+                        class="Rectangle-22" fill="#FFFFFF"></path>
+                    <path
+                        d="M102.2,32.3472222 C102.2,31.2042996 103.122863,30.2777778 104.262375,30.2777778 L122.270959,30.2777778 C123.409977,30.2777778 124.333333,31.1963314 124.333333,32.3472222 C124.333333,33.4901448 123.410471,34.4166667 122.270959,34.4166667 L104.262375,34.4166667 C103.123357,34.4166667 102.2,33.4981131 102.2,32.3472222 Z M93.9,32.3472222 C93.9,31.2042996 94.8210195,30.2777778 95.975,30.2777778 C97.1209909,30.2777778 98.05,31.1963314 98.05,32.3472222 C98.05,33.4901448 97.1289805,34.4166667 95.975,34.4166667 C94.8290091,34.4166667 93.9,33.4981131 93.9,32.3472222 Z M110.5,166.861111 C107.444024,166.861111 104.966667,164.390386 104.966667,161.342593 C104.966667,158.294799 107.444024,155.824074 110.5,155.824074 C113.555976,155.824074 116.033333,158.294799 116.033333,161.342593 C116.033333,164.390386 113.555976,166.861111 110.5,166.861111 Z"
+                        class="Combined-Shape" fill="#D8D8D8"></path>
+                    <path
+                        d="M58,141.908965 L58,171.913518 C58,182.40427 66.4816681,191.53913 76.944336,192.312795 C87.5193556,193.094768 96,185.212667 96,174.716029 L96,131.142136 L58,141.908965 Z"
+                        class="Rectangle-42" fill="#FFC7BF"></path>
+                    <g class="rotate" transform="translate(58, 98)">
+                        <g class="thumb">
+                            <path
+                                d="M1.84741111e-13,43.9089648 L13,57.9135177 L38,33.1421356 L53.9783196,17.163816 C57.691664,13.4504716 57.6909512,7.43611716 53.9809704,3.72613639 C50.2701739,0.0153398983 44.2547355,0.0173424013 40.5432908,3.72878714 L12.6469791,31.6250988 L1.84741111e-13,43.9089648 Z"
+                                class="Rectangle-42" fill="#FFC7BF"></path>
+                            <path
+                                d="M38.4207518,11.635845 C37.8833955,11.0984887 37.8805975,10.2300601 38.4211951,9.68946256 L42.4232959,5.68736173 C45.0762634,3.03439419 49.380549,3.03736958 52.0251431,5.68196366 L52.0251431,5.68196366 C54.6751294,8.33194993 54.6772947,12.6262612 52.019745,15.2838109 L48.0176442,19.2859117 C47.4800432,19.8235128 46.6069554,19.8220486 46.0712618,19.286355 L38.4207518,11.635845 L38.4207518,11.635845 Z"
+                                class="Rectangle-41-Copy" fill-opacity="0.5" fill="#FFFFFF"></path>
+                            <path
+                                d="M25.1966991,25.1464466 L32.9748737,32.9246212 C33.365398,33.3151455 33.998563,33.3151455 34.3890873,32.9246212 C34.7796116,32.5340969 34.7796116,31.9009319 34.3890873,31.5104076 L26.6109127,23.732233 C26.2203884,23.3417088 25.5872234,23.3417088 25.1966991,23.732233 C24.8061748,24.1227573 24.8061748,24.7559223 25.1966991,25.1464466 L25.1966991,25.1464466 L25.1966991,25.1464466 Z"
+                                class="Shape" fill-opacity="0.1" fill="#000000" fill-rule="nonzero"></path>
+                            <path
+                                d="M28.0251263,22.3180195 L35.8033009,30.0961941 C36.1938252,30.4867184 36.8269901,30.4867184 37.2175144,30.0961941 C37.6080387,29.7056698 37.6080387,29.0725048 37.2175144,28.6819805 L29.4393398,20.9038059 C29.0488155,20.5132816 28.4156506,20.5132816 28.0251263,20.9038059 C27.634602,21.2943302 27.634602,21.9274952 28.0251263,22.3180195 L28.0251263,22.3180195 L28.0251263,22.3180195 Z"
+                                class="Shape" fill-opacity="0.1" fill="#000000" fill-rule="nonzero"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+</div>
+
+
+<!-- end of small menu-->
+
+
 
 </div>
 
