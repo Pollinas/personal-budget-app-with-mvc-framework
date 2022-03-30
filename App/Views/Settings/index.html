@@ -10,14 +10,22 @@
 {% endblock %}
 
 {% block footer %}
+{{ parent() }}
 <script src="/js/panel.js"></script>
+<script src="/js/modal.js"></script>
 <script src="/js/settings.js"></script>
+<script src="/js/profile.js"></script>
+<script src="/js/toggle-password.js"></script>
+
 {% endblock %}
 
 {% block body %}
 
 <h1>Personal Budget App</h1>
 
+<!---->
+<!---->
+<!---->
 <!-- navigation-->
 <button id="hamburger-menu" data-toggle="ham-navigation" class="hamburger-menu-button">
     <section class="hamburger-menu-button-open">Menu</section>
@@ -28,11 +36,19 @@
         <li class="active"><a href="#" onclick="toggleExpenses()" id="expenseClick">Wydatki</a></li>
         <li><a href="#" onclick="toggleMethods()" id="methodsClick">Metody</a></li>
         <li><a href="#" onclick="toggleProfile()" id="profileClick">Profil</a></li>
-        <li><a href="#" onclick="togglePassword()" id="passwordClick">Hasło</a></li>
+        <li><a href="#" onclick="togglePasswordContainer()" id="passwordClick">Hasło</a></li>
     </ul>
 </nav>
 <!-- end of navigation-->
+<!---->
+<!---->
+<!---->
 
+<div class="d-none" id="userId">{{ user.id }}</div>
+
+<!---->
+<!---->
+<!---->
 <!-- guide -->
 <div id="guideContainer" class="container text-center justify-content-center align-self-center  p-5">
     <span class="my-5">Kliknij na ikonę w lewym górnym rogu i wybierz jedną z opcji. </span>
@@ -40,37 +56,427 @@
     <div id="gear" class="mx-auto"></div>
 </div>
 <!--end of guide-->
+<!---->
+<!---->
+<!---->
 
+<!---->
+<!---->
+<!---->
 <!-- income setting-->
 <div id="incomesContainer" class="text-center">
-    hey, I am an income container!
-</div>
-<!-- end of income settings -->
 
+    <table id="tableOfIncomesCategories"
+        class="table table-hover table-dark w-50 table-active text-white table-sm table-text">
+
+        <thead>
+            <tr>
+                <th scope="col">Kategoria</th>
+                <th scope="col" width="5%"></th>
+                <th scope="col" style="display:none;">ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for incomeCategory in incomeCategories %}
+            <tr class="editIncomeBtn">
+                <td style="color:black;">{{ incomeCategory.name }}</td>
+                <td><i class="fas fa-edit"></i></td>
+                <td style="display:none;">{{ incomeCategory.id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col mb-2">
+            <button class="btn btn-hover no-focus btn-sm btn-block" style="height:30px" data-toggle="modal"
+                data-target="#addIncomeCategoryModal">Dodaj nową
+                kategorię</button>
+        </div>
+    </div>
+
+    <button class="modal-button" href="#myModal1">Usuń wszystkie przychody</button>
+</div>
+
+<!-- modal delete all incomes-->
+<div class="modal" tabindex="-1" id="myModal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Settings/deleteAllIncomes">
+                    Czy na pewno chcesz usunąć wszystkie przychody?
+                    Zmiany są nieodwaracalne.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
+                <button type="button submit" class="btn btn-primary">Tak</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--edit income category modal-->
+<div class="modal" id="editIncomeModal" tabindex="-1" role="dialog" aria-labelledby="edytujKategoriePrzychodu"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id='editIncomeForm'>
+
+                    <input type="hidden" id="incomeCategoryIdModal" name="incomeCategoryId">
+                    <div class="input-group">
+
+                        <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg></span>
+
+                        <input type="text" id="incomeCategoryModal" class="form-control"
+                            placeholder="Kategoria przychodów" maxlength="40" step="any" aria-label="KategoriaPrzychodu"
+                            name="incomeCategory" required>
+                    </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
+                <button type="button submit" class="btn btn-primary">Tak</button>
+            </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- end of income settings -->
+<!---->
+<!---->
+<!---->
+
+<!---->
+<!---->
+<!---->
 <!-- expense setting-->
 <div id="expensesContainer" class="text-center">
-    hey, I am an expense container!
-</div>
-<!-- end of expense settings -->
 
+    <table id="tableOfExpensesCategories"
+        class="table table-hover table-active table-dark w-50 text-white table-sm table-text">
+
+        <thead>
+            <tr>
+                <th scope="col">Kategoria</th>
+                <th scope="col" width="5%"></th>
+                <th scope="col" style="display:none;">ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expenseCategory in expenseCategories %}
+            <tr class="editExpenseBtn">
+                <td style="color:black;">{{ expenseCategory.name }}</td>
+                <td><i class="fas fa-edit"></i></td>
+                <td style="display:none;">{{ expenseCategory.id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col mb-2">
+            <button class="btn btn-hover no-focus btn-sm btn-block" style="height:30px" data-toggle="modal"
+                data-target="#addIncomeCategoryModal">Dodaj nową
+                kategorię</button>
+        </div>
+    </div>
+    <button class="modal-button" href="#myModal2">Usuń wszystkie wydatki</button>
+</div>
+
+<!-- modal delete all expenses-->
+<div class="modal" tabindex="-1" id="myModal2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Settings/deleteAllExpenses">
+                    Czy na pewno chcesz usunąć wszystkie wydatki?
+                    Zmiany są nieodwaracalne.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
+                <button type="button submit" class="btn btn-primary">Tak</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--edit expense category modal-->
+<div class="modal" id="editExpenseModal" tabindex="-1" role="dialog" aria-labelledby="edytujKategorieWydatku"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id='editExpenseForm'>
+
+                    <input type="hidden" id="expenseCategoryIdModal" name="expenseCategoryId">
+                    <div class="input-group">
+
+                        <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg></span>
+
+                        <input type="text" id="expenseCategoryModal" class="form-control"
+                            placeholder="Kategoria wydatków" maxlength="40" step="any" aria-label="KategoriaWydatku"
+                            name="expenseCategory" required>
+                    </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
+                <button type="button submit" class="btn btn-primary">Tak</button>
+            </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- end of expense settings -->
+<!---->
+<!---->
+<!---->
+
+
+<!---->
+<!---->
+<!---->
 <!-- methods setting-->
 <div id="methodsContainer" class="text-center">
-    hey, I am a methods container!
+    <table id="tableOfPaymenthMethods"
+        class="table table-hover table-active table-dark text-white table-sm table-text w-50">
+
+        <thead>
+            <tr>
+                <th scope="col">Metody płatności</th>
+                <th scope="col" width="5%"></th>
+                <th scope="col" style="display:none;">ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for method in methods %}
+            <tr class="editPaymentBtn">
+                <td style="color:black;">{{ method.name }}</td>
+                <td><i class="fas fa-edit"></i></td>
+                <td style="display:none;">{{ method.id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col mb-2">
+            <button class="btn btn-hover text-white no-focus btn-sm btn-block" data-toggle="modal"
+                data-target="#addIncomeCategoryModal">Dodaj nową metodę
+                płatności</button>
+        </div>
+    </div>
+</div>
+
+
+<!--edit payment modal-->
+<div class="modal" id="editPaymentModal" tabindex="-1" role="dialog" aria-labelledby="edytujMetodePlatnosci"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id='editPaymentForm'>
+
+                    <input type="hidden" id="paymentIdModal" name="paymentId">
+                    <div class="input-group">
+                        <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-credit-card-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0V4zm0 3v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7H0zm3 2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z" />
+                            </svg></span>
+                        <input type="text" id="paymentModal" class="form-control" placeholder="Metoda płatności"
+                            maxlength="40" step="any" aria-label="MEtodaPłatności" name="paymentMethod" required>
+                    </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
+                <button type="button submit" class="btn btn-primary">Tak</button>
+            </div>
+
+            </form>
+        </div>
+
+    </div>
 </div>
 <!-- end of methods settings -->
+<!---->
+<!---->
+<!---->
 
-<!-- methods setting-->
+
+<!---->
+<!---->
+<!---->
+<!-- profile setting-->
 <div id="profileContainer" class="text-center">
-    hey, I am a profile container!
+
+    <dl class="list-group  d-column d-flex">
+
+
+        {% if user.errors is not empty %}
+        <p class="align-self-center text-center">
+        <ul class="error">
+            {% for error in user.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        </p>
+        {% endif %}
+
+        <label class="list-group-item">
+            <dt>name</dt>
+            <dd>{{ user.name }}</dd>
+        </label>
+        <label class="list-group-item">
+            <dt>E-mail</dt>
+            <dd>{{ user.email }}</dd>
+        </label>
+    </dl>
+
+    <button class="modal-button" href="#myModal5">Edytuj dane</button>
+
+    <button class="modal-button" href="#myModal4">Usuń konto</button>
 </div>
-<!-- end of methods settings -->
 
 
-<!-- methods setting-->
+<!-- modal edit profile-->
+<div class="modal" tabindex="-1" id="myModal5">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" action="/Settings/updateProfile" id="formProfile">
+
+                    <div class="input-group align-self-center m-md-3 px-md-5 my-3 ">
+                        <label for="name" class="form-label"> </label>
+                        <span class="input-group-text"><svg xmlns="://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                            </svg></span>
+                        <input type="text" name="name" minlength="2" maxlength="20" class="form-control rounded"
+                            id="name" aria-describedby="name" placeholder="Wpisz swoje imię." value="{{ user.name }}"
+                            required>
+                    </div>
+
+                    <div class="input-group align-self-center m-md-3 px-md-5 my-3 ">
+                        <label for="email" class="form-label"> </label>
+                        <span class="input-group-text">@</span>
+                        <input type="email" name="email" class="form-control rounded" id="email"
+                            aria-describedby="email" required placeholder="Wpisz swój adres e-mail."
+                            value="{{ user.email }}" required>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- end of modal edit profile-->
+<!-- modal delete account -->
+<div class="modal" tabindex="-1" id="myModal4">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/Settings/delete">
+                    <p>Czy na pewno chcesz usunąć konto?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                <button type="button submit" class="btn btn-primary">Usuń konto</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end of modal delete account-->
+<!-- end of profile settings -->
+<!---->
+<!---->
+<!---->
+
+<!---->
+<!---->
+<!---->
+<!-- password setting-->
 <div id="passwordContainer" class="text-center">
-    hey, I am a password container!
+    <!-- jeszcze potrzebne errors i drugi input na wpisanie obecnego hasła-->
+
+    <form method="post" action="/Profile/updatePassword" id="formPasswordReset">
+        <div class=" input-group m-md-3 px-md-5 my-3 ">
+            <label for="password" class="form-label"> </label>
+            <input type="password" name="password" minlength="6" class="form-control rounded" id="password"
+                aria-describedby="password" placeholder="Wpisz hasło" required
+                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+                title="Hasło musi zawierać co najmniej 6 znaków, w tym przynajmniej 1 literę i 1 cyfrę.">
+            <span class="input-group-text"><i class="bi bi-eye-slash" id="togglePassword"></i></span>
+        </div>
+
+        <button type="button submit" class="btn btn-primary">Save changes</button>
+
+    </form>
+
 </div>
-<!-- end of methods settings -->
+
+<!-- end of modal edit password-->
+<!-- end of passwordsettings -->
+<!---->
+<!---->
+<!---->
 
 
 <!-- small menu-->
