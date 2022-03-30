@@ -4,32 +4,22 @@
 
 {% block stylesheets %}
 {{ parent() }}
-<link rel="stylesheet" type="text/css" href="/stylesheet/home.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheet/shiny-btn.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheet/forgot.css" />
 {% endblock %}
 
-{% block footer %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="/js/home.js"></script>
-{% endblock %}
 
 {% block body %}
 
+<h1>Personal Budget App</h1>
 
-<div id="preloader">
-    <div id="status">
-
-        <i class="fa-solid fa-key fa-beat-fade fa-5x" style="color: silver;"></i>
-
-    </div>
-</div>
-
-<div class="container main d-flex flex-column flex-md-row py-5 px-4 my-5">
+<div class="container main d-flex flex-column flex-lg-row py-5 px-4 my-5">
     <img src="https://images.unsplash.com/photo-1584447128309-b66b7a4d1b63?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Zm9yZ2V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-        alt="" class="img-fluid img-thumbnail order-md-first order-last ">
+        alt="" class="img-fluid  order-lg-first order-last ">
     <div class="container align-items-center justify-content-center align-self-center d-flex flex-column text-center py-5 px-4 my-5"
         id="content">
-        <h1>Nie pamiętasz hasła?</h1>
-        <span class="text-center">Wpisz swój adres e-mail i klinij 'wyślij',aby uzyskać wiadomość z linikiem do
+        <h2>Nie pamiętasz hasła?</h2>
+        <span class="text-center w-75">Wpisz swój adres e-mail i klinij 'wyślij',aby uzyskać wiadomość z linikiem do
             resetowania hasła.</span>
         <form method="post" action="/password/request-reset">
             <div>
@@ -38,7 +28,10 @@
                     placeholder="Wpisz swój adres e-mail" autofocus required />
             </div>
 
-            <button type="submit" class="m-4  px-3 btn btn-dark btn-lg">Wyślij</button>
+            <div class="button-container d-flex mx-auto align-items-center justify-center flex-column mt-4">
+                <button class="shiny-btn forgot" type="submit">
+                    <div>WYŚLIJ</div>
+            </div>
         </form>
 
     </div>
