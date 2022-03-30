@@ -21,22 +21,41 @@ $('.menu li a').on("click", function () {
 });
 
 
+
+/**
+ * toggle different settings
+ */
+
+var incomesContainer = document.querySelector('#incomesContainer');
+var expensesContainer = document.querySelector('#expensesContainer');
+var methodsContainer = document.querySelector('#methodsContainer');
+var profileContainer = document.querySelector('#profileContainer');
+var passwordContainer = document.querySelector('#passwordContainer');
+var guideContainer = document.querySelector('#guideContainer');
+
+function choiceReset() {
+
+    if (incomesContainer.style.display === 'block') { incomesContainer.style.display = 'none'; }
+    if (expensesContainer.style.display === 'block') { expensesContainer.style.display = 'none'; }
+    if (methodsContainer.style.display === 'block') { methodsContainer.style.display = 'none'; }
+    if (profileContainer.style.display === 'block') { profileContainer.style.display = 'none'; }
+    if (passwordContainer.style.display === 'block') { passwordContainer.style.display = 'none'; }
+    guideContainer.style.display = 'none';
+}
+
 // toggle income settings 
 
 function toggleIncomes() {
 
-    var incomesContainer = document.querySelector('#incomesContainer');
-
+    choiceReset();
     incomesContainer.style.display = 'block';
-
 }
 
 //toggle expense settings 
 
 function toggleExpenses() {
 
-    var expensesContainer = document.querySelector('#expensesContainer');
-
+    choiceReset();
     expensesContainer.style.display = 'block';
 
 }
@@ -45,8 +64,7 @@ function toggleExpenses() {
 
 function toggleMethods() {
 
-    var methodsContainer = document.querySelector('#methodsContainer');
-
+    choiceReset();
     methodsContainer.style.display = 'block';
 
 }
@@ -55,8 +73,7 @@ function toggleMethods() {
 
 function toggleProfile() {
 
-    var profileContainer = document.querySelector('#profileContainer');
-
+    choiceReset();
     profileContainer.style.display = 'block';
 
 }
@@ -65,8 +82,7 @@ function toggleProfile() {
 
 function togglePassword() {
 
-    var passwordContainer = document.querySelector('#passwordContainer');
-
+    choiceReset();
     passwordContainer.style.display = 'block';
 
 }
