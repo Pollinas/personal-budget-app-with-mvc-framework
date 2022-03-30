@@ -35,11 +35,11 @@ var guideContainer = document.querySelector('#guideContainer');
 
 function choiceReset() {
 
-    if (incomesContainer.style.display === 'block') { incomesContainer.style.display = 'none'; }
-    if (expensesContainer.style.display === 'block') { expensesContainer.style.display = 'none'; }
-    if (methodsContainer.style.display === 'block') { methodsContainer.style.display = 'none'; }
-    if (profileContainer.style.display === 'block') { profileContainer.style.display = 'none'; }
-    if (passwordContainer.style.display === 'block') { passwordContainer.style.display = 'none'; }
+    if (incomesContainer.style.display === 'flex') { incomesContainer.style.display = 'none'; }
+    if (expensesContainer.style.display === 'flex') { expensesContainer.style.display = 'none'; }
+    if (methodsContainer.style.display === 'flex') { methodsContainer.style.display = 'none'; }
+    if (profileContainer.style.display === 'flex') { profileContainer.style.display = 'none'; }
+    if (passwordContainer.style.display === 'flex') { passwordContainer.style.display = 'none'; }
     guideContainer.style.display = 'none';
 }
 
@@ -48,7 +48,7 @@ function choiceReset() {
 function toggleIncomes() {
 
     choiceReset();
-    incomesContainer.style.display = 'block';
+    incomesContainer.style.display = 'flex';
 }
 
 //toggle expense settings 
@@ -56,7 +56,7 @@ function toggleIncomes() {
 function toggleExpenses() {
 
     choiceReset();
-    expensesContainer.style.display = 'block';
+    expensesContainer.style.display = 'flex';
 
 }
 
@@ -65,7 +65,7 @@ function toggleExpenses() {
 function toggleMethods() {
 
     choiceReset();
-    methodsContainer.style.display = 'block';
+    methodsContainer.style.display = 'flex';
 
 }
 
@@ -74,17 +74,62 @@ function toggleMethods() {
 function toggleProfile() {
 
     choiceReset();
-    profileContainer.style.display = 'block';
+    profileContainer.style.display = 'flex';
 
 }
 
 //toggle password settings 
 
-function togglePassword() {
+function togglePasswordContainer() {
 
     choiceReset();
-    passwordContainer.style.display = 'block';
+    passwordContainer.style.display = 'flex';
 
 }
 
+
+/**
+ * incomes and expenses
+ */
+$(document).ready(function () {
+    $('.editIncomeBtn').on('click', function () {
+        $('#editIncomeModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        var data = $tr.children("td").map(function () {
+            return $(this).text();
+        }).get();
+
+        $('#incomeCategoryModal').val(data[0]);
+        $('#incomeCategoryIdModal').val(data[2]);
+
+
+    });
+
+    $('.editExpenseBtn').on('click', function () {
+        $('#editExpenseModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        var data = $tr.children("td").map(function () {
+            return $(this).text();
+        }).get();
+
+        $('#expenseCategoryModal').val(data[0]);
+        $('#expenseCategoryIdModal').val(data[2]);
+
+    });
+
+    $('.editPaymentBtn').on('click', function () {
+        $('#editPaymentModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        var data = $tr.children("td").map(function () {
+            return $(this).text();
+        }).get();
+
+        $('#paymentModal').val(data[0]);
+        $('#paymentIdModal').val(data[2]);
+
+    });
+});
 
