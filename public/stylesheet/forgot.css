@@ -1,0 +1,23 @@
+h2, span{
+    color: white;
+    letter-spacing: 1px;
+}
+
+h2{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+span{
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.input-group-text{
+    margin:0;
+    font-size: 20px;
+}
+
+*{
+    box-sizing: border-box;
+}
