@@ -5,40 +5,22 @@
 
 {% block stylesheets %}
 {{ parent() }}
-<link rel="stylesheet" type="text/css" href="/stylesheet/home.css" />
-{% endblock %}
-
-{% block footer %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="/js/home.js"></script>
+<link rel="stylesheet" type="text/css" href="/stylesheet/forgot.css" />
 {% endblock %}
 
 {% block body %}
 
-<div id="preloader">
-    <div id="status">
-
-        <figure class="text-centerfs-1">
-            <blockquote class="blockquote">
-                <p>„Bogactwo to stan umysłu, a nie konta..”</p>
-            </blockquote>
-            <figcaption class="blockquote-footer">
-                <cite title="Source Title" class="fw-bold">ROBERT KIYOSAKI</cite>
-            </figcaption>
-        </figure>
-
-    </div>
-</div>
+<h1>Personal Budget App</h1>
 
 <div class="container main d-flex flex-column flex-md-row py-5 px-4 my-5">
     <img src="https://images.unsplash.com/photo-1503980599186-9cc36eda351a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHRoYW5rJTIweW91fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-        alt="" class="img-fluid img-thumbnail order-md-first order-last ">
-    <div class="container align-items-center justify-content-center align-self-center d-flex flex-column py-5 px-4 my-5"
-        id="content">
-        <span class="text-center m-2 fs-2">
-            <p>Dziękujemy za rejestrację. </p>
+        alt="" class="img-fluid order-lg-first order-last">
 
-            <p>Sprawdź swoją skrzynkę e-mail i kliknij na przesłany link, aby aktywować konto.</p>
+    <div class="container align-items-center justify-content-center text-center align-self-center d-flex flex-column py-5 px-4 my-5"
+        id="content">
+        <h2>Dziękujemy za rejestrację!</h2>
+        <span class="text-center m-2 fs-2">
+            Sprawdź swoją skrzynkę e-mail i kliknij na przesłany link, aby aktywować konto.
         </span>
 
     </div>
