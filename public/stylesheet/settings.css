@@ -113,3 +113,74 @@ a {
       color:white;
       font-size: 40px;
   }
+
+  /* guide */
+
+  #guideContainer
+  {
+    display: flex;
+    letter-spacing: 2px;
+    line-height: 150%;   
+    font-size: 25px;
+    font-weight: bold;
+    color:white;
+    margin-top: 5%;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    flex-direction: column;
+  }
+
+  #gear {
+    width: 72px;
+    height: 48px;
+    position: relative;
+    margin: 30px;
+    display: inline-block;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.2);
+    vertical-align: middle;
+    float: left;
+  }
+  #gear:before, #gear:after {
+    content: "";
+    display: block;
+    position: absolute;
+  }
+
+
+  @-webkit-keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+#gear {
+  border-radius: 100%;
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 0 0 4px #b9b6ad, inset 0 0 0 8px #b9b6ad, inset 0 0 0 15px #e7e5d8;
+  animation: rotate 45s infinite linear;
+  top: 12px;
+  left: 42px;
+}
+
+/* Teeth */
+#gear:after,
+#gear:before {
+  height: 14px;
+  width: 14px;
+  background: #b9b6ad;
+  border-radius: 2px;
+  z-index: -1;
+  box-shadow: 0 62px 0 0 #b9b6ad, -31px 31px 0 0 #b9b6ad, 31px 31px 0 0 #b9b6ad;
+}
+
+#gear:after {
+  top: -15px;
+  left: 17px;
+}
+
+#gear:before {
+  top: -5px;
+  left: 39px;
+  transform: rotateZ(45deg);
+}
