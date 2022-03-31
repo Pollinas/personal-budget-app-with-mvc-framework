@@ -5,6 +5,12 @@ document.getElementById('toggleProfileInput').addEventListener('click', function
     });
 });
 
+document.getElementById('togglePasswordInput').addEventListener('click', function () {
+    [].map.call(document.querySelectorAll('.passwordInput'), function (el) {
+        el.classList.toggle('passwordInput--open');
+    });
+});
+
 
 
 $(document).ready(function () {

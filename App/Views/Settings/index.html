@@ -426,25 +426,40 @@
 <!---->
 <!-- password setting-->
 <div id="passwordContainer" class="text-center">
-    <!-- jeszcze potrzebne errors i drugi input na wpisanie obecnego hasła-->
 
-    <form method="post" action="/Profile/updatePassword" id="formPasswordReset">
-        <div class=" input-group m-md-3 px-md-5 my-3 ">
-            <label for="password" class="form-label"> </label>
-            <input type="password" name="password" minlength="6" class="form-control rounded" id="password"
-                aria-describedby="password" placeholder="Wpisz hasło" required
-                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
-                title="Hasło musi zawierać co najmniej 6 znaków, w tym przynajmniej 1 literę i 1 cyfrę.">
-            <span class="input-group-text"><i class="bi bi-eye-slash" id="togglePassword"></i></span>
+    <div class="passwordInput">
+        <button class="password__avatar" id="togglePasswordInput">
+            <img src="/img/password.svg" alt="PasswordPic" />
+        </button>
+        <div class="password__form">
+            <form method="post" action="/Settings/updatePassword" id="formPasswordReset">>
+
+                <div class="input-group mx-auto px-5 ">
+                    <label for="password" class="form-label"> </label>
+                    <input type="password" name="password" minlength="6" class="form-control rounded" id="password"
+                        aria-describedby="password" placeholder="Wpisz hasło" required
+                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+                        title="Hasło musi zawierać co najmniej 6 znaków, w tym przynajmniej 1 literę i 1 cyfrę.">
+                    <span class="input-group-text"><i class="bi bi-eye-slash" id="togglePassword"></i></span>
+                </div>
+
+                <button class="btn btn-success my-5" type="submit">Resetuj hasło</button>
+            </form>
         </div>
+    </div>
 
-        <button type="button submit" class="btn btn-primary">Save changes</button>
-
-    </form>
+    {% if user.errors is not empty %}
+    <p class="align-self-center text-center">
+    <ul class="error">
+        {% for error in user.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    </p>
+    {% endif %}
 
 </div>
 
-<!-- end of modal edit password-->
 <!-- end of passwordsettings -->
 <!---->
 <!---->
