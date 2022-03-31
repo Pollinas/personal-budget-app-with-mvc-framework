@@ -351,84 +351,56 @@
 <!-- profile setting-->
 <div id="profileContainer" class="text-center">
 
-    <dl class="list-group  d-column d-flex">
+    <div class="profile">
+        <button class="profile__avatar" id="toggleProfileInput">
+            <img src="/img/profile.svg" alt="Avatar" />
+        </button>
+        <div class="profile__form">
+            <form method="post" action="/Settings/updateProfile" id="formProfile">
 
+                <div class="input-group align-self-center mx-auto px-5 mt-5 mb-3">
+                    <label for="name" class="form-label"> </label>
+                    <span class="input-group-text"><svg xmlns="://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path
+                                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                        </svg></span>
+                    <input type="text" name="name" minlength="2" maxlength="20" class="form-control rounded" id="name"
+                        aria-describedby="name" placeholder="Wpisz swoje imię." value="{{ user.name }}" required>
+                </div>
 
-        {% if user.errors is not empty %}
-        <p class="align-self-center text-center">
-        <ul class="error">
-            {% for error in user.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-        </p>
-        {% endif %}
+                <div class="input-group align-self-center mx-auto px-5 mb-4">
+                    <label for="email" class="form-label"> </label>
+                    <span class="input-group-text">@</span>
+                    <input type="email" name="email" class="form-control rounded" id="email" aria-describedby="email"
+                        required placeholder="Wpisz swój adres e-mail." value="{{ user.email }}" required>
+                </div>
 
-        <label class="list-group-item">
-            <dt>name</dt>
-            <dd>{{ user.name }}</dd>
-        </label>
-        <label class="list-group-item">
-            <dt>E-mail</dt>
-            <dd>{{ user.email }}</dd>
-        </label>
-    </dl>
-
-    <button class="modal-button" href="#myModal5">Edytuj dane</button>
-
-    <button class="modal-button" href="#myModal4">Usuń konto</button>
-</div>
-
-
-<!-- modal edit profile-->
-<div class="modal" tabindex="-1" id="myModal5">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="btn-close close" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-                <form method="post" action="/Settings/updateProfile" id="formProfile">
-
-                    <div class="input-group align-self-center m-md-3 px-md-5 my-3 ">
-                        <label for="name" class="form-label"> </label>
-                        <span class="input-group-text"><svg xmlns="://www.w3.org/2000/svg" width="16" height="16"
-                                fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                                <path
-                                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                            </svg></span>
-                        <input type="text" name="name" minlength="2" maxlength="20" class="form-control rounded"
-                            id="name" aria-describedby="name" placeholder="Wpisz swoje imię." value="{{ user.name }}"
-                            required>
-                    </div>
-
-                    <div class="input-group align-self-center m-md-3 px-md-5 my-3 ">
-                        <label for="email" class="form-label"> </label>
-                        <span class="input-group-text">@</span>
-                        <input type="email" name="email" class="form-control rounded" id="email"
-                            aria-describedby="email" required placeholder="Wpisz swój adres e-mail."
-                            value="{{ user.email }}" required>
-                    </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button submit" class="btn btn-primary">Save changes</button>
-            </div>
+                <button class="btn btn-success mb-4" type="submit">Edytuj dane</button>
             </form>
+            <hr>
+            <button class="modal-button btn btn-danger my-4" href="#myModal4">Usuń konto</button>
         </div>
     </div>
+
+
+    {% if user.errors is not empty %}
+    <p class="align-self-center text-center">
+    <ul class="error">
+        {% for error in user.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    </p>
+    {% endif %}
+
 </div>
 
-<!-- end of modal edit profile-->
 <!-- modal delete account -->
 <div class="modal" tabindex="-1" id="myModal4">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
                 <button type="button" class="btn-close close" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -436,8 +408,8 @@
                     <p>Czy na pewno chcesz usunąć konto?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
-                <button type="button submit" class="btn btn-primary">Usuń konto</button>
+                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                <button type="button submit" class="btn btn-danger">Usuń konto</button>
             </div>
             </form>
         </div>
@@ -487,7 +459,8 @@
         <button class="close-btn"><span class="material-icons">
                 close
             </span></button>
-        <h4 class="text-center m-2">HEJ{% if current_user %}, {{ current_user.name}}{% endif %}! <br> DOKĄD CHCESZ
+        <h4 class="text-center m-2">HEJ{% if current_user %}, {{ current_user.name}}{% endif %}! <br> DOKĄD
+            CHCESZ
             PÓJŚĆ?
         </h4>
         <ul>
@@ -596,7 +569,8 @@
                 <rect id="path-13" x="73.15" y="39.9351852" width="74.7" height="113.12963"></rect>
                 <filter x="-2.0%" y="-1.3%" width="104.0%" height="102.7%" filterUnits="objectBoundingBox"
                     id="filter-14">
-                    <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+                    <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1">
+                    </feGaussianBlur>
                     <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
                     <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1"
                         result="shadowInnerInner1"></feComposite>

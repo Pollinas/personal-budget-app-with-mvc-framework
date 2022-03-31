@@ -1,3 +1,12 @@
+
+document.getElementById('toggleProfileInput').addEventListener('click', function () {
+    [].map.call(document.querySelectorAll('.profile'), function (el) {
+        el.classList.toggle('profile--open');
+    });
+});
+
+
+
 $(document).ready(function () {
 
     var userId = document.querySelector('#userId').innerHTML;
