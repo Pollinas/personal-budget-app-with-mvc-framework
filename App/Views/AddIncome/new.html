@@ -17,6 +17,7 @@
 <script src="/js/form.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 
 {% endblock %}
 
@@ -46,8 +47,8 @@
     </ul>
     <!-- fieldsets -->
     <div id="fieldset-wrapper">
-        <fieldset>
-            <h2 class="step-title text-center">Wpisz kwotę przychodu</h2>
+        <fieldset id="sf1" class="frm">
+            <h2 class=" step-title text-center">Wpisz kwotę przychodu</h2>
             <div class="input-group m-5 w-75">
                 <label for="amount" class="form-label align-self-center"></label>
                 <span class="input-group-text">PLN</span>
@@ -56,10 +57,10 @@
             </div>
 
             <div class="button-wrapper">
-                <input type="button" name="next" class="next action-button" value="Następny krok" />
+                <input type="button" name="next" class="next action-button open1" value="Następny krok" />
             </div>
         </fieldset>
-        <fieldset>
+        <fieldset id="sf2" class="frm">
             <h2 class="step-title">Wybierz jedną z kategorii</h2>
             <h3 class="step-subtitle">I wpisz komentarz poniżej, jeśli chcesz.</h3>
             <div class="input-group my-4">
@@ -82,11 +83,11 @@
                 placeholder="Miejsce na ewentualny komentarz"></textarea>
 
             <div class="button-wrapper">
-                <input type="button" name="previous" class="previous action-button" value="Poprzedni krok" />
-                <input type="button" name="next" class="next action-button" value="Następny krok" />
+                <input type="button" name="previous" class="previous action-button back2" value="Poprzedni krok" />
+                <input type="button" name="next" class="next action-button open2" value="Następny krok" />
             </div>
         </fieldset>
-        <fieldset>
+        <fieldset id="sf3" class="frm">
             <h2 class="step-title">Ustaw datę przychodu</h2>
 
             <div class="input-group m-5 w-75">
@@ -96,8 +97,8 @@
             </div>
 
             <div class="button-wrapper">
-                <input type="button" name="previous" class="previous action-button" value="Poprzedni krok" />
-                <input type="submit" name="submit" class="submit  action-button" value="Dodaj przychód" />
+                <input type="button" name="previous" class="previous action-button back3" value="Poprzedni krok" />
+                <input type="submit" name="submit" class="submit action-button" value="Dodaj przychód" />
             </div>
         </fieldset>
         <div class="ripple-loader">
