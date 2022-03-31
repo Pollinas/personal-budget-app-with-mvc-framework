@@ -213,7 +213,7 @@ a {
 }
 
 
-/* profile */
+/* profile an password */
 hr {
   color: black;
 }
@@ -229,18 +229,16 @@ img {
   max-width: 100%;
 }
 
-.profileContainer {
-  position: relative;
-  animation: intro .7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
 
-.profile {
+.profile,
+.passwordInput {
   position: relative;
   min-width: 30%;
   max-height: 50%;
 }
 
-.profile--open .profile__form {
+.profile--open .profile__form,
+.passwordInput--open .password__form {
   visibility: visible;
   height: auto;
   opacity: 1;
@@ -249,17 +247,15 @@ img {
   padding-top: 5em;
 }
 
-.profile--open .profile__fields {
-  opacity: 1;
-  visibility: visible;
-}
 
-.profile--open .profile__avatar {
+.profile--open .profile__avatar,
+.passwordInput--open .password__avatar {
   transform: translate(-50%, -1.5em);
   border-radius: 50%;
 }
 
-.profile__form {
+.profile__form,
+.password__form {
   position: relative;
   background: white;
   visibility: hidden;
@@ -272,7 +268,8 @@ img {
     padding .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.profile__avatar {
+.profile__avatar,
+.password__avatar {
   position: absolute;
   z-index: 1;
   left: 50%;
@@ -286,7 +283,8 @@ img {
   will-change: transform;
 }
 
-.profile__avatar:focus {
+.profile__avatar:focus,
+.password__avatar:focus {
   outline: 0;
 }
 
