@@ -11,6 +11,7 @@
 
 {% block footer %}
 {{ parent() }}
+<script src="https://kit.fontawesome.com/e2d73f7922.js" crossorigin="anonymous"></script>
 <script src="/js/panel.js"></script>
 <script src="/js/modal.js"></script>
 <script src="/js/settings.js"></script>
@@ -66,54 +67,54 @@
 <!-- income setting-->
 <div id="incomesContainer" class="text-center">
 
-    <table id="tableOfIncomesCategories"
-        class="table table-hover table-dark w-50 table-active text-white table-sm table-text">
+    <table id="tableOfIncomesCategories" class="table table-hover table-dark w-50 table-sm">
 
         <thead>
             <tr>
                 <th scope="col">Kategoria</th>
-                <th scope="col" width="5%"></th>
+                <th scope="col" width="7%"></th>
                 <th scope="col" style="display:none;">ID</th>
+                <th scope="col" width="7%"></th>
             </tr>
         </thead>
         <tbody>
             {% for incomeCategory in incomeCategories %}
-            <tr class="editIncomeBtn">
-                <td style="color:black;">{{ incomeCategory.name }}</td>
-                <td><i class="fas fa-edit"></i></td>
+            <tr>
+                <td>{{ incomeCategory.name }}</td>
+                <td class="editIncomeBtn" style="cursor: pointer;"><i class="fas fa-edit"></i></td>
                 <td style="display:none;">{{ incomeCategory.id }}</td>
+                <td style="cursor: pointer;"><i class="fa-solid fa-trash-can"></i></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <div class="row">
-        <div class="col mb-2">
-            <button class="btn btn-hover no-focus btn-sm btn-block" style="height:30px" data-toggle="modal"
-                data-target="#addIncomeCategoryModal">Dodaj nową
-                kategorię</button>
-        </div>
-    </div>
+    <button class="btn btn-lg btn-success text-white mt-3 mb-2" data-toggle="modal"
+        data-target="#addIncomeCategoryModal">Dodaj
+        nową
+        kategorię</button>
 
-    <button class="modal-button" href="#myModal1">Usuń wszystkie przychody</button>
+    <button class="btn btn-lg modal-button btn-danger text-white my-5" href="#deleteAllIncomes">Usuń wszystkie
+        przychody</button>
+
+
 </div>
 
 <!-- modal delete all incomes-->
-<div class="modal" tabindex="-1" id="myModal1">
+<div class="modal" tabindex="-1" id="deleteAllIncomes">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
                 <button type="button" class="btn-close close" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <form method="post" action="/Settings/deleteAllIncomes">
-                    Czy na pewno chcesz usunąć wszystkie przychody?
-                    Zmiany są nieodwaracalne.
+                    Czy na pewno chcesz usunąć wszystkie przychody? <br><br>
+                    Zmiany są nieodwracalne.
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
-                <button type="button submit" class="btn btn-primary">Tak</button>
+                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Nie</button>
+                <button type="button submit" class="btn btn-danger">Tak</button>
             </div>
             </form>
         </div>
@@ -170,53 +171,53 @@
 <!-- expense setting-->
 <div id="expensesContainer" class="text-center">
 
-    <table id="tableOfExpensesCategories"
-        class="table table-hover table-active table-dark w-50 text-white table-sm table-text">
+    <table id="tableOfExpensesCategories" class="table table-hover table-dark w-50 table-sm">
 
         <thead>
             <tr>
                 <th scope="col">Kategoria</th>
-                <th scope="col" width="5%"></th>
+                <th scope="col" width="7%"></th>
                 <th scope="col" style="display:none;">ID</th>
+                <th scope="col" width="7%"></th>
             </tr>
         </thead>
         <tbody>
             {% for expenseCategory in expenseCategories %}
-            <tr class="editExpenseBtn">
-                <td style="color:black;">{{ expenseCategory.name }}</td>
-                <td><i class="fas fa-edit"></i></td>
+            <tr>
+                <td>{{ expenseCategory.name }}</td>
+                <td class="editExpenseBtn" style="cursor: pointer;"><i class="fas fa-edit"></i></td>
                 <td style="display:none;">{{ expenseCategory.id }}</td>
+                <td class="deleteExpenseCatgedoryBtn" style="cursor: pointer;"><i class="fa-solid fa-trash-can"></i>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <div class="row">
-        <div class="col mb-2">
-            <button class="btn btn-hover no-focus btn-sm btn-block" style="height:30px" data-toggle="modal"
-                data-target="#addIncomeCategoryModal">Dodaj nową
-                kategorię</button>
-        </div>
-    </div>
-    <button class="modal-button" href="#myModal2">Usuń wszystkie wydatki</button>
+    <button class="btn btn-lg btn-success text-white mt-3 mb-2" data-toggle="modal"
+        data-target="#addExpenseCategoryModal">Dodaj
+        nową
+        kategorię</button>
+    <button class="btn btn-lg modal-button btn-danger text-white my-5" href="#deleteAllExpenses">Usuń wszystkie
+        wydatki</button>
+
 </div>
 
 <!-- modal delete all expenses-->
-<div class="modal" tabindex="-1" id="myModal2">
+<div class="modal" tabindex="-1" id="deleteAllExpenses">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
                 <button type="button" class="btn-close close" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <form method="post" action="/Settings/deleteAllExpenses">
-                    Czy na pewno chcesz usunąć wszystkie wydatki?
-                    Zmiany są nieodwaracalne.
+                    Czy na pewno chcesz usunąć wszystkie wydatki? <br><br>
+                    Zmiany są nieodwracalne.
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
-                <button type="button submit" class="btn btn-primary">Tak</button>
+                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Nie</button>
+                <button type="button submit" class="btn btn-danger">Tak</button>
             </div>
             </form>
         </div>
@@ -235,7 +236,7 @@
             <div class="modal-body">
                 <form action="" method="post" id='editExpenseForm'>
 
-                    <input type="hidden" id="expenseCategoryIdModal" name="expenseCategoryId">
+                    <input type="hidden" id="expenseCategoryIdEditModal" name="expenseCategoryId">
                     <div class="input-group">
 
                         <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -252,9 +253,40 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
+                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Nie</button>
                 <button type="button submit" class="btn btn-primary">Tak</button>
             </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+<!--end of edit expense category modal-->
+
+<!-- delete single expense category modal-->
+<div class="modal fade" id="deleteExpenseCategoryModal" tabindex="-1" role="dialog"
+    aria-labelledby="usunKategorieWydatku" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/Settings/deleteExpenseCategory" method="post" id='deleteExpenseCategoryForm'>
+                <div class="modal-body text-center">
+
+                    <input type="hidden" id="expenseCategoryIdModal" name="expenseCategorydId">
+                    <input type="hidden" id="expenseCategoryNameModal" name="ExpenseCategoryName">
+                    Czy na pewno chcesz usunąć tę kategorię wydatku?
+                    <br> <br>
+                    Jeśli to zrobisz, wszystkim powiązanym z nią wydatkom zostanie przypisana kategoria o nazwie "Inne".
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-danger">Usuń</button>
+                </div>
 
             </form>
         </div>
@@ -273,51 +305,50 @@
 <!---->
 <!-- methods setting-->
 <div id="methodsContainer" class="text-center">
-    <table id="tableOfPaymenthMethods"
-        class="table table-hover table-active table-dark text-white table-sm table-text w-50">
+    <table id="tableOfPaymenthMethods" class="table table-hover table-dark w-50 table-sm">
 
         <thead>
             <tr>
                 <th scope="col">Metody płatności</th>
                 <th scope="col" width="5%"></th>
                 <th scope="col" style="display:none;">ID</th>
+                <th scope="col" width="5%"></th>
             </tr>
         </thead>
         <tbody>
             {% for method in methods %}
-            <tr class="editPaymentBtn">
-                <td style="color:black;">{{ method.name }}</td>
-                <td><i class="fas fa-edit"></i></td>
+            <tr>
+                <td>{{ method.name }}</td>
+                <td class="editMethodBtn" style="cursor: pointer;"><i class="fas fa-edit"></i></td>
                 <td style="display:none;">{{ method.id }}</td>
+                <td class="deleteMethodBtn" style="cursor: pointer;"><i class="fa-solid fa-trash-can"></i></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <div class="row">
-        <div class="col mb-2">
-            <button class="btn btn-hover text-white no-focus btn-sm btn-block" data-toggle="modal"
-                data-target="#addIncomeCategoryModal">Dodaj nową metodę
-                płatności</button>
-        </div>
-    </div>
+    <button class="btn btn-success btn-lg text-white mt-5" data-toggle="modal"
+        data-target="#addIncomeCategoryModal">Dodaj
+        nową
+        metodę
+        płatności</button>
 </div>
 
 
 <!--edit payment modal-->
-<div class="modal" id="editPaymentModal" tabindex="-1" role="dialog" aria-labelledby="edytujMetodePlatnosci"
+<div class="modal fade" id="editPaymentModal" tabindex="-1" role="dialog" aria-labelledby="edytujMetodePlatnosci"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Edycja nazwy metody płatności</h5>
                 <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form action="" method="post" id='editPaymentForm'>
+            <form action="" method="post" id='editPaymentForm'>
+                <div class="modal-body">
 
                     <input type="hidden" id="paymentIdModal" name="paymentId">
-                    <div class="input-group">
+                    <div class="input-group my-4">
                         <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-credit-card-fill" viewBox="0 0 16 16">
                                 <path
@@ -327,18 +358,50 @@
                             maxlength="40" step="any" aria-label="MEtodaPłatności" name="paymentMethod" required>
                     </div>
 
-            </div>
+                </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
-                <button type="button submit" class="btn btn-primary">Tak</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-success">Zapisz zmiany</button>
+                </div>
 
             </form>
         </div>
 
     </div>
 </div>
+<!--end of edit payment modal-->
+
+<!--delete payment method modal-->
+<div class="modal fade" id="deleteMethodModal" tabindex="-1" role="dialog" aria-labelledby="usunMetodePlatnosci"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/Settings/deletePaymentMethod" method="post" id='deletePaymentForm'>
+                <div class="modal-body text-center">
+
+                    <input type="hidden" id="methodIdModal" name="methodId">
+                    <input type="hidden" id="methodName" name="methodName">
+                    Czy na pewno chcesz usunąć tę metodę płatności?
+                    <br> <br>
+                    Jeśli to zrobisz, wszystkim powiązanym z nią wydatkom zostanie przypisana metoda o nazwie "Inne".
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-danger">Usuń</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
 <!-- end of methods settings -->
 <!---->
 <!---->
@@ -403,7 +466,7 @@
             <div class="modal-header">
                 <button type="button" class="btn-close close" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <form action="/Settings/delete">
                     <p>Czy na pewno chcesz usunąć konto?</p>
             </div>
@@ -437,13 +500,13 @@
                 <div class="input-group mx-auto px-5 ">
                     <label for="password" class="form-label"> </label>
                     <input type="password" name="password" minlength="6" class="form-control rounded" id="password"
-                        aria-describedby="password" placeholder="Wpisz hasło" required
+                        aria-describedby="password" placeholder="Wpisz nowe hasło" required
                         pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
                         title="Hasło musi zawierać co najmniej 6 znaków, w tym przynajmniej 1 literę i 1 cyfrę.">
                     <span class="input-group-text"><i class="bi bi-eye-slash" id="togglePassword"></i></span>
                 </div>
 
-                <button class="btn btn-success my-5" type="submit">Resetuj hasło</button>
+                <button class="btn btn-success my-5" type="submit">Zapisz zmiany</button>
             </form>
         </div>
     </div>

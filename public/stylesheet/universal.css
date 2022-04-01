@@ -1,38 +1,37 @@
 body,
 html {
 	height: 100%;
-	
+
 	background-image: linear-gradient(to right, #434343 0%, black 100%);
 	font-family: 'Lato', sans-serif;
-   
+
 }
 
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-a{
+a {
 	text-decoration: none;
 	color: white;
 	font-weight: bolder;
 	letter-spacing: 1px;
 }
 
-a:hover{
-	color:black;
+a:hover {
+	color: black;
 }
 
-.error{
-    font-size: 20px;
-	color:#FF1B1C;
+.error {
+	font-size: 20px;
+	color: #FF1B1C;
 	list-style-type: none;
 }
 
 
-
-h1{
-    color: white;
+h1 {
+	color: white;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -42,6 +41,3 @@ h1{
 	opacity: 0.1;
 	font-weight: 900;
 }
-
-
-
