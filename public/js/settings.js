@@ -91,6 +91,8 @@ function togglePasswordContainer() {
  * incomes, expenses an payment methods
  */
 $(document).ready(function () {
+
+    //incomes
     $('.editIncomeBtn').on('click', function () {
         $('#editIncomeModal').modal('show');
 
@@ -101,6 +103,20 @@ $(document).ready(function () {
 
         $('#incomeCategoryModal').val(data[0]);
         $('#incomeCategoryIdModal').val(data[2]);
+
+
+    });
+
+    $('.deleteIncomeCategoryBtn').on('click', function () {
+        $('#deleteIncomeCategoryModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        var data = $tr.children("td").map(function () {
+            return $(this).text();
+        }).get();
+
+        $('#incomeCategoryNameDeleteModal').val(data[0]);
+        $('#incomeCategoryIdDeleteModal').val(data[2]);
 
 
     });

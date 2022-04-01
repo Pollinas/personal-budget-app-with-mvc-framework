@@ -66,6 +66,35 @@ class Settings extends Authenticated
         }
     }
 
+    /**
+     * Delete chosen income category 
+     * 
+     * @return void
+     */
+    public function deleteIncomeCategoryAction()
+    {
+        $income_category_id = $_POST['incomeCategoryId'];
+        
+        if ($_POST['incomeCategoryName'] != "Inne")
+         {
+           
+          if( Income::deleteSingleIncomeCategory($income_category_id) )
+             {
+                 Flash::addMessage('Wybrana kategoria przychodu została usunięta.');
+                 $this->indexAction();
+ 
+             } else {
+ 
+                 Flash::addMessage('Ups! Coś poszło nie tak. spróbuj ponownie później.' , $type='info');
+                 $this->indexAction();
+             }       
+        
+         }else{
+             Flash::addMessage('Tej kategorii przychodu nie można usuwać ani edytować.' , $type='warning');
+             $this->indexAction();
+        }
+    }
+
     // methods for managing expenses
 
     /**

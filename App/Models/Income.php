@@ -69,7 +69,7 @@ class Income extends \Core\Model
         if (empty($this->errors)) {
 
             $category_name = $this->category;
-            $category_id = $this->extractCategoryIdByName($category_name);
+            $category_id = Income::extractCategoryIdByName($category_name);
 
             $sql = 'INSERT INTO incomes
             VALUES ( NULL, :id , :category_id ,:amount, :date, :comment)';
@@ -127,7 +127,7 @@ class Income extends \Core\Model
      * 
      * @return $category_id 
      */
-    protected function extractCategoryIdByName($category_name)
+    protected static function extractCategoryIdByName($category_name)
     {
         $sql = 'SELECT id FROM incomes_category_assigned_to_users
         WHERE user_id= :id AND name=  :category_name limit 1';
@@ -179,6 +179,41 @@ class Income extends \Core\Model
         $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
 
         return $stmt->execute();
+    }
+
+    /**
+     * delete a single income category
+     * 
+     * @return boolean
+     */
+    public static function deleteSingleIncomeCategory($income_category_id)
+    {
+        $incomeCategoryOtherId = Income::extractCategoryIdByName('Inne');
+
+        $sql = 'UPDATE incomes
+        SET  income_category_assigned_to_user_id = :other_id';
+
+         $sql .= "\nWHERE income_category_assigned_to_user_id = :income_category_id";
+
+        $db = static::getDB();
+        $stmt1 = $db->prepare($sql);
+
+        $stmt1->bindValue(':income_category_id', $income_category_id, PDO::PARAM_INT);
+        $stmt1->bindValue(':other_id', $incomeCategoryOtherId, PDO::PARAM_INT);
+        
+
+        if($stmt1->execute())
+        {
+            $sql = 'DELETE FROM incomes_category_assigned_to_users
+            WHERE id = :income_category_id';
+
+            $db = static::getDB();
+            $stmt2 = $db->prepare($sql);
+
+            $stmt2->bindValue(':income_category_id', $income_category_id, PDO::PARAM_INT);
+
+            return $stmt2->execute();
+        }
     }
 
   

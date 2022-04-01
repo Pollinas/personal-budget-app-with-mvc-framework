@@ -302,6 +302,6 @@ class Expense extends \Core\Model
             return $stmt2->execute();
         }
     }
-  
-  
+
+ 
 }
