@@ -87,9 +87,8 @@ function togglePasswordContainer() {
 
 }
 
-
 /**
- * incomes and expenses
+ * incomes, expenses an payment methods
  */
 $(document).ready(function () {
     $('.editIncomeBtn').on('click', function () {
@@ -106,6 +105,8 @@ $(document).ready(function () {
 
     });
 
+    //expenses
+
     $('.editExpenseBtn').on('click', function () {
         $('#editExpenseModal').modal('show');
 
@@ -115,11 +116,27 @@ $(document).ready(function () {
         }).get();
 
         $('#expenseCategoryModal').val(data[0]);
+        $('#expenseCategoryIdEditModal').val(data[2]);
+
+    });
+
+
+    $('.deleteExpenseCatgedoryBtn').on('click', function () {
+        $('#deleteExpenseCategoryModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        var data = $tr.children("td").map(function () {
+            return $(this).text();
+        }).get();
+
+        $('#expenseCategoryNameModal').val(data[0]);
         $('#expenseCategoryIdModal').val(data[2]);
 
     });
 
-    $('.editPaymentBtn').on('click', function () {
+    //methods 
+
+    $('.editMethodBtn').on('click', function () {
         $('#editPaymentModal').modal('show');
 
         $tr = $(this).closest('tr');
@@ -129,6 +146,19 @@ $(document).ready(function () {
 
         $('#paymentModal').val(data[0]);
         $('#paymentIdModal').val(data[2]);
+
+    });
+
+    $('.deleteMethodBtn').on('click', function () {
+        $('#deleteMethodModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        var data = $tr.children("td").map(function () {
+            return $(this).text();
+        }).get();
+
+        $('#methodName').val(data[0]);
+        $('#methodIdModal').val(data[2]);
 
     });
 });

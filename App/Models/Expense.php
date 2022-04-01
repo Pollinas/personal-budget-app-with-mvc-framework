@@ -78,12 +78,12 @@ class Expense extends \Core\Model
 
         if (empty($this->errors)) {
 
-            //wywołanie metod do porbania category id i payment method 
+           
             $category_name = $this->category;
             $category_id = $this->extractCategoryIdByName($category_name);
 
             $method_name = $this->method;
-            $method_id= $this->extractPaymentMethodIdByName($method_name);
+            $method_id= Expense::extractPaymentMethodIdByName($method_name);
 
             $sql = 'INSERT INTO expenses
             VALUES ( NULL, :id , :category_id , :payment_method_id, :amount, :date, :comment)';
@@ -160,7 +160,7 @@ class Expense extends \Core\Model
 
     } 
 
-    protected function extractPaymentMethodIdByName($method_name)
+    protected static function extractPaymentMethodIdByName($method_name)
     {
         $sql = 'SELECT id FROM payment_methods_assigned_to_users
         WHERE user_id = :id AND name= :method_name limit 1';
@@ -231,9 +231,42 @@ class Expense extends \Core\Model
         return $stmt->execute();
     }
 
+
+
+    /**
+     * delete a single payment method
+     * 
+     * @return boolean
+     */
+    public static function deleteSinglePaymentMethod($payment_method_id)
+    {
+        $paymentMethodOtherId = Expense::extractPaymentMethodIdByName('Inne');
+
+        $sql = 'UPDATE expenses
+        SET  payment_method_assigned_to_user_id = :other_id';
+
+         $sql .= "\nWHERE payment_method_assigned_to_user_id = :payment_method_id";
+
+        $db = static::getDB();
+        $stmt1 = $db->prepare($sql);
+
+        $stmt1->bindValue(':payment_method_id', $payment_method_id, PDO::PARAM_INT);
+        $stmt1->bindValue(':other_id', $paymentMethodOtherId, PDO::PARAM_INT);
+        
+
+        if($stmt1->execute())
+        {
+            $sql = 'DELETE FROM payment_methods_assigned_to_users
+            WHERE id = :payment_method_id';
+
+            $db = static::getDB();
+            $stmt2 = $db->prepare($sql);
+
+            $stmt2->bindValue(':payment_method_id', $payment_method_id, PDO::PARAM_INT);
+
+            return $stmt2->execute();
+        }
+    }
   
-
-
-
   
 }

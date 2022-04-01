@@ -46,6 +46,8 @@ class Settings extends Authenticated
         ]);
     }
 
+    //methods for managing incomes 
+
     /**
      * Delete all incomes
      * 
@@ -63,6 +65,8 @@ class Settings extends Authenticated
             $this->indexAction();
         }
     }
+
+    // methods for managing expenses
 
     /**
      * Delete all expenses
@@ -82,14 +86,47 @@ class Settings extends Authenticated
         }
     }
 
-     /**
+    //methods for managing payment methods
+
+    /**
+     * Delete chosen payment method
+     * 
+     * @return void
+     */
+    public function deletePaymentMethodAction()
+    {
+        $payment_method_id = $_POST['methodId'];
+        
+       if ($_POST['methodName'] != "Inne")
+        {
+         if(Expense::deleteSinglePaymentMethod( $payment_method_id))
+            {
+                Flash::addMessage('Wybrana metoda płatności została usunięta.');
+                $this->indexAction();
+
+            } else {
+
+                Flash::addMessage('Ups! Coś poszło nie tak. spróbuj ponownie później.' , $type='info');
+                $this->indexAction();
+            }
+        }else{
+            Flash::addMessage('Tej metody płatności nie można usuwać ani edytować.' , $type='warning');
+            $this->indexAction();
+       }
+    }
+
+
+
+    //methods for managing profile data 
+
+    /**
      * update the profile data 
      * 
      * @return void
      */
 
-  public function updateProfileAction()
-  {
+    public function updateProfileAction()
+    {
       if($this->user->updateProfile($_POST)){
           Flash::addMessage('Nowe dane zostały zapisane.');
          $this->indexAction();
@@ -99,7 +136,7 @@ class Settings extends Authenticated
          $this->indexAction();
       }
       
-  }
+    }
  
       /**
       * update password 
