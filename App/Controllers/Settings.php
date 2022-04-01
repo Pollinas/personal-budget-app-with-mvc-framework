@@ -86,6 +86,35 @@ class Settings extends Authenticated
         }
     }
 
+     /**
+     * Delete chosen expense category 
+     * 
+     * @return void
+     */
+    public function deleteExpenseCategoryAction()
+    {
+        $expense_category_id = $_POST['expenseCategoryId'];
+        
+        if ($_POST['expenseCategoryName'] != "Inne")
+         {
+           
+          if( Expense::deleteSingleExpenseCategory($expense_category_id) )
+             {
+                 Flash::addMessage('Wybrana kategoria wydatku została usunięta.');
+                 $this->indexAction();
+ 
+             } else {
+ 
+                 Flash::addMessage('Ups! Coś poszło nie tak. spróbuj ponownie później.' , $type='info');
+                 $this->indexAction();
+             }       
+        
+         }else{
+             Flash::addMessage('Tej kategorii wydatku nie można usuwać ani edytować.' , $type='warning');
+             $this->indexAction();
+        }
+    }
+
     //methods for managing payment methods
 
     /**

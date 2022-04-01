@@ -80,7 +80,7 @@ class Expense extends \Core\Model
 
            
             $category_name = $this->category;
-            $category_id = $this->extractCategoryIdByName($category_name);
+            $category_id = Expense::extractCategoryIdByName($category_name);
 
             $method_name = $this->method;
             $method_id= Expense::extractPaymentMethodIdByName($method_name);
@@ -142,7 +142,7 @@ class Expense extends \Core\Model
      * 
      * @return $category_id 
      */
-    protected function extractCategoryIdByName($category_name)
+    protected static function extractCategoryIdByName($category_name)
     {
         $sql = 'SELECT id FROM expenses_category_assigned_to_users
         WHERE user_id= :id AND name= :category_name limit 1';
@@ -263,6 +263,41 @@ class Expense extends \Core\Model
             $stmt2 = $db->prepare($sql);
 
             $stmt2->bindValue(':payment_method_id', $payment_method_id, PDO::PARAM_INT);
+
+            return $stmt2->execute();
+        }
+    }
+
+    /**
+     * delete a single expense category
+     * 
+     * @return boolean
+     */
+    public static function deleteSingleExpenseCategory($expense_category_id)
+    {
+       $expenseCategoryOtherId = Expense::extractCategoryIdByName('Inne');
+
+        $sql = 'UPDATE expenses
+        SET  expense_category_assigned_to_user_id = :other_id';
+
+         $sql .= "\nWHERE expense_category_assigned_to_user_id = :expense_category_id";
+
+        $db = static::getDB();
+        $stmt1 = $db->prepare($sql);
+
+        $stmt1->bindValue(':expense_category_id', $expense_category_id, PDO::PARAM_INT);
+        $stmt1->bindValue(':other_id', $expenseCategoryOtherId, PDO::PARAM_INT);
+        
+
+        if($stmt1->execute())
+        {
+            $sql = 'DELETE FROM expenses_category_assigned_to_users
+            WHERE id = :expense_category_id';
+
+            $db = static::getDB();
+            $stmt2 = $db->prepare($sql);
+
+            $stmt2->bindValue(':expense_category_id', $expense_category_id, PDO::PARAM_INT);
 
             return $stmt2->execute();
         }
