@@ -219,6 +219,39 @@ $(document).ready(function () {
     formCategoryValidation('#addIncomeCategoryForm', '/account/validate-income-category-name'); // dodawanie nowej kategorii przychodu
 
 
+    //edytowanie istniejącej kategorii wydatków
+    $('#editExpenseForm').validate({
+        rules: {
+            new_category_name:
+            {
+                required: true,
+                remote: {
+                    url: '/account/validate-expense-category-name',
+                    data: {
+                        ignore_id: function () {
+                            return $('#expenseCategoryIdEditModal').val();
+                        }
+                    }
+                },
+                minlength: 4,
+                maxlength: 20,
+                regex: true
+            }
+
+        },
+        messages: {
+            new_category_name: {
+                remote: 'Kategoria o takiej nazwie już istnieje.',
+                maxlength: 'Kategoria może zawierać 4-20 liter polskiego alfabetu.',
+                minlength: 'Kategoria może zawierać 4-20 liter polskiego alfabetu.'
+            }
+        },
+        errorElement: "span",
+        errorClass: "help-inline"
+    });
+
+
+
 
     //payment method
     $('#addPaymentMethodForm').validate({
@@ -274,10 +307,6 @@ $(document).ready(function () {
         errorElement: "span",
         errorClass: "help-inline"
     });
-
-
-
-
 
 
 });

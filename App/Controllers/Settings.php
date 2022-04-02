@@ -107,8 +107,8 @@ class Settings extends Authenticated
              }       
         
          }else{
-             Flash::addMessage('Tej kategorii przychodu nie można usuwać ani edytować.' , $type='warning');
-             $this->indexAction();
+
+              $this->displayInfoWhenTryingToMessWithInneAction();
         }
     }
 
@@ -187,8 +187,8 @@ class Settings extends Authenticated
              }       
         
          }else{
-             Flash::addMessage('Tej kategorii wydatku nie można usuwać ani edytować.' , $type='warning');
-             $this->indexAction();
+
+            $this->displayInfoWhenTryingToMessWithInneAction();
         }
     }
 
@@ -205,7 +205,7 @@ class Settings extends Authenticated
 
         $new_category_name = Settings::mb_ucfirst($new_category_name, 'UTF-8', true);
     
-        if(!Expense::CategoryExists($new_category_name))
+        if(! Expense::CategoryExists($new_category_name))
         {
             if(Expense::addNewExpenseCategory($new_category_name))
             {
@@ -222,6 +222,46 @@ class Settings extends Authenticated
             Flash::addMessage('Kategoria wydatków o takiej nazwie już istnieje.' , $type='warning');
             $this->indexAction();
         } 
+    }
+
+    /**
+     * Update a name of existing expense category
+     * 
+     * @return void 
+     */
+    public function updateExpenseCategoryAction()
+    {
+        $new_category_name = $_POST['new_category_name'];
+        $new_category_name = Settings::mb_ucfirst($new_category_name, 'UTF-8', true);
+
+        $category_id = $_POST['expenseCategoryId'];
+
+        if ($new_category_name != "Inne")
+        {
+    
+            if(! Expense::CategoryExists($new_category_name, $category_id))
+            {
+                if(Expense::updateExpenseCategory($new_category_name, $category_id))
+                {
+                Flash::addMessage('Zaktualizowano wybraną kategorię wydatków.');
+                    $this->indexAction(); 
+
+                } else {
+                    Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawną nazwę dla edytowanej kategorii wydatków lub spróbuj ponownie później.' , $type='info');
+                    $this->indexAction();
+                }
+           
+        } else {
+
+            Flash::addMessage('Kategoria wydatków o takiej nazwie już istnieje.' , $type='warning');
+            $this->indexAction();
+        }
+
+        } else {
+
+            $this->displayInfoWhenTryingToMessWithInneAction();
+        } 
+      
     }
 
     //methods for managing payment methods
@@ -248,8 +288,8 @@ class Settings extends Authenticated
                 $this->indexAction();
             }
         }else{
-            Flash::addMessage('Tej metody płatności nie można usuwać ani edytować.' , $type='warning');
-            $this->indexAction();
+
+            $this->displayInfoWhenTryingToMessWithInneAction();
        }
     }
 
@@ -300,7 +340,7 @@ class Settings extends Authenticated
         if ($new_method_name != "Inne")
         {
     
-        if(!Expense::MethodExists($new_method_name, $method_id)) //tu trzeba bedzie jeszcze dodac ignorowanie dla id 
+        if(!Expense::MethodExists($new_method_name, $method_id))
         {
             if(Expense::updatePaymentMethod($new_method_name,  $method_id))
             {
@@ -320,11 +360,15 @@ class Settings extends Authenticated
 
         } else {
 
-            Flash::addMessage('Tej metody płatności nie można usuwać ani edytować.' , $type='warning');
-            $this->indexAction();
-        }
-       
+            $this->displayInfoWhenTryingToMessWithInneAction();
+        } 
       
+    }
+    
+    protected function displayInfoWhenTryingToMessWithInneAction()
+    {
+        Flash::addMessage('Metody płatności oraz kategorii przychodów i wydatków o nazwie "Inne" nie można usuwać ani edytować.' , $type='warning');
+        $this->indexAction();
     }
 
 

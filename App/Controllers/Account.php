@@ -47,7 +47,7 @@ class Account extends \Core\Controller
    */
   public function validateExpenseCategoryNameAction()
   {
-    $is_valid = ! Expense::CategoryExists($_GET['new_category_name']);
+    $is_valid = ! Expense::CategoryExists($_GET['new_category_name'] ,  $_GET['ignore_id'] ?? null);
 
     header('Content-Type: application/json');
     echo json_encode($is_valid);
