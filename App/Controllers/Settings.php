@@ -143,6 +143,46 @@ class Settings extends Authenticated
         } 
     }
 
+        /**
+     * Update a name of existing income category
+     * 
+     * @return void 
+     */
+    public function updateIncomeCategoryAction()
+    {
+        $new_category_name = $_POST['new_category_name'];
+        $new_category_name = Settings::mb_ucfirst($new_category_name, 'UTF-8', true);
+
+        $category_id = $_POST['incomeCategoryId'];
+
+        if ($new_category_name != "Inne")
+        {
+    
+            if(! Income::CategoryExists($new_category_name, $category_id))
+            {
+                if(Income::updateIncomeCategory($new_category_name, $category_id))
+                {
+                Flash::addMessage('Zaktualizowano wybraną kategorię przychodów.');
+                    $this->indexAction(); 
+
+                } else {
+                    Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawną nazwę dla edytowanej kategorii przychodów lub spróbuj ponownie później.' , $type='info');
+                    $this->indexAction();
+                }
+           
+        } else {
+
+            Flash::addMessage('Kategoria przychodów o takiej nazwie już istnieje.' , $type='warning');
+            $this->indexAction();
+        }
+
+        } else {
+
+            $this->displayInfoWhenTryingToMessWithInneAction();
+        } 
+      
+    }
+
     // methods for managing expenses
 
     /**

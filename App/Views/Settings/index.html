@@ -120,7 +120,7 @@
 </div>
 
 <!--edit income category modal-->
-<div class="modal" id="editIncomeModal" tabindex="-1" role="dialog" aria-labelledby="edytujKategoriePrzychodu"
+<div class="modal fade" id="editIncomeModal" tabindex="-1" role="dialog" aria-labelledby="edytujKategoriePrzychodu"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -128,7 +128,7 @@
                 <h5 class="modal-title">Edytujesz nazwę kategorii przychodu</h5>
                 <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="post" id='editIncomeForm'>
+            <form action="/Settings/updateIncomeCategory" method="post" id='editIncomeForm'>
                 <div class="modal-body">
 
                     <input type="hidden" id="incomeCategoryIdModal" name="incomeCategoryId">
@@ -142,7 +142,7 @@
 
                         <input type="text" id="incomeCategoryModal" class="form-control"
                             placeholder="Kategoria przychodów" maxlength="40" step="any" aria-label="KategoriaPrzychodu"
-                            name="incomeCategory" required>
+                            name="new_category_name" required>
                     </div>
 
                 </div>
