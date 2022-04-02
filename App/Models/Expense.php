@@ -154,7 +154,8 @@ class Expense extends \Core\Model
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $stmt->execute();
         $row= $stmt->fetch();
-        $category_id= $row['id'];
+
+        $category_id= $row['id'] ?? 0;
     
         return $category_id;
 
@@ -322,22 +323,66 @@ class Expense extends \Core\Model
         }
     }
 
+
     /**
-     * validate new payment method name
+     * Check if the expense category with given name exists 
+     * 
+     * @return boolean ; true if it does, false if it does not
+     */
+
+    public static function CategoryExists($new_category_name)
+    {
+        if(Expense::extractCategoryIdByName($new_category_name) != 0)
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+     /**
+     * Add a new expense category
+     * 
+     * @return boolean ; true if the category is saved, false otherwise
+     */
+    public static function addNewExpenseCategory($new_category_name)
+    {
+        if(Expense::validateNew($new_category_name))
+        {
+            
+            $sql = 'INSERT INTO expenses_category_assigned_to_users
+            VALUES ( NULL, :id , :category_name)';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+            $stmt->bindValue(':category_name', $new_category_name, PDO::PARAM_STR);
+
+            return $stmt->execute(); 
+
+        } else {
+            return false;
+        }
+    }
+ 
+
+    /**
+     * validate a new name- for both payment methods and categories 
      * 
      * @return boolean : true if all is fine, false otherwise
      */
-    protected static function validateNewPaymentMethod($new_method_name)
+    protected static function validateNew($new_name)
     {
-            if ($new_method_name == '') {
+            if ($new_name == '') {
                return false;
             }
     
-            if (strlen($new_method_name) < 4) {
+            if (strlen($new_name) < 4) {
                 return false;
             }
             
-            if (strlen($new_method_name) > 20) {
+            if (strlen($new_name) > 20) {
                 return false;
             }
             
@@ -351,7 +396,7 @@ class Expense extends \Core\Model
      */
     public static function addNewPaymentMethod($new_method_name)
     {
-        if(Expense::validateNewPaymentMethod($new_method_name))
+        if(Expense::validateNew($new_method_name))
         {
         $sql = 'INSERT INTO payment_methods_assigned_to_users
         VALUES ( NULL, :id , :method_name)';
