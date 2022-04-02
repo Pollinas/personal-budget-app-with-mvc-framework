@@ -46,6 +46,23 @@ class Settings extends Authenticated
         ]);
     }
 
+    /**
+     * auxliary method for the categories and methods proper convention
+     * 
+     * @return string ; original string input after convertion
+     */
+    protected static function mb_ucfirst($str, $encoding = "UTF-8", $lower_str_end = false) {
+        $first_letter = mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding);
+        $str_end = "";
+        if ($lower_str_end) {
+            $str_end = mb_strtolower(mb_substr($str, 1, mb_strlen($str, $encoding), $encoding), $encoding);
+        } else {
+            $str_end = mb_substr($str, 1, mb_strlen($str, $encoding), $encoding);
+        }
+        $str = $first_letter . $str_end;
+        return $str;
+    }
+
     //methods for managing incomes 
 
     /**
@@ -175,6 +192,48 @@ class Settings extends Authenticated
 
 
 
+    /**
+     * Add a new payment method 
+     * 
+     * @return void
+     */
+    public function addNewPaymentMethodAction()
+    {
+        $new_method_name = $_POST['new_method_name'];
+
+        $new_method_name = Settings::mb_ucfirst($new_method_name, 'UTF-8', true);
+    
+        if(!Expense::MethodExists($new_method_name))
+        {
+            if(Expense::addNewPaymentMethod($new_method_name))
+            {
+               Flash::addMessage('Dodano nową metodę płatności.');
+                $this->indexAction(); 
+
+            } else {
+                Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawną nazwę nowej metody płatności lub spróbuj ponownie później.' , $type='info');
+                $this->indexAction();
+            }
+           
+        } else {
+
+            Flash::addMessage('Metoda płatności o takiej nazwie już istnieje.' , $type='warning');
+            $this->indexAction();
+        } 
+    }
+
+    /**
+     * Update a name of existing payment method
+     * 
+     * @return void 
+     */
+    public function updatePaymentMethodAction()
+    {
+      
+    }
+
+
+
     //methods for managing profile data 
 
     /**
@@ -234,5 +293,6 @@ class Settings extends Authenticated
             $this->redirect('/');
          }
      }
+
     
 }

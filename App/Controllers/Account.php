@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use \App\Models\User;
+use \App\Models\Expense;
 
 /**
  * Account controller
@@ -20,6 +21,19 @@ class Account extends \Core\Controller
   public function validateEmailAction()
   {
     $is_valid = ! User::emailExists($_GET['email'], $_GET['ignore_id'] ?? null);
+
+    header('Content-Type: application/json');
+    echo json_encode($is_valid);
+  }
+
+  /**
+   * Validate if method name is available (AJAX) for a new payment method.
+   *
+   * @return void
+   */
+  public function validateMethodName()
+  {
+    $is_valid = ! Expense::MethodExists($_GET['new_method_name']);
 
     header('Content-Type: application/json');
     echo json_encode($is_valid);

@@ -177,5 +177,34 @@ $(document).ready(function () {
         $('#methodIdModal').val(data[2]);
 
     });
+
+
+    $.validator.addMethod('regex', function (value) {
+        return /^[A-Z, a-z, ą,Ą,ć,Ć,ę,Ę,ł,Ł, ń,Ń,ó,Ó,ś,Ś,ż,Ż,ź,Ź]+$/.test(value);
+    }, 'Metoda płatności może zawierać tylko litery polskiego alfabetu.');
+
+    $("#addPaymentMethodForm").validate({
+        rules: {
+            new_method_name:
+            {
+                required: true,
+                remote: '/account/validate-method-name',
+                minlength: 4,
+                maxlength: 20,
+                regex: true
+            }
+
+        },
+        messages: {
+            new_method_name: {
+                remote: 'Metoda płatności o takiej nazwie już istnieje.',
+                maxlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.',
+                minlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.'
+            }
+        },
+        errorElement: "span",
+        errorClass: "help-inline"
+    });
+
 });
 

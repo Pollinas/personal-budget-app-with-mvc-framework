@@ -170,11 +170,14 @@ class Expense extends \Core\Model
         $stmt->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
         $stmt->bindValue(':method_name', $method_name, PDO::PARAM_STR);
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        
         $stmt->execute();
+     
         $row= $stmt->fetch();
-        $method_id= $row['id'];
+        $method_id= $row['id'] ?? 0;
     
         return $method_id;
+   
     }
 
  /**
@@ -303,5 +306,67 @@ class Expense extends \Core\Model
         }
     }
 
+    /**
+     * Check if the method with given name exists 
+     * 
+     * @return boolean ; true if it does, false if it does not
+     */
+
+    public static function MethodExists($new_method_name)
+    {
+        if(Expense::extractPaymentMethodIdByName($new_method_name) != 0)
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * validate new payment method name
+     * 
+     * @return boolean : true if all is fine, false otherwise
+     */
+    protected static function validateNewPaymentMethod($new_method_name)
+    {
+            if ($new_method_name == '') {
+               return false;
+            }
+    
+            if (strlen($new_method_name) < 4) {
+                return false;
+            }
+            
+            if (strlen($new_method_name) > 20) {
+                return false;
+            }
+            
+            return true;
+    }
+
+    /**
+     * Add a new payment method 
+     * 
+     * @return boolean ; true if the method is saved, false otherwise
+     */
+    public static function addNewPaymentMethod($new_method_name)
+    {
+        if(Expense::validateNewPaymentMethod($new_method_name))
+        {
+        $sql = 'INSERT INTO payment_methods_assigned_to_users
+        VALUES ( NULL, :id , :method_name)';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':method_name', $new_method_name, PDO::PARAM_STR);
+
+        return $stmt->execute();
+
+        } else {
+            return false;
+        }
+    }
  
 }
