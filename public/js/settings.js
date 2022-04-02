@@ -214,7 +214,9 @@ $(document).ready(function () {
         });
     }
 
-    formCategoryValidation('#addExpenseCategoryForm', '/account/validate-expense-category-name'); // dodawanie nowej metody wydatku
+    formCategoryValidation('#addExpenseCategoryForm', '/account/validate-expense-category-name'); // dodawanie nowej kategorii wydatku
+
+    formCategoryValidation('#addIncomeCategoryForm', '/account/validate-income-category-name'); // dodawanie nowej kategorii przychodu
 
 
 

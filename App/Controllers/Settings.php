@@ -112,6 +112,37 @@ class Settings extends Authenticated
         }
     }
 
+    
+    /**
+     * Add a new income category
+     * 
+     * @return void
+     */
+    public function addNewIncomeCategoryAction()
+    {
+        $new_category_name = $_POST['new_category_name'];
+
+        $new_category_name = Settings::mb_ucfirst($new_category_name, 'UTF-8', true);
+    
+        if(!Income::CategoryExists($new_category_name))
+        {
+            if(Income::addNewIncomeCategory($new_category_name))
+            {
+               Flash::addMessage('Dodano nową kategorię przychodów.');
+                $this->indexAction(); 
+
+            } else {
+                Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawną nazwę nowej kategorii przychodów lub spróbuj ponownie później.' , $type='info');
+                $this->indexAction();
+            }
+           
+        } else {
+
+            Flash::addMessage('Kategoria przychodów o takiej nazwie już istnieje.' , $type='warning');
+            $this->indexAction();
+        } 
+    }
+
     // methods for managing expenses
 
     /**

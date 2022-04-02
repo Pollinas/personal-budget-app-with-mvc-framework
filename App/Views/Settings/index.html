@@ -89,9 +89,7 @@
         </tbody>
     </table>
 
-    <button class="btn btn-lg btn-success text-white mt-3 mb-2" data-toggle="modal"
-        data-target="#addIncomeCategoryModal">Dodaj
-        nową
+    <button class="modal-button btn btn-success btn-lg  mt-5" href="#addIncomeCategoryModal">Dodaj nową
         kategorię</button>
 
     <button class="btn btn-lg modal-button btn-danger text-white my-5" href="#deleteAllIncomes">Usuń wszystkie
@@ -189,6 +187,39 @@
 
     </div>
 </div>
+<!--end of delete single income category modal-->
+
+<!--add new income category modal-->
+<div class="modal" id="addIncomeCategoryModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dodaj nową kategorię przychodów</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <form method="post" action="/Settings/addNewIncomeCategory" id="addIncomeCategoryForm">
+                <div class="modal-body text-center">
+
+                    <div class="input-group my-4">
+                        <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg></span>
+                        <input type="text" class="form-control" placeholder="Wpisz nazwę." maxlength="20"
+                            aria-label="NowaKategoriaPrzychodu" name="new_category_name" required>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-success">Dodaj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--end of add new income category modal-->
 
 <!-- end of income settings -->
 <!---->
@@ -342,7 +373,7 @@
                                     d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
                             </svg></span>
                         <input type="text" class="form-control" placeholder="Wpisz nazwę." maxlength="20"
-                            aria-label="NowaKategoriiWydatku" name="new_category_name" required>
+                            aria-label="NowaKategoriaWydatku" name="new_category_name" required>
                     </div>
 
                 </div>
