@@ -34,7 +34,7 @@ class Account extends \Core\Controller
    */
   public function validateMethodNameAction()
   {
-    $is_valid = ! Expense::MethodExists($_GET['new_method_name']);
+    $is_valid = ! Expense::MethodExists($_GET['new_method_name'], $_GET['ignore_id'] ?? null);
 
     header('Content-Type: application/json');
     echo json_encode($is_valid);

@@ -122,10 +122,10 @@
 <!--edit income category modal-->
 <div class="modal" id="editIncomeModal" tabindex="-1" role="dialog" aria-labelledby="edytujKategoriePrzychodu"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Edytujesz nazwę kategorii przychodu</h5>
                 <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -148,8 +148,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
-                <button type="button submit" class="btn btn-primary">Tak</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                <button type="button submit" class="btn btn-success">Zapisz zmiany</button>
             </div>
 
             </form>
@@ -287,10 +287,10 @@
 <!--edit expense category modal-->
 <div class="modal" id="editExpenseModal" tabindex="-1" role="dialog" aria-labelledby="edytujKategorieWydatku"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Edytujesz nazwę kategorii wydatków</h5>
                 <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -313,8 +313,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Nie</button>
-                <button type="button submit" class="btn btn-primary">Tak</button>
+                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                <button type="button submit" class="btn btn-success">Zapisz zmiany</button>
             </div>
 
             </form>
@@ -426,16 +426,16 @@
 </div>
 
 
-<!--edit payment modal-->
+<!--edit payment method modal-->
 <div class="modal fade" id="editPaymentModal" tabindex="-1" role="dialog" aria-labelledby="edytujMetodePlatnosci"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edycja nazwy metody płatności</h5>
+                <h5 class="modal-title">Edytujesz nazwę metody płatności</h5>
                 <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="post" id='editPaymentForm'>
+            <form action="/Settings/updatePaymentMethod" method="post" id='editPaymentMethodForm'>
                 <div class="modal-body">
 
                     <input type="hidden" id="paymentIdModal" name="paymentId">
@@ -446,7 +446,7 @@
                                     d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0V4zm0 3v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7H0zm3 2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z" />
                             </svg></span>
                         <input type="text" id="paymentModal" class="form-control" placeholder="Metoda płatności"
-                            maxlength="40" step="any" aria-label="MEtodaPłatności" name="paymentMethod" required>
+                            maxlength="40" step="any" aria-label="MetodaPłatności" name="new_method_name" required>
                     </div>
 
                 </div>
@@ -461,7 +461,7 @@
 
     </div>
 </div>
-<!--end of edit payment modal-->
+<!--end of edit payment method modal-->
 
 <!--delete payment method modal-->
 <div class="modal fade" id="deleteMethodModal" tabindex="-1" role="dialog" aria-labelledby="usunMetodePlatnosci"

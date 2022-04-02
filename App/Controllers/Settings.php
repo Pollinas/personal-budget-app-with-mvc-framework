@@ -292,6 +292,38 @@ class Settings extends Authenticated
      */
     public function updatePaymentMethodAction()
     {
+        $new_method_name = $_POST['new_method_name'];
+        $new_method_name = Settings::mb_ucfirst($new_method_name, 'UTF-8', true);
+
+        $method_id = $_POST['paymentId'];
+
+        if ($new_method_name != "Inne")
+        {
+    
+        if(!Expense::MethodExists($new_method_name, $method_id)) //tu trzeba bedzie jeszcze dodac ignorowanie dla id 
+        {
+            if(Expense::updatePaymentMethod($new_method_name,  $method_id))
+            {
+               Flash::addMessage('Zaktualizowano wybraną metodę płatności.');
+                $this->indexAction(); 
+
+            } else {
+                Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawną nazwę dla edytowanej metody płatności lub spróbuj ponownie później.' , $type='info');
+                $this->indexAction();
+            }
+           
+        } else {
+
+            Flash::addMessage('Metoda płatności o takiej nazwie już istnieje.' , $type='warning');
+            $this->indexAction();
+        }
+
+        } else {
+
+            Flash::addMessage('Tej metody płatności nie można usuwać ani edytować.' , $type='warning');
+            $this->indexAction();
+        }
+       
       
     }
 
