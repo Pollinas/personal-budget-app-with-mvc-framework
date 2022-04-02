@@ -14,7 +14,7 @@ function myFunction(e) {
 
 
     if (varDate > today) {
-        alert("Data wydatku nie może być późniejsza od dzisiejszej daty!");
+        alert("Data przychodu nie może być późniejsza od dzisiejszej daty!");
         document.getElementById("date").valueAsDate = null;
     }
 
