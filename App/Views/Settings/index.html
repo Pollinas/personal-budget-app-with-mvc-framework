@@ -128,12 +128,12 @@
                 <h5 class="modal-title">Edytujesz nazwę kategorii przychodu</h5>
                 <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form action="" method="post" id='editIncomeForm'>
+            <form action="" method="post" id='editIncomeForm'>
+                <div class="modal-body">
 
                     <input type="hidden" id="incomeCategoryIdModal" name="incomeCategoryId">
-                    <div class="input-group">
 
+                    <div class="input-group my-4">
                         <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
                                 <path
@@ -145,12 +145,12 @@
                             name="incomeCategory" required>
                     </div>
 
-            </div>
+                </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
-                <button type="button submit" class="btn btn-success">Zapisz zmiany</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-success">Zapisz zmiany</button>
+                </div>
 
             </form>
         </div>
@@ -285,7 +285,7 @@
 </div>
 
 <!--edit expense category modal-->
-<div class="modal" id="editExpenseModal" tabindex="-1" role="dialog" aria-labelledby="edytujKategorieWydatku"
+<div class="modal fade" id="editExpenseModal" tabindex="-1" role="dialog" aria-labelledby="edytujKategorieWydatku"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -293,12 +293,12 @@
                 <h5 class="modal-title">Edytujesz nazwę kategorii wydatków</h5>
                 <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form action="" method="post" id='editExpenseForm'>
+            <form action="/Settings/updateExpenseCategory" method="post" id='editExpenseForm'>
+                <div class="modal-body">
 
                     <input type="hidden" id="expenseCategoryIdEditModal" name="expenseCategoryId">
-                    <div class="input-group">
 
+                    <div class="input-group  my-4">
                         <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
                                 <path
@@ -307,15 +307,15 @@
 
                         <input type="text" id="expenseCategoryModal" class="form-control"
                             placeholder="Kategoria wydatków" maxlength="40" step="any" aria-label="KategoriaWydatku"
-                            name="expenseCategory" required>
+                            name="new_category_name" required>
                     </div>
 
-            </div>
+                </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
-                <button type="button submit" class="btn btn-success">Zapisz zmiany</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-success">Zapisz zmiany</button>
+                </div>
 
             </form>
         </div>

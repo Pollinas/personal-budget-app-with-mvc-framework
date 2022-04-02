@@ -337,11 +337,18 @@ class Expense extends \Core\Model
      * @return boolean ; true if it does, false if it does not
      */
 
-    public static function CategoryExists($new_category_name)
+    public static function CategoryExists($new_category_name , $ignore_id = null)
     {
-        if(Expense::extractCategoryIdByName($new_category_name) != 0)
+        $id = Expense::extractCategoryIdByName($new_category_name);
+
+        if($id != 0)
         {
+            if ($id == $ignore_id)
+            {
+                return false;
+            }  
             return true;
+
         } else {
             return false;
         }
@@ -367,6 +374,34 @@ class Expense extends \Core\Model
             $stmt->bindValue(':category_name', $new_category_name, PDO::PARAM_STR);
 
             return $stmt->execute(); 
+
+        } else {
+            return false;
+        }
+    }
+
+       
+    /**
+     * Edit chosen expense category
+     * 
+     * @return boolean ; true if the method is saved, false otherwise
+     */
+    public static function updateExpenseCategory($new_category_name, $category_id)
+    {
+        if(Expense::validateNew($new_category_name))
+        {
+            $sql = 'UPDATE expenses_category_assigned_to_users
+            SET name = :new_category_name';
+            
+            $sql .= "\nWHERE id = :category_id";
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':new_category_name', $new_category_name, PDO::PARAM_STR);
+            $stmt->bindValue(':category_id', $category_id, PDO::PARAM_INT);
+
+            return $stmt->execute();
 
         } else {
             return false;
