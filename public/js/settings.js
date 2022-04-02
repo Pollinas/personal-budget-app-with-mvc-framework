@@ -178,33 +178,73 @@ $(document).ready(function () {
 
     });
 
+    /**
+     * forms validation
+     */
+
 
     $.validator.addMethod('regex', function (value) {
         return /^[A-Z, a-z, ą,Ą,ć,Ć,ę,Ę,ł,Ł, ń,Ń,ó,Ó,ś,Ś,ż,Ż,ź,Ź]+$/.test(value);
-    }, 'Metoda płatności może zawierać tylko litery polskiego alfabetu.');
+    }, 'Nazwa może zawierać tylko litery polskiego alfabetu.');
 
-    $("#addPaymentMethodForm").validate({
-        rules: {
-            new_method_name:
-            {
-                required: true,
-                remote: '/account/validate-method-name',
-                minlength: 4,
-                maxlength: 20,
-                regex: true
-            }
 
-        },
-        messages: {
-            new_method_name: {
-                remote: 'Metoda płatności o takiej nazwie już istnieje.',
-                maxlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.',
-                minlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.'
-            }
-        },
-        errorElement: "span",
-        errorClass: "help-inline"
-    });
+    // kategorie wydatków i przychodów
+    function formCategoryValidation(formID, remoteAction) {
+        $(formID).validate({
+            rules: {
+                new_category_name:
+                {
+                    required: true,
+                    remote: remoteAction,
+                    minlength: 4,
+                    maxlength: 20,
+                    regex: true
+                }
+
+            },
+            messages: {
+                new_category_name: {
+                    remote: 'Kategoria o takiej nazwie już istnieje.',
+                    maxlength: 'Kategoria może zawierać 4-20 liter polskiego alfabetu.',
+                    minlength: 'Kategoria może zawierać 4-20 liter polskiego alfabetu.'
+                }
+            },
+            errorElement: "span",
+            errorClass: "help-inline"
+        });
+    }
+
+    formCategoryValidation('#addExpenseCategoryForm', '/account/validate-expense-category-name'); // dodawanie nowej metody wydatku
+
+
+
+    //payment method
+    function formMethodValidation(formID, remoteAction) {
+        $(formID).validate({
+            rules: {
+                new_method_name:
+                {
+                    required: true,
+                    remote: remoteAction,
+                    minlength: 4,
+                    maxlength: 20,
+                    regex: true
+                }
+
+            },
+            messages: {
+                new_method_name: {
+                    remote: 'Metoda płatności o takiej nazwie już istnieje.',
+                    maxlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.',
+                    minlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.'
+                }
+            },
+            errorElement: "span",
+            errorClass: "help-inline"
+        });
+    }
+
+    formMethodValidation("#addPaymentMethodForm", '/account/validate-method-name'); //dodawanie nowej metody płatności 
 
 });
 

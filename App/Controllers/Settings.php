@@ -161,6 +161,38 @@ class Settings extends Authenticated
         }
     }
 
+    
+
+    /**
+     * Add a new expense category
+     * 
+     * @return void
+     */
+    public function addNewExpenseCategoryAction()
+    {
+        $new_category_name = $_POST['new_category_name'];
+
+        $new_category_name = Settings::mb_ucfirst($new_category_name, 'UTF-8', true);
+    
+        if(!Expense::CategoryExists($new_category_name))
+        {
+            if(Expense::addNewExpenseCategory($new_category_name))
+            {
+               Flash::addMessage('Dodano nową kategorię wydatków.');
+                $this->indexAction(); 
+
+            } else {
+                Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawną nazwę nowej kategorii wydatków lub spróbuj ponownie później.' , $type='info');
+                $this->indexAction();
+            }
+           
+        } else {
+
+            Flash::addMessage('Kategoria wydatków o takiej nazwie już istnieje.' , $type='warning');
+            $this->indexAction();
+        } 
+    }
+
     //methods for managing payment methods
 
     /**
