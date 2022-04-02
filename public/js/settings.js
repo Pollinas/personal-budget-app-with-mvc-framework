@@ -221,32 +221,64 @@ $(document).ready(function () {
 
 
     //payment method
-    function formMethodValidation(formID, remoteAction) {
-        $(formID).validate({
-            rules: {
-                new_method_name:
-                {
-                    required: true,
-                    remote: remoteAction,
-                    minlength: 4,
-                    maxlength: 20,
-                    regex: true
-                }
+    $('#addPaymentMethodForm').validate({
+        rules: {
+            new_method_name:
+            {
+                required: true,
+                remote: '/account/validate-method-name',
+                minlength: 4,
+                maxlength: 20,
+                regex: true
+            }
 
-            },
-            messages: {
-                new_method_name: {
-                    remote: 'Metoda płatności o takiej nazwie już istnieje.',
-                    maxlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.',
-                    minlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.'
-                }
-            },
-            errorElement: "span",
-            errorClass: "help-inline"
-        });
-    }
+        },
+        messages: {
+            new_method_name: {
+                remote: 'Metoda płatności o takiej nazwie już istnieje.',
+                maxlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.',
+                minlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.'
+            }
+        },
+        errorElement: "span",
+        errorClass: "help-inline"
+    });
 
-    formMethodValidation("#addPaymentMethodForm", '/account/validate-method-name'); //dodawanie nowej metody płatności 
+    //payment method
+    $('#editPaymentMethodForm').validate({
+        rules: {
+            new_method_name:
+            {
+                required: true,
+                remote: {
+                    url: '/account/validate-method-name',
+                    data: {
+                        ignore_id: function () {
+                            return $('#paymentIdModal').val();
+                        }
+                    }
+                },
+                minlength: 4,
+                maxlength: 20,
+                regex: true
+            }
+
+        },
+        messages: {
+            new_method_name: {
+                remote: 'Metoda płatności o takiej nazwie już istnieje.',
+                maxlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.',
+                minlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.'
+            }
+        },
+        errorElement: "span",
+        errorClass: "help-inline"
+    });
+
+
+
+
+
 
 });
 

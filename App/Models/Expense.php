@@ -313,11 +313,18 @@ class Expense extends \Core\Model
      * @return boolean ; true if it does, false if it does not
      */
 
-    public static function MethodExists($new_method_name)
+    public static function MethodExists($new_method_name, $ignore_id = null)
     {
-        if(Expense::extractPaymentMethodIdByName($new_method_name) != 0)
+        $id = Expense::extractPaymentMethodIdByName($new_method_name);
+
+        if($id != 0)
         {
+            if ($id == $ignore_id)
+            {
+                return false;
+            }  
             return true;
+            
         } else {
             return false;
         }
@@ -408,6 +415,34 @@ class Expense extends \Core\Model
         $stmt->bindValue(':method_name', $new_method_name, PDO::PARAM_STR);
 
         return $stmt->execute();
+
+        } else {
+            return false;
+        }
+    }
+
+    
+    /**
+     * Edit chosen method's name
+     * 
+     * @return boolean ; true if the method is saved, false otherwise
+     */
+    public static function updatePaymentMethod($new_method_name,  $method_id)
+    {
+        if(Expense::validateNew($new_method_name))
+        {
+            $sql = 'UPDATE payment_methods_assigned_to_users
+            SET name = :new_method_name';
+            
+            $sql .= "\nWHERE id = :method_id";
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':new_method_name', $new_method_name, PDO::PARAM_STR);
+            $stmt->bindValue(':method_id', $method_id, PDO::PARAM_INT);
+
+            return $stmt->execute();
 
         } else {
             return false;
