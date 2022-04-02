@@ -241,9 +241,41 @@ $(document).ready(function () {
         },
         messages: {
             new_category_name: {
-                remote: 'Kategoria o takiej nazwie już istnieje.',
-                maxlength: 'Kategoria może zawierać 4-20 liter polskiego alfabetu.',
-                minlength: 'Kategoria może zawierać 4-20 liter polskiego alfabetu.'
+                remote: 'Kategoria wydatków o takiej nazwie już istnieje.',
+                maxlength: 'Kategoria wydatków może zawierać 4-20 liter polskiego alfabetu.',
+                minlength: 'Kategoria wydatków może zawierać 4-20 liter polskiego alfabetu.'
+            }
+        },
+        errorElement: "span",
+        errorClass: "help-inline"
+    });
+
+
+    //edytowanie istniejącej kategorii przychodu
+    $('#editIncomeForm').validate({
+        rules: {
+            new_category_name:
+            {
+                required: true,
+                remote: {
+                    url: '/account/validate-income-category-name',
+                    data: {
+                        ignore_id: function () {
+                            return $('#incomeCategoryIdModal').val();
+                        }
+                    }
+                },
+                minlength: 4,
+                maxlength: 20,
+                regex: true
+            }
+
+        },
+        messages: {
+            new_category_name: {
+                remote: 'Kategoria przychodu o takiej nazwie już istnieje.',
+                maxlength: 'Kategoria przychodu może zawierać 4-20 liter polskiego alfabetu.',
+                minlength: 'Kategoria przychodu może zawierać 4-20 liter polskiego alfabetu.'
             }
         },
         errorElement: "span",
