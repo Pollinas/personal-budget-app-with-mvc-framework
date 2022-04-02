@@ -139,7 +139,8 @@ class Income extends \Core\Model
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $stmt->execute();
         $row= $stmt->fetch();
-        $category_id= $row['id'];
+
+        $category_id= $row['id'] ?? 0;
     
         return $category_id;
 
@@ -213,6 +214,72 @@ class Income extends \Core\Model
             $stmt2->bindValue(':income_category_id', $income_category_id, PDO::PARAM_INT);
 
             return $stmt2->execute();
+        }
+    }
+
+    /**
+     * Check if the income category with given name exists 
+     * 
+     * @return boolean ; true if it does, false if it does not
+     */
+
+    public static function CategoryExists($new_category_name)
+    {
+        if(Income::extractCategoryIdByName($new_category_name) != 0)
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    
+    /**
+     * validate a new income category
+     * 
+     * @return boolean : true if all is fine, false otherwise
+     */
+    protected static function validateNewName($new_name)
+    {
+            if ($new_name == '') {
+               return false;
+            }
+    
+            if (strlen($new_name) < 4) {
+                return false;
+            }
+            
+            if (strlen($new_name) > 20) {
+                return false;
+            }
+            
+            return true;
+    }
+
+    
+     /**
+     * Add a new income category
+     * 
+     * @return boolean ; true if the category is saved, false otherwise
+     */
+    public static function addNewIncomeCategory($new_category_name)
+    {
+        if(Income::validateNewName($new_category_name))
+        {
+            
+            $sql = 'INSERT INTO incomes_category_assigned_to_users
+            VALUES ( NULL, :id , :category_name)';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+            $stmt->bindValue(':category_name', $new_category_name, PDO::PARAM_STR);
+
+            return $stmt->execute(); 
+
+        } else {
+            return false;
         }
     }
 
