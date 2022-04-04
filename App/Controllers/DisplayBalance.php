@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Models\Balance;
+use \App\Flash;
 
 /**
  * DisplayBalance controller
@@ -14,7 +15,7 @@ class DisplayBalance extends Authenticated
 {
 
     /**
-     * Show the display balance  page
+     * Show the display balance  page; load default data : this month
      *
      * @return void
      */
@@ -45,7 +46,26 @@ class DisplayBalance extends Authenticated
 
         else if ($balance->time ===  "previous_month")
         {
-             View::renderTemplate('displayBalance/new.html', [
+            $this->showPreviousMonthDataAction();
+        }
+
+        else if ($balance->time ===  "current_year")
+        {
+            $this->showCurrentYearDataAction();
+        }    
+        
+        unset($balance);
+    }
+
+    /**
+     * show the display balance page with data form the previous month
+     * 
+     * @return void
+     */
+
+    protected function showPreviousMonthDataAction()
+    {
+        View::renderTemplate('displayBalance/new.html', [
             'incomes' => Balance::getPreviousMonthIncomes(),
             'expenses' => Balance::getPreviousMonthExpenses(),
             'balanceCalc' => Balance::getPreviousMonthBalance(),
@@ -53,25 +73,33 @@ class DisplayBalance extends Authenticated
             'incomes_sums' => Balance::getPreviousMonthIncomesSumsDivedIntoCategories(),
             'expenses_sums' => Balance::getPreviousMonthExpensesSumsDivedIntoCategories()
              ]);
-        }
-
-        else if ($balance->time ===  "current_year")
-        {
-            View::renderTemplate('displayBalance/new.html', [
-                'incomes' => Balance::getCurrentYearIncomes(),
-                'expenses' => Balance::getCurrentYearExpenses(),
-                'balanceCalc' => Balance::getCurrentYearBalance(),
-                'current_year' => true,
-                'incomes_sums' => Balance::getCurrentYearIncomesSumsDivedIntoCategories(),
-                'expenses_sums' => Balance::getCurrentYearExpensesSumsDivedIntoCategories()
-                ]);
-        }    
-        
-        unset($balance);
     }
 
+    
     /**
+     * show the display balance page with data form the current year 
      * 
+     * @return void
+     */
+
+    protected function showCurrentYearDataAction()
+    {
+        View::renderTemplate('displayBalance/new.html', [
+            'incomes' => Balance::getCurrentYearIncomes(),
+            'expenses' => Balance::getCurrentYearExpenses(),
+            'balanceCalc' => Balance::getCurrentYearBalance(),
+            'current_year' => true,
+            'incomes_sums' => Balance::getCurrentYearIncomesSumsDivedIntoCategories(),
+            'expenses_sums' => Balance::getCurrentYearExpensesSumsDivedIntoCategories()
+            ]);
+    }
+
+
+
+    /**
+     * show the display balance page with data form the chosen dates 
+     * 
+     * @return void
      */
     public function createCustomAction()
     {
@@ -90,6 +118,50 @@ class DisplayBalance extends Authenticated
             ]);
 
         unset($balance);
+    }
+
+    
+
+    /**
+     * delete single income; then render the same view as before 
+     * 
+     * @return void
+     */
+    public function deleteSingleIncomeAction()
+    {
+        $id = $_POST['income_id'];
+
+        if(Balance::deleteSingleIncome($id))
+        {
+            Flash::addMessage('Usunięto wybrany przychód.');  
+        }
+        else
+        {
+            Flash::addMessage('Ups! Coś poszło nie tak.' , $type='info');  
+        }
+
+        $balance = new Balance($_POST);
+
+        $when = $_POST['period'] ;
+        if( $when == 'current_month')  $this->newAction();
+        else if( $when == 'previous_month')  $this-> showPreviousMonthDataAction();
+        else if( $when == 'current_year')  $this->showCurrentYearDataAction();
+
+        else {
+            $begin = $when;
+            $end = $_POST['end'];
+            View::renderTemplate('displayBalance/new.html', [
+                'balance' => $balance, 
+                'incomes' => Balance::getCustomIncomes($begin, $end),
+                'expenses' =>   Balance::getCustomExpenses($begin, $end),
+                'balanceCalc' => Balance::getCustomBalance($begin, $end),
+                'custom' => true,
+                'incomes_sums' => Balance::getCustomIncomesSumsDivedIntoCategories($begin, $end),
+                'expenses_sums' => Balance::getCustomExpensesSumsDivedIntoCategories($begin, $end)
+                ]);
+    
+        }
+      
     }
 
 }

@@ -1,9 +1,9 @@
 
 function myFunction(e) {
-    var option_value = document.getElementById("time").value;
+    let option_value = document.getElementById("time").value;
     let none = document.querySelector(".none")
     if (option_value == "custom") {
-        var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
+        let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
         myModal.show();
     }
 }
@@ -11,12 +11,12 @@ function myFunction(e) {
 
 
 function checkEndDate(e) {
-    var end = document.querySelector("#end").value;
-    var begin = document.querySelector("#begin").value;
+    let end = document.querySelector("#end").value;
+    let begin = document.querySelector("#begin").value;
 
-    var endDate = new Date(end);
-    var beginDate = new Date(begin);
-    var today = new Date();
+    let endDate = new Date(end);
+    let beginDate = new Date(begin);
+    let today = new Date();
 
     if (endDate > today) {
         alert("Data końcowa nie może być późniejsza od dzisiejszej daty!");
@@ -32,10 +32,10 @@ function checkEndDate(e) {
 
 function checkBeginDate(e) {
 
-    var begin = document.querySelector("#begin").value;
+    let begin = document.querySelector("#begin").value;
 
-    var beginDate = new Date(begin);
-    var today = new Date();
+    let beginDate = new Date(begin);
+    let today = new Date();
 
     if (beginDate > today) {
         alert("Data początkowa nie może być późniejsza od dzisiejszej daty!");
@@ -73,9 +73,9 @@ function drawChart(labels, data, id) {
 }
 
 if (document.getElementById('currentMonthIncomesChart')) {
-    var currentMonthIncomesAmounts = document.getElementById('currentMonthIncomesAmounts').innerText;
-    var currentMonthIncomesSumsNames = document.getElementById('currentMonthIncomesSumsNames').innerText;
-    var currentMonthIncomesSumsNamesReady = currentMonthIncomesSumsNames.split(",");
+    let currentMonthIncomesAmounts = document.getElementById('currentMonthIncomesAmounts').innerText;
+    let currentMonthIncomesSumsNames = document.getElementById('currentMonthIncomesSumsNames').innerText;
+    let currentMonthIncomesSumsNamesReady = currentMonthIncomesSumsNames.split(",");
     currentMonthIncomesSumsNamesReady.pop();
 
     drawChart(currentMonthIncomesSumsNamesReady, currentMonthIncomesAmounts, 'currentMonthIncomesChart');
@@ -83,9 +83,9 @@ if (document.getElementById('currentMonthIncomesChart')) {
 
 // current month expenses chart
 if (document.getElementById('currentMonthExpensesChart')) {
-    var currentMonthExpensesAmounts = document.getElementById('currentMonthExpensesAmounts').innerText;
-    var currentMonthExpensesSumsNames = document.getElementById('currentMonthExpensesSumsNames').innerText;
-    var currentMonthExpensesSumsNamesReady = currentMonthExpensesSumsNames.split(",");
+    let currentMonthExpensesAmounts = document.getElementById('currentMonthExpensesAmounts').innerText;
+    let currentMonthExpensesSumsNames = document.getElementById('currentMonthExpensesSumsNames').innerText;
+    let currentMonthExpensesSumsNamesReady = currentMonthExpensesSumsNames.split(",");
     currentMonthExpensesSumsNamesReady.pop();
 
     drawChart(currentMonthExpensesSumsNamesReady, currentMonthExpensesAmounts, 'currentMonthExpensesChart');
@@ -93,9 +93,9 @@ if (document.getElementById('currentMonthExpensesChart')) {
 
 //previous month incomes pie chart
 if (document.getElementById('previousMonthIncomesChart')) {
-    var previousMonthIncomesAmounts = document.getElementById('previousMonthIncomesAmounts').innerText;
-    var previousMonthIncomesSumsNames = document.getElementById('previousMonthIncomesSumsNames').innerText;
-    var previousMonthIncomesSumsNamesReady = previousMonthIncomesSumsNames.split(",");
+    let previousMonthIncomesAmounts = document.getElementById('previousMonthIncomesAmounts').innerText;
+    let previousMonthIncomesSumsNames = document.getElementById('previousMonthIncomesSumsNames').innerText;
+    let previousMonthIncomesSumsNamesReady = previousMonthIncomesSumsNames.split(",");
     previousMonthIncomesSumsNamesReady.pop();
 
     drawChart(previousMonthIncomesSumsNamesReady, previousMonthIncomesAmounts, 'previousMonthIncomesChart');
@@ -103,9 +103,9 @@ if (document.getElementById('previousMonthIncomesChart')) {
 
 // previous month expenses chart
 if (document.getElementById('previousMonthExpensesChart')) {
-    var previousMonthExpensesAmounts = document.getElementById('previousMonthExpensesAmounts').innerText;
-    var previousMonthExpensesSumsNames = document.getElementById('previousMonthExpensesSumsNames').innerText;
-    var previousMonthExpensesSumsNamesReady = previousMonthExpensesSumsNames.split(",");
+    let previousMonthExpensesAmounts = document.getElementById('previousMonthExpensesAmounts').innerText;
+    let previousMonthExpensesSumsNames = document.getElementById('previousMonthExpensesSumsNames').innerText;
+    let previousMonthExpensesSumsNamesReady = previousMonthExpensesSumsNames.split(",");
     previousMonthExpensesSumsNamesReady.pop();
 
     drawChart(previousMonthExpensesSumsNamesReady, previousMonthExpensesAmounts, 'previousMonthExpensesChart');
@@ -114,9 +114,9 @@ if (document.getElementById('previousMonthExpensesChart')) {
 
 //current year incomes pie chart
 if (document.getElementById('currentYearIncomesChart')) {
-    var currentYearIncomesAmounts = document.getElementById('currentYearIncomesAmounts').innerText;
-    var currentYearIncomesSumsNames = document.getElementById('currentYearIncomesSumsNames').innerText;
-    var currentYearIncomesSumsNamesReady = currentYearIncomesSumsNames.split(",");
+    let currentYearIncomesAmounts = document.getElementById('currentYearIncomesAmounts').innerText;
+    let currentYearIncomesSumsNames = document.getElementById('currentYearIncomesSumsNames').innerText;
+    let currentYearIncomesSumsNamesReady = currentYearIncomesSumsNames.split(",");
     currentYearIncomesSumsNamesReady.pop();
 
     drawChart(currentYearIncomesSumsNamesReady, currentYearIncomesAmounts, 'currentYearIncomesChart');
@@ -124,9 +124,9 @@ if (document.getElementById('currentYearIncomesChart')) {
 
 //current year expenses chart
 if (document.getElementById('currentYearExpensesChart')) {
-    var currentYearExpensesAmounts = document.getElementById('currentYearExpensesAmounts').innerText;
-    var currentYearExpensesSumsNames = document.getElementById('currentYearExpensesSumsNames').innerText;
-    var currentYearExpensesSumsNamesReady = currentYearExpensesSumsNames.split(",");
+    let currentYearExpensesAmounts = document.getElementById('currentYearExpensesAmounts').innerText;
+    let currentYearExpensesSumsNames = document.getElementById('currentYearExpensesSumsNames').innerText;
+    let currentYearExpensesSumsNamesReady = currentYearExpensesSumsNames.split(",");
     currentYearExpensesSumsNamesReady.pop();
 
     drawChart(currentYearExpensesSumsNamesReady, currentYearExpensesAmounts, 'currentYearExpensesChart');
@@ -135,9 +135,9 @@ if (document.getElementById('currentYearExpensesChart')) {
 
 //custom incomes pie chart
 if (document.getElementById('customIncomesChart')) {
-    var customIncomesAmounts = document.getElementById('customIncomesAmounts').innerText;
-    var customIncomesSumsNames = document.getElementById('customIncomesSumsNames').innerText;
-    var customIncomesSumsNamesReady = customIncomesSumsNames.split(",");
+    let customIncomesAmounts = document.getElementById('customIncomesAmounts').innerText;
+    let customIncomesSumsNames = document.getElementById('customIncomesSumsNames').innerText;
+    let customIncomesSumsNamesReady = customIncomesSumsNames.split(",");
     customIncomesSumsNamesReady.pop();
 
     drawChart(customIncomesSumsNamesReady, customIncomesAmounts, 'customIncomesChart');
@@ -146,12 +146,55 @@ if (document.getElementById('customIncomesChart')) {
 //custom expenses chart
 
 if (document.getElementById('customExpensesChart')) {
-    var customExpensesAmounts = document.getElementById('customExpensesAmounts').innerText;
-    var customExpensesSumsNames = document.getElementById('customExpensesSumsNames').innerText;
-    var customExpensesSumsNamesReady = customExpensesSumsNames.split(",");
+    let customExpensesAmounts = document.getElementById('customExpensesAmounts').innerText;
+    let customExpensesSumsNames = document.getElementById('customExpensesSumsNames').innerText;
+    let customExpensesSumsNamesReady = customExpensesSumsNames.split(",");
     customExpensesSumsNamesReady.pop();
 
     drawChart(customExpensesSumsNamesReady, customExpensesAmounts, 'customExpensesChart');
 }
 
 
+/**
+ * editing and deleting single incomes and expenses 
+ */
+$(document).ready(function () {
+
+    $('.deleteSingleIncomeBtn').on('click', function () {
+        $('#deleteSingleIncomeModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        let data = $tr.children("td").map(function () {
+            return $(this).text();
+        }).get();
+
+        $('#incomeIdDeleteModal').val(data[0]);
+        $('#periodDeleteIncomeModal').val(data[1]);
+
+        if ($('#when1income').val() !== 'current_month' && $('#when1income').val() !== 'current_year' && $('#when1income').val() !== 'previous_month') {
+
+            $('#periodEndDeleteIncomeModal').val(data[2]);
+        }
+
+
+    });
+
+    $('.deleteSingleExpenseBtn').on('click', function () {
+        $('#deleteSingleExpenseModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        let data = $tr.children("td").map(function () {
+            return $(this).text();
+        }).get();
+
+        $('#expenseIdDeleteModal').val(data[0]);
+        $('#periodDeleteExpenseModal').val(data[1]);
+
+        if ($('#when1expense').val() !== 'current_month' && $('#when1expense').val() !== 'current_year' && $('#when1expense').val() !== 'previous_month') {
+
+            $('#periodEndDeleteExpenseModal').val(data[2]);
+        }
+
+    });
+
+});

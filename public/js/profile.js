@@ -15,7 +15,7 @@ document.getElementById('togglePasswordInput').addEventListener('click', functio
 
 $(document).ready(function () {
 
-    var userId = document.querySelector('#userId').innerHTML;
+    let userId = document.querySelector('#userId').innerHTML;
 
     /**
      * Validate the form
@@ -63,7 +63,7 @@ $.validator.addMethod('validPassword',
 
 $(document).ready(function () {
 
-    //var userId = document.querySelector('#userId').innerHTML;
+    //let userId = document.querySelector('#userId').innerHTML;
 
     /**
      * Validate the form

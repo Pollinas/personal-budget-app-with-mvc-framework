@@ -78,7 +78,7 @@ class Settings extends Authenticated
             $this->indexAction();
         }
         else{
-            Flash::addMessage('Ups! Coś poszło nie tak.');  
+            Flash::addMessage('Ups! Coś poszło nie tak.' , $type='info');  
             $this->indexAction();
         }
     }
@@ -198,7 +198,7 @@ class Settings extends Authenticated
             $this->indexAction();
            
         }else{
-            Flash::addMessage('Ups! Coś poszło nie tak.');
+            Flash::addMessage('Ups! Coś poszło nie tak.' , $type='info');
             $this->indexAction();
         }
     }
