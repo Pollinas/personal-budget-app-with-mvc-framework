@@ -680,5 +680,25 @@ class Balance extends \Core\Model
         return $stmt->execute();
     }
 
+    
+    /**
+     * Delete a single expense from expenses table , given the income id 
+     * 
+     * @return boolean; true if the expense was deleted, false otherwise 
+     */
+
+    public static function deleteSingleExpense($id)
+    {
+        $sql = 'DELETE FROM expenses
+        WHERE id = :id ';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
    
 }
