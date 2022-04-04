@@ -43,7 +43,7 @@ class Balance extends \Core\Model
     public static function getCurrentMonthIncomes()
     {
         $current_month= date("m");
-        $sql = 'SELECT date_of_income, amount, income_comment, name
+        $sql = 'SELECT incomes.id AS id, date_of_income, amount, income_comment, name
         FROM incomes_category_assigned_to_users, incomes 
         WHERE EXTRACT(MONTH FROM date_of_income) = :current_month AND incomes.user_id = :id 
         AND incomes_category_assigned_to_users.user_id = incomes.user_id 
@@ -70,7 +70,7 @@ class Balance extends \Core\Model
     {
          $previous_month= Balance::getPreviousMonth();
 
-        $sql = 'SELECT date_of_income, amount, income_comment, name
+        $sql = 'SELECT incomes.id AS id, date_of_income, amount, income_comment, name
         FROM incomes_category_assigned_to_users, incomes 
         WHERE EXTRACT(MONTH FROM date_of_income) = :previous_month AND incomes.user_id = :id 
         AND incomes_category_assigned_to_users.user_id = incomes.user_id 
@@ -97,7 +97,7 @@ class Balance extends \Core\Model
     {
         $current_year = date("Y");
 
-        $sql = 'SELECT date_of_income, amount, income_comment, name
+        $sql = 'SELECT incomes.id AS id, date_of_income, amount, income_comment, name
         FROM incomes_category_assigned_to_users, incomes 
         WHERE EXTRACT(YEAR FROM date_of_income) = :current_year
          AND incomes.user_id = :id 
@@ -124,7 +124,7 @@ class Balance extends \Core\Model
      */
     public static function getCustomIncomes($begin, $end)
     {
-        $sql = 'SELECT date_of_income, amount, income_comment, name
+        $sql = 'SELECT incomes.id AS id, date_of_income, amount, income_comment, name
         FROM incomes_category_assigned_to_users, incomes 
         WHERE date_of_income BETWEEN  :begin AND  :end
          AND incomes.user_id = :id 
@@ -153,7 +153,7 @@ class Balance extends \Core\Model
     {
         $current_month= date("m");
 
-        $sql = 'SELECT date_of_expense, amount, expense_comment, 
+        $sql = 'SELECT expenses.id AS id, date_of_expense, amount, expense_comment, 
          expenses_category_assigned_to_users.name AS category,
         payment_methods_assigned_to_users.name AS method
         FROM expenses_category_assigned_to_users, expenses ,payment_methods_assigned_to_users
@@ -184,7 +184,7 @@ class Balance extends \Core\Model
     {
         $previous_month= Balance::getPreviousMonth();
 
-        $sql = 'SELECT date_of_expense, amount, expense_comment,
+        $sql = 'SELECT expenses.id AS id, date_of_expense, amount, expense_comment,
          expenses_category_assigned_to_users.name AS category,
         payment_methods_assigned_to_users.name AS method
         FROM expenses_category_assigned_to_users, expenses , payment_methods_assigned_to_users
@@ -215,7 +215,7 @@ class Balance extends \Core\Model
     {
         $current_year = date("Y");
 
-        $sql = 'SELECT date_of_expense, amount, expense_comment, 
+        $sql = 'SELECT expenses.id AS id, date_of_expense, amount, expense_comment, 
         expenses_category_assigned_to_users.name AS category,
         payment_methods_assigned_to_users.name AS method
         FROM expenses_category_assigned_to_users, expenses , payment_methods_assigned_to_users
@@ -245,7 +245,7 @@ class Balance extends \Core\Model
      */   
     public static function getCustomExpenses($begin, $end)
     {
-        $sql = 'SELECT date_of_expense, amount, expense_comment, 
+        $sql = 'SELECT expenses.id AS id, date_of_expense, amount, expense_comment, 
          expenses_category_assigned_to_users.name AS category,
         payment_methods_assigned_to_users.name AS method
         FROM expenses_category_assigned_to_users, expenses, payment_methods_assigned_to_users
@@ -661,7 +661,24 @@ class Balance extends \Core\Model
     }
 
 
+    /**
+     * Delete a single income from incomes table , given the income id 
+     * 
+     * @return boolean; true if the income was deleted, false otherwise 
+     */
 
+     public static function deleteSingleIncome($id)
+    {
+        $sql = 'DELETE FROM incomes
+        WHERE id = :id ';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
 
    
 }

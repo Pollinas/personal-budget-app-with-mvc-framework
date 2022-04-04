@@ -9,16 +9,16 @@ jQuery(window).load(function () {
 
 $(document).ready(function () {
 
-    var content = $('.content');
-    var currentItem = content.filter('.active');
-    var steps = $('.card').filter('.steps');
-    var inactive1 = $('.inactive-1');
-    var inactive2 = $('.inactive-2');
+    let content = $('.content');
+    let currentItem = content.filter('.active');
+    let steps = $('.card').filter('.steps');
+    let inactive1 = $('.inactive-1');
+    let inactive2 = $('.inactive-2');
 
     $('.button').click(function () {
-        var nextItem = currentItem.next();
-        var lastItem = content.last();
-        var contentFirst = content.first();
+        let nextItem = currentItem.next();
+        let lastItem = content.last();
+        let contentFirst = content.first();
 
         currentItem.removeClass('active');
 

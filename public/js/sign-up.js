@@ -18,7 +18,7 @@ $(document).ready(function () {
     );
 
 
-    var v = $("#msform").validate({
+    let v = $("#msform").validate({
         rules: {
             name: 'required',
             email: {

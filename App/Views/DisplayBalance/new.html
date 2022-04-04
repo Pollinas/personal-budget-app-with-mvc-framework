@@ -10,6 +10,8 @@
 {% endblock %}
 
 {% block footer %}
+{{ parent() }}
+<script src="https://kit.fontawesome.com/e2d73f7922.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" type="text/javascript"></script>
 <script src="/js/display-balance.js"></script>
 <script src="/js/panel.js"></script>
@@ -78,23 +80,52 @@
         <table class="table table-dark table-hover">
             <thead>
                 <tr>
-                    <th class="text-center" scope="col" colspan="4">Przychody</th>
+                    <th class="text-center" scope="col" colspan="6">Przychody</th>
                 </tr>
                 <tr>
+                    <th scope="col" style="display:none;">ID</th>
+                    <th scope="col" style="display:none;">period</th>
+                    {% if balance.begin %}
+                    <th scope="col" style="display:none;">additional for custom dates</th>
+                    {% endif %}
                     <th scope="col">Data</th>
                     <th scope="col">Kwota [PLN]</th>
                     <th scope="col">Kategoria</th>
                     <th scope="col">Komentarz</th>
+                    <th scope="col" width="7%"></th>
+                    <th scope="col" width="7%"></th>
                 </tr>
             </thead>
             <tbody>
                 {% if incomes %}
                 {% for income in incomes %}
                 <tr>
+                    <td style="display:none;">{{ income.id }}</td>
+                    {% if current_month %}
+                    <td id="when1income" style="display:none;">current_month
+                    </td>
+                    {% endif %}
+                    {% if previous_month %}
+                    <td id="when1income" style="display:none;">previous_month
+                    </td>
+                    {% endif %}
+                    {% if current_year %}
+                    <td id="when1income" style="display:none;">current_year
+                    </td>
+                    {% endif %}
+                    {% if balance.begin %}
+                    <td id="when1income" style="display:none;">{{ balance.begin }}
+                    </td>
+                    <td style="display:none;">{{ balance.end }}
+                    </td>
+                    {% endif %}
                     <td> {{ income.date_of_income }} </td>
                     <td> {{ income.amount }}</td>
                     <td> {{ income.name }}</td>
                     <td>{% if income.income_comment != '' %}{{ income.income_comment }} {% endif %}</td>
+                    <td class="editSingleIncomeBtn" style="cursor: pointer;"><i class="fas fa-edit"></i></td>
+                    <td class="deleteSingleIncomeBtn" style="cursor: pointer;"><i class="fa-solid fa-trash-can"></i>
+                    </td>
                 </tr>
                 {% endfor %}
                 {% endif %}
@@ -162,14 +193,21 @@
         <table class="table table-dark table-hover">
             <thead>
                 <tr>
-                    <th class="text-center" scope="col" colspan="5">Wydatki</th>
+                    <th class="text-center" scope="col" colspan="7">Wydatki</th>
                 </tr>
                 <tr>
+                    <th scope="col" style="display:none;">ID</th>
+                    <th scope="col" style="display:none;">period</th>
+                    {% if balance.begin %}
+                    <th scope="col" style="display:none;">additional for custom dates</th>
+                    {% endif %}
                     <th scope="col">Data</th>
                     <th scope="col">Kwota [PLN]</th>
                     <th scope="col">Kategoria</th>
                     <th scope="col">Metoda płatności</th>
                     <th scope="col">Komentarz</th>
+                    <th scope="col" width="7%"></th>
+                    <th scope="col" width="7%"></th>
                 </tr>
             </thead>
             <tbody>
@@ -177,11 +215,33 @@
                 {% if expenses %}
                 {% for expense in expenses %}
                 <tr>
+                    <td style="display:none;">{{ expense.id }}</td>
+                    {% if current_month %}
+                    <td id="when1expense" style="display:none;">current_month
+                    </td>
+                    {% endif %}
+                    {% if previous_month %}
+                    <td id="when1expense" style="display:none;">previous_month
+                    </td>
+                    {% endif %}
+                    {% if current_year %}
+                    <td id="when1expense" style="display:none;">current_year
+                    </td>
+                    {% endif %}
+                    {% if balance.begin %}
+                    <td id="when1expense" style="display:none;">{{ balance.begin }}
+                    </td>
+                    <td style="display:none;">{{ balance.end }}
+                    </td>
+                    {% endif %}
                     <td> {{ expense.date_of_expense }} </td>
                     <td> {{ expense.amount }}</td>
                     <td> {{ expense.category }}</td>
                     <td> {{ expense.method }} </td>
                     <td>{% if expense.expense_comment != '' %}{{ expense.expense_comment }} {% endif %}</td>
+                    <td class="editSingleExpenseBtn" style="cursor: pointer;"><i class="fas fa-edit"></i></td>
+                    <td class="deleteSingleExpenseBtn" style="cursor: pointer;"><i class="fa-solid fa-trash-can"></i>
+                    </td>
                 </tr>
                 {% endfor %}
                 {% endif %}
@@ -581,7 +641,7 @@
 <!-- end of small menu-->
 
 
-<!-- Modal -->
+<!-- Modal to choose the time period -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -608,6 +668,60 @@
         </div>
     </div>
 </div>
+
+<!-- delete single income  modal-->
+<div class="modal fade" id="deleteSingleIncomeModal" tabindex="-1" role="dialog"
+    aria-labelledby="usunKategoriePrzychodu" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/DisplayBalance/deleteSingleIncome" method="post">
+                <div class="modal-body text-center my-4">
+                    <input type="hidden" id="incomeIdDeleteModal" name="income_id">
+                    <input type="hidden" id="periodDeleteIncomeModal" name="period">
+
+                    <input type="hidden" id="periodEndDeleteIncomeModal" name="end">
+
+                    Czy na pewno chcesz usunąć ten przychód?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-danger">Usuń</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--end of delete single income category modal-->
+
+<!-- delete single expense  modal-->
+<div class="modal fade" id="deleteSingleExpenseModal" tabindex="-1" role="dialog"
+    aria-labelledby="usunKategoriePrzychodu" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/DisplayBalance/deleteSingleExpense" method="post">
+                <div class="modal-body text-center my-4">
+                    <input type="hidden" id="expenseIdDeleteModal" name="expense_id">
+                    <input type="hidden" id="periodDeleteExpenseModal" name="period">
+
+                    <input type="hidden" id="periodEndDeleteExpenseModal" name="end">
+
+                    Czy na pewno chcesz usunąć ten wydatek?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-danger">Usuń</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--end of delete single income category modal-->
 
 
 {% endblock %}

@@ -1,4 +1,4 @@
-var button = document.getElementById('hamburger-menu'),
+let button = document.getElementById('hamburger-menu'),
     section = button.getElementsByTagName('section')[0];
 
 button.onclick = function () {
@@ -8,7 +8,7 @@ button.onclick = function () {
 $('#hamburger-menu').on('click', toggleOnClass);
 
 function toggleOnClass(event) {
-    var toggleElementId = '#' + $(this).data('toggle'),
+    let toggleElementId = '#' + $(this).data('toggle'),
         element = $(toggleElementId);
 
     element.toggleClass('on');
@@ -26,12 +26,12 @@ $('.menu li a').on("click", function () {
  * toggle different settings
  */
 
-var incomesContainer = document.querySelector('#incomesContainer');
-var expensesContainer = document.querySelector('#expensesContainer');
-var methodsContainer = document.querySelector('#methodsContainer');
-var profileContainer = document.querySelector('#profileContainer');
-var passwordContainer = document.querySelector('#passwordContainer');
-var guideContainer = document.querySelector('#guideContainer');
+let incomesContainer = document.querySelector('#incomesContainer');
+let expensesContainer = document.querySelector('#expensesContainer');
+let methodsContainer = document.querySelector('#methodsContainer');
+let profileContainer = document.querySelector('#profileContainer');
+let passwordContainer = document.querySelector('#passwordContainer');
+let guideContainer = document.querySelector('#guideContainer');
 
 function choiceReset() {
 
@@ -97,7 +97,7 @@ $(document).ready(function () {
         $('#editIncomeModal').modal('show');
 
         $tr = $(this).closest('tr');
-        var data = $tr.children("td").map(function () {
+        let data = $tr.children("td").map(function () {
             return $(this).text();
         }).get();
 
@@ -111,7 +111,7 @@ $(document).ready(function () {
         $('#deleteIncomeCategoryModal').modal('show');
 
         $tr = $(this).closest('tr');
-        var data = $tr.children("td").map(function () {
+        let data = $tr.children("td").map(function () {
             return $(this).text();
         }).get();
 
@@ -127,7 +127,7 @@ $(document).ready(function () {
         $('#editExpenseModal').modal('show');
 
         $tr = $(this).closest('tr');
-        var data = $tr.children("td").map(function () {
+        let data = $tr.children("td").map(function () {
             return $(this).text();
         }).get();
 
@@ -141,7 +141,7 @@ $(document).ready(function () {
         $('#deleteExpenseCategoryModal').modal('show');
 
         $tr = $(this).closest('tr');
-        var data = $tr.children("td").map(function () {
+        let data = $tr.children("td").map(function () {
             return $(this).text();
         }).get();
 
@@ -156,7 +156,7 @@ $(document).ready(function () {
         $('#editPaymentModal').modal('show');
 
         $tr = $(this).closest('tr');
-        var data = $tr.children("td").map(function () {
+        let data = $tr.children("td").map(function () {
             return $(this).text();
         }).get();
 
@@ -169,7 +169,7 @@ $(document).ready(function () {
         $('#deleteMethodModal').modal('show');
 
         $tr = $(this).closest('tr');
-        var data = $tr.children("td").map(function () {
+        let data = $tr.children("td").map(function () {
             return $(this).text();
         }).get();
 
