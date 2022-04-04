@@ -46,28 +46,28 @@
     class="container-fluid main d-flex flex-column align-items-center justify-content-center mt-5 mb-3 align-self-center">
 
     {% if balance.begin %}
-    <div class="mx-auto my-3" id="when">
+    <div class="mx-auto my-3">
         <p>Bilans od <b>{{ balance.begin }}</b> do <b>{{ balance.end }}</b> </p>
     </div>
     {% endif %}
 
 
     {% if current_month %}
-    <div class="mx-auto my-3" id="when">
+    <div class="mx-auto my-3">
         <p>Bilans z <b>bieżącego miesiąca</b> </p>
     </div>
     {% endif %}
 
 
     {% if previous_month %}
-    <div class="mx-auto my-3" id="when">
+    <div class="mx-auto my-3">
         <p>Bilans z <b>zeszłego miesiąca</b> </p>
     </div>
     {% endif %}
 
 
     {% if current_year %}
-    <div class="mx-auto my-3" id="when">
+    <div class="mx-auto my-3">
         <p>Bilans z <b>bieżącego roku</b> </p>
     </div>
     {% endif %}
@@ -84,10 +84,6 @@
                 </tr>
                 <tr>
                     <th scope="col" style="display:none;">ID</th>
-                    <th scope="col" style="display:none;">period</th>
-                    {% if balance.begin %}
-                    <th scope="col" style="display:none;">additional for custom dates</th>
-                    {% endif %}
                     <th scope="col">Data</th>
                     <th scope="col">Kwota [PLN]</th>
                     <th scope="col">Kategoria</th>
@@ -101,24 +97,6 @@
                 {% for income in incomes %}
                 <tr>
                     <td style="display:none;">{{ income.id }}</td>
-                    {% if current_month %}
-                    <td id="when1income" style="display:none;">current_month
-                    </td>
-                    {% endif %}
-                    {% if previous_month %}
-                    <td id="when1income" style="display:none;">previous_month
-                    </td>
-                    {% endif %}
-                    {% if current_year %}
-                    <td id="when1income" style="display:none;">current_year
-                    </td>
-                    {% endif %}
-                    {% if balance.begin %}
-                    <td id="when1income" style="display:none;">{{ balance.begin }}
-                    </td>
-                    <td style="display:none;">{{ balance.end }}
-                    </td>
-                    {% endif %}
                     <td> {{ income.date_of_income }} </td>
                     <td> {{ income.amount }}</td>
                     <td> {{ income.name }}</td>
@@ -197,10 +175,6 @@
                 </tr>
                 <tr>
                     <th scope="col" style="display:none;">ID</th>
-                    <th scope="col" style="display:none;">period</th>
-                    {% if balance.begin %}
-                    <th scope="col" style="display:none;">additional for custom dates</th>
-                    {% endif %}
                     <th scope="col">Data</th>
                     <th scope="col">Kwota [PLN]</th>
                     <th scope="col">Kategoria</th>
@@ -216,24 +190,6 @@
                 {% for expense in expenses %}
                 <tr>
                     <td style="display:none;">{{ expense.id }}</td>
-                    {% if current_month %}
-                    <td id="when1expense" style="display:none;">current_month
-                    </td>
-                    {% endif %}
-                    {% if previous_month %}
-                    <td id="when1expense" style="display:none;">previous_month
-                    </td>
-                    {% endif %}
-                    {% if current_year %}
-                    <td id="when1expense" style="display:none;">current_year
-                    </td>
-                    {% endif %}
-                    {% if balance.begin %}
-                    <td id="when1expense" style="display:none;">{{ balance.begin }}
-                    </td>
-                    <td style="display:none;">{{ balance.end }}
-                    </td>
-                    {% endif %}
                     <td> {{ expense.date_of_expense }} </td>
                     <td> {{ expense.amount }}</td>
                     <td> {{ expense.category }}</td>
@@ -680,9 +636,6 @@
             <form action="/DisplayBalance/deleteSingleIncome" method="post">
                 <div class="modal-body text-center my-4">
                     <input type="hidden" id="incomeIdDeleteModal" name="income_id">
-                    <input type="hidden" id="periodDeleteIncomeModal" name="period">
-
-                    <input type="hidden" id="periodEndDeleteIncomeModal" name="end">
 
                     Czy na pewno chcesz usunąć ten przychód?
                 </div>
@@ -707,9 +660,6 @@
             <form action="/DisplayBalance/deleteSingleExpense" method="post">
                 <div class="modal-body text-center my-4">
                     <input type="hidden" id="expenseIdDeleteModal" name="expense_id">
-                    <input type="hidden" id="periodDeleteExpenseModal" name="period">
-
-                    <input type="hidden" id="periodEndDeleteExpenseModal" name="end">
 
                     Czy na pewno chcesz usunąć ten wydatek?
                 </div>

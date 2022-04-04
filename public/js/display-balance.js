@@ -169,12 +169,6 @@ $(document).ready(function () {
         }).get();
 
         $('#incomeIdDeleteModal').val(data[0]);
-        $('#periodDeleteIncomeModal').val(data[1]);
-
-        if ($('#when1income').val() !== 'current_month' && $('#when1income').val() !== 'current_year' && $('#when1income').val() !== 'previous_month') {
-
-            $('#periodEndDeleteIncomeModal').val(data[2]);
-        }
 
 
     });
@@ -188,12 +182,6 @@ $(document).ready(function () {
         }).get();
 
         $('#expenseIdDeleteModal').val(data[0]);
-        $('#periodDeleteExpenseModal').val(data[1]);
-
-        if ($('#when1expense').val() !== 'current_month' && $('#when1expense').val() !== 'current_year' && $('#when1expense').val() !== 'previous_month') {
-
-            $('#periodEndDeleteExpenseModal').val(data[2]);
-        }
 
     });
 
