@@ -54,7 +54,6 @@ class DisplayBalance extends Authenticated
             $this->showCurrentYearDataAction();
         }    
         
-        unset($balance);
     }
 
     /**
@@ -117,7 +116,6 @@ class DisplayBalance extends Authenticated
             'expenses_sums' => Balance::getCustomExpensesSumsDivedIntoCategories($begin, $end)
             ]);
 
-        unset($balance);
     }
 
     
@@ -131,35 +129,15 @@ class DisplayBalance extends Authenticated
     {
         $id = $_POST['income_id'];
 
+
         if(Balance::deleteSingleIncome($id))
         {
-            Flash::addMessage('Usunięto wybrany przychód.');  
+            Flash::addMessage('Usunięto wybrany przychód.');    
+            $this->newAction();
         }
         else
         {
             Flash::addMessage('Ups! Coś poszło nie tak.' , $type='info');  
-        }
-
-        $balance = new Balance($_POST);
-
-        $when = $_POST['period'] ;
-        if( $when == 'current_month')  $this->newAction();
-        else if( $when == 'previous_month')  $this-> showPreviousMonthDataAction();
-        else if( $when == 'current_year')  $this->showCurrentYearDataAction();
-
-        else {
-            $begin = $when;
-            $end = $_POST['end'];
-            View::renderTemplate('displayBalance/new.html', [
-                'balance' => $balance, 
-                'incomes' => Balance::getCustomIncomes($begin, $end),
-                'expenses' =>   Balance::getCustomExpenses($begin, $end),
-                'balanceCalc' => Balance::getCustomBalance($begin, $end),
-                'custom' => true,
-                'incomes_sums' => Balance::getCustomIncomesSumsDivedIntoCategories($begin, $end),
-                'expenses_sums' => Balance::getCustomExpensesSumsDivedIntoCategories($begin, $end)
-                ]);
-    
         }
       
     }
