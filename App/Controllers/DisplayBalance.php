@@ -142,4 +142,25 @@ class DisplayBalance extends Authenticated
       
     }
 
+    /**
+     * delete single expense; then render the same view as before 
+     * 
+     * @return void
+     */
+    public function deleteSingleExpenseAction()
+    {
+        $id = $_POST['expense_id'];
+
+        if(Balance::deleteSingleExpense($id))
+        {
+            Flash::addMessage('Usunięto wybrany wydatek.');    
+            $this->newAction();
+        }
+        else
+        {
+            Flash::addMessage('Ups! Coś poszło nie tak.' , $type='info');  
+        }
+      
+    }
+
 }
