@@ -31,7 +31,7 @@
             <option value="current_year"> Bieżący rok </option>
             <option value="custom"> Niestandardowy </option>
         </select>
-        <button class="btn btn-outline-success m-3" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+        <button class="btn btn-outline-success m-3" type="submit"><svg xmlns="://www.w3.org/2000/svg" width="16"
                 height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                 <path
                     d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
@@ -88,8 +88,8 @@
                     <th scope="col">Kwota [PLN]</th>
                     <th scope="col">Kategoria</th>
                     <th scope="col">Komentarz</th>
-                    <th scope="col" width="7%"></th>
-                    <th scope="col" width="7%"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -97,9 +97,9 @@
                 {% for income in incomes %}
                 <tr>
                     <td style="display:none;">{{ income.id }}</td>
-                    <td> {{ income.date_of_income }} </td>
-                    <td> {{ income.amount }}</td>
-                    <td> {{ income.name }}</td>
+                    <td>{{ income.date_of_income }}</td>
+                    <td>{{ income.amount }}</td>
+                    <td>{{ income.name }}</td>
                     <td>{% if income.income_comment != '' %}{{ income.income_comment }} {% endif %}</td>
                     <td class="editSingleIncomeBtn" style="cursor: pointer;"><i class="fas fa-edit"></i></td>
                     <td class="deleteSingleIncomeBtn" style="cursor: pointer;"><i class="fa-solid fa-trash-can"></i>
@@ -180,8 +180,8 @@
                     <th scope="col">Kategoria</th>
                     <th scope="col">Metoda płatności</th>
                     <th scope="col">Komentarz</th>
-                    <th scope="col" width="7%"></th>
-                    <th scope="col" width="7%"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -190,10 +190,10 @@
                 {% for expense in expenses %}
                 <tr>
                     <td style="display:none;">{{ expense.id }}</td>
-                    <td> {{ expense.date_of_expense }} </td>
-                    <td> {{ expense.amount }}</td>
-                    <td> {{ expense.category }}</td>
-                    <td> {{ expense.method }} </td>
+                    <td>{{ expense.date_of_expense }}</td>
+                    <td>{{ expense.amount }}</td>
+                    <td>{{ expense.category }}</td>
+                    <td>{{ expense.method }}</td>
                     <td>{% if expense.expense_comment != '' %}{{ expense.expense_comment }} {% endif %}</td>
                     <td class="editSingleExpenseBtn" style="cursor: pointer;"><i class="fas fa-edit"></i></td>
                     <td class="deleteSingleExpenseBtn" style="cursor: pointer;"><i class="fa-solid fa-trash-can"></i>
@@ -363,8 +363,8 @@
 <div class="floating-btn">
     <div class="icon">
         <?xml version="1.0" encoding="UTF-8"?>
-        <svg width="160px" height="256px" viewBox="0 0 218 289" version="1.1" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <svg width="160px" height="256px" viewBox="0 0 218 289" version="1.1" xmlns="https://www.w3.org/2000/svg"
+            xmlns:xlink="https://www.w3.org/1999/xlink">
             <defs>
                 <clipPath id="clip-path" clipPathUnits="userSpaceOnUse">
                     <rect id="screen-clip-path" x="0" y="0" width="74.7" height="113.12963"></rect>
@@ -626,8 +626,8 @@
 </div>
 
 <!-- delete single income  modal-->
-<div class="modal fade" id="deleteSingleIncomeModal" tabindex="-1" role="dialog"
-    aria-labelledby="usunKategoriePrzychodu" aria-hidden="true">
+<div class="modal fade" id="deleteSingleIncomeModal" tabindex="-1" role="dialog" aria-labelledby="usunPrzychod"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -647,6 +647,61 @@
     </div>
 </div>
 <!--end of delete single income category modal-->
+
+<!-- edit single income  modal-->
+<div class="modal fade" id="editSingleIncomeModal" tabindex="-1" role="dialog" aria-labelledby="edytujPrzychod"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Edytujesz wybrany przychód</h5>
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/DisplayBalance/editSingleIncome" method="post" id="editSingleIncomeForm">
+                <div class="modal-body text-center">
+                    <input type="hidden" id="incomeIdEditModal" name="income_id">
+
+                    <div class="input-group m-3 w-75">
+                        <label for="incomeDateEditModal" class="form-label align-self-center mx-2">Data</label>
+                        <input id="incomeDateEditModal" type="date" class="form-control" name="date" required
+                            onchange="checkIncomeDate(event)">
+                    </div>
+
+                    <div class="input-group m-3 w-75">
+                        <label for="editIncomeAmount" class="form-label align-self-center mx-2">Kwota</label>
+                        <span class="input-group-text">PLN</span>
+                        <input type="number" step="0.1" min="0.1" class="form-control" name="amount"
+                            id="incomeAmountEditModal" required>
+                    </div>
+
+                    <div class="input-group my-4">
+                        <span class="input-group-text"><svg xmlns="https://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg></span>
+                        <select class="form-select" name="category" id="incomeCategoryEditModal"
+                            aria-label="Default select example">
+                            {% for category in income_categories %}
+                            <option>{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <label for="incomeCommentEditModal">Ewentualny komentarz</label>
+                    <textarea type="text" class="form-control" name="comment" id="incomeCommentEditModal" rows="4"
+                        cols="15"></textarea>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-success">Zapisz zmiany</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--end of edit single income category modal-->
 
 <!-- delete single expense  modal-->
 <div class="modal fade" id="deleteSingleExpenseModal" tabindex="-1" role="dialog"
@@ -670,6 +725,76 @@
     </div>
 </div>
 <!--end of delete single income category modal-->
+
+<!-- edit single expense  modal-->
+<div class="modal fade" id="editSingleExpenseModal" tabindex="-1" role="dialog" aria-labelledby="edytujWydatek"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Edytujesz wybrany wydatek</h5>
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/DisplayBalance/editSingleExpense" method="post" id="editSingleExpenseForm">
+                <div class="modal-body text-center">
+                    <input type="hidden" id="expenseIdEditModal" name="expense_id">
+
+                    <div class="input-group m-3 w-75">
+                        <label for="expenseDateEditModal" class="form-label align-self-center mx-2">Data</label>
+                        <input id="expenseDateEditModal" type="date" class="form-control" name="date"
+                            onchange="checkExpenseDate(event)" required>
+                    </div>
+
+                    <div class=" input-group m-3 w-75">
+                        <label for="editExpenseAmount" class="form-label align-self-center mx-2">Kwota</label>
+                        <span class="input-group-text">PLN</span>
+                        <input type="number" step="0.1" min="0.1" class="form-control" name="amount"
+                            id="editExpenseAmount" required>
+                    </div>
+
+                    <div class="input-group my-4">
+                        <label class="form-label" for="expenseCategoryEditModal"></label>
+                        <span class="input-group-text"><svg xmlns="https://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg></span>
+                        <select class="form-select" id="expenseCategoryEditModal" name="category"
+                            aria-label="Default select example">
+                            {% for category in expense_categories %}
+                            <option>{{ category.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="input-group my-4">
+                        <label class="form-label" for="expenseMethodEditModal"></label>
+                        <span class="input-group-text"><i class="fa-solid fa-credit-card"></i></span>
+                        <select class="form-select" id="expenseMethodEditModal" name="method"
+                            aria-label="Default select example">
+                            {% for method in payment_methods %}
+                            <option>{{ method.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <label for="expenseCommentEditModal">Ewentualny komentarz</label>
+                    <textarea type="text" class="form-control" name="comment" id="expenseCommentEditModal" rows="4"
+                        cols="15"></textarea>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-success">Zapisz zmiany</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--end of edit single income category modal-->
 
 
 {% endblock %}

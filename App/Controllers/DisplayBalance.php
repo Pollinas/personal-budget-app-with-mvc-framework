@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Models\Balance;
+use \App\Models\Income;
+use \App\Models\Expense;
 use \App\Flash;
 
 /**
@@ -27,7 +29,10 @@ class DisplayBalance extends Authenticated
             'balanceCalc' => Balance::getCurrentMonthBalance(),
             'current_month' => 'true',
             'incomes_sums' => Balance::getCurrentMonthIncomesSumsDivedIntoCategories(),
-            'expenses_sums' => Balance::getCurrentMonthExpensesSumsDivedIntoCategories()
+            'expenses_sums' => Balance::getCurrentMonthExpensesSumsDivedIntoCategories(),
+            'expense_categories' => Expense::getExpenseCategories(),
+            'payment_methods' => Expense::getPaymentMethods(),
+            'income_categories' => Income::getIncomeCategories()
             ]);
     }
 
@@ -70,7 +75,10 @@ class DisplayBalance extends Authenticated
             'balanceCalc' => Balance::getPreviousMonthBalance(),
             'previous_month' => 'true',
             'incomes_sums' => Balance::getPreviousMonthIncomesSumsDivedIntoCategories(),
-            'expenses_sums' => Balance::getPreviousMonthExpensesSumsDivedIntoCategories()
+            'expenses_sums' => Balance::getPreviousMonthExpensesSumsDivedIntoCategories(),
+            'expense_categories' => Expense::getExpenseCategories(),
+            'payment_methods' => Expense::getPaymentMethods(),
+            'income_categories' => Income::getIncomeCategories()
              ]);
     }
 
@@ -89,7 +97,10 @@ class DisplayBalance extends Authenticated
             'balanceCalc' => Balance::getCurrentYearBalance(),
             'current_year' => true,
             'incomes_sums' => Balance::getCurrentYearIncomesSumsDivedIntoCategories(),
-            'expenses_sums' => Balance::getCurrentYearExpensesSumsDivedIntoCategories()
+            'expenses_sums' => Balance::getCurrentYearExpensesSumsDivedIntoCategories(),
+            'expense_categories' => Expense::getExpenseCategories(),
+            'payment_methods' => Expense::getPaymentMethods(),
+            'income_categories' => Income::getIncomeCategories()
             ]);
     }
 
@@ -113,7 +124,10 @@ class DisplayBalance extends Authenticated
             'balanceCalc' => Balance::getCustomBalance($begin, $end),
             'custom' => true,
             'incomes_sums' => Balance::getCustomIncomesSumsDivedIntoCategories($begin, $end),
-            'expenses_sums' => Balance::getCustomExpensesSumsDivedIntoCategories($begin, $end)
+            'expenses_sums' => Balance::getCustomExpensesSumsDivedIntoCategories($begin, $end),
+            'expense_categories' => Expense::getExpenseCategories(),
+            'payment_methods' => Expense::getPaymentMethods(),
+            'income_categories' => Income::getIncomeCategories()
             ]);
 
     }
@@ -121,7 +135,7 @@ class DisplayBalance extends Authenticated
     
 
     /**
-     * delete single income; then render the same view as before 
+     * delete single income
      * 
      * @return void
      */
@@ -129,8 +143,7 @@ class DisplayBalance extends Authenticated
     {
         $id = $_POST['income_id'];
 
-
-        if(Balance::deleteSingleIncome($id))
+        if(Income::deleteSingleIncome($id))
         {
             Flash::addMessage('Usunięto wybrany przychód.');    
             $this->newAction();
@@ -143,7 +156,7 @@ class DisplayBalance extends Authenticated
     }
 
     /**
-     * delete single expense; then render the same view as before 
+     * delete single expense
      * 
      * @return void
      */
@@ -151,16 +164,61 @@ class DisplayBalance extends Authenticated
     {
         $id = $_POST['expense_id'];
 
-        if(Balance::deleteSingleExpense($id))
+        if(Expense::deleteSingleExpense($id))
         {
             Flash::addMessage('Usunięto wybrany wydatek.');    
             $this->newAction();
         }
         else
         {
-            Flash::addMessage('Ups! Coś poszło nie tak.' , $type='info');  
+            Flash::addMessage('Ups! Coś poszło nie tak. Spróbuj ponownie później.' , $type='info');  
         }
       
     }
+   /**
+     * edit single income 
+     * 
+     * @return void
+     */
+    public function editSingleIncomeAction()
+    {
+        $id= $_POST['income_id'] ;  $date = $_POST['date'] ; $amount = $_POST['amount'] ; $category= $_POST['category']; $comment = $_POST['comment'];
+        
+        if(Income::editSingleIncome($id, $date, $amount, $category, $comment))
+        {
+            
+            Flash::addMessage('Edytowano wybrany przychód.');    
+            $this->newAction();
+        }
+        else
+        {
+            Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawne dane w formularzu lub spróbuj ponownie później.' , $type='warning');  
+            $this->newAction();
+        }
+    }
+
+
+    /**
+     * edit single expense
+     * 
+     * @return void
+     */
+    public function editSingleExpenseAction()
+    {
+        $id= $_POST['expense_id'] ;  $date = $_POST['date'] ; $amount = $_POST['amount'] ; $category= $_POST['category']; $comment = $_POST['comment']; $method = $_POST['method'];
+        
+        if(Expense::editSingleExpense($id, $date, $amount, $category, $comment, $method))
+        {
+            
+            Flash::addMessage('Edytowano wybrany wydatek.');    
+            $this->newAction();
+        }
+        else
+        {
+            Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawne dane w formularzu lub spróbuj ponownie później.' , $type='warning');  
+            $this->newAction();
+        }
+    }
+
 
 }
