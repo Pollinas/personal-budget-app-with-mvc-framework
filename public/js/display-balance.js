@@ -8,7 +8,15 @@ function myFunction(e) {
     }
 }
 
+//universal function for checking the date in forms
+function checkDate(date, id) {
+    let today = new Date();
 
+    if (date > today) {
+        alert("Data nie może być późniejsza od dzisiejszej daty!");
+        document.getElementById(id).valueAsDate = null;
+    }
+}
 
 function checkEndDate(e) {
     let end = document.querySelector("#end").value;
@@ -16,13 +24,8 @@ function checkEndDate(e) {
 
     let endDate = new Date(end);
     let beginDate = new Date(begin);
-    let today = new Date();
 
-    if (endDate > today) {
-        alert("Data końcowa nie może być późniejsza od dzisiejszej daty!");
-        document.getElementById("end").valueAsDate = null;
-    }
-
+    checkDate(endDate, "end");
 
     if (beginDate > endDate) {
         alert("Data końcowa bilansu nie może być wcześniejsza od jego daty początkowej!");
@@ -30,20 +33,33 @@ function checkEndDate(e) {
     }
 }
 
+
+
+
 function checkBeginDate(e) {
 
     let begin = document.querySelector("#begin").value;
-
     let beginDate = new Date(begin);
-    let today = new Date();
-
-    if (beginDate > today) {
-        alert("Data początkowa nie może być późniejsza od dzisiejszej daty!");
-        document.getElementById("begin").valueAsDate = null;
-    }
+    checkDate(beginDate, "begin");
 
 }
 
+
+function checkIncomeDate(e) {
+
+    let incomeDate = document.querySelector("#incomeDateEditModal").value;
+    let date = new Date(incomeDate);
+    checkDate(date, "incomeDateEditModal");
+
+}
+
+function checkExpenseDate(e) {
+
+    let expenseDate = document.querySelector("#expenseDateEditModal").value;
+    let date = new Date(expenseDate);
+    checkDate(date, "expenseDateEditModal");
+
+}
 // piechart 
 
 
@@ -173,6 +189,24 @@ $(document).ready(function () {
 
     });
 
+    $('.editSingleIncomeBtn').on('click', function () {
+        $('#editSingleIncomeModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        let data = $tr.children("td").map(function () {
+            return $(this).text();
+        }).get();
+
+        $('#incomeIdEditModal').val(data[0]);
+        $('#incomeDateEditModal').val(data[1]);
+        $('#incomeAmountEditModal').val(data[2]);
+        $('#incomeCategoryEditModal').val(data[3]);
+        $('#incomeCommentEditModal').val(data[4]);
+
+    });
+
+
+
     $('.deleteSingleExpenseBtn').on('click', function () {
         $('#deleteSingleExpenseModal').modal('show');
 
@@ -184,5 +218,54 @@ $(document).ready(function () {
         $('#expenseIdDeleteModal').val(data[0]);
 
     });
+
+    $('.editSingleExpenseBtn').on('click', function () {
+        $('#editSingleExpenseModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        let data = $tr.children("td").map(function () {
+            return $(this).text();
+        }).get();
+
+        $('#expenseIdEditModal').val(data[0]);
+        $('#expenseDateEditModal').val(data[1]);
+        $('#editExpenseAmount').val(data[2]);
+        $('#expenseCategoryEditModal').val(data[3]);
+        $('#expenseMethodEditModal').val(data[4]);
+        $('#expenseCommentEditModal').val(data[5]);
+
+    });
+
+
+    $("#editSingleIncomeForm").validate({
+        ignore: '#incomeAmountEditModal',
+        rules: {
+            date: 'required',
+            category: 'required'
+        },
+        messages: {
+            date: ' Podaj datę przychodu.',
+            category: 'Wybierz kategorię.'
+        },
+        errorElement: "span",
+        errorClass: "help-inline",
+    });
+
+    $("#editSingleExpenseForm").validate({
+        ignore: '#editExpenseAmount',
+        rules: {
+            date: 'required',
+            method: 'required',
+            category: 'required'
+        },
+        messages: {
+            date: ' Podaj datę wydatku.',
+            method: 'Wybierz jedną z metod płatności.',
+            category: 'Wybierz kategorię.'
+        },
+        errorElement: "span",
+        errorClass: "help-inline",
+    });
+
 
 });

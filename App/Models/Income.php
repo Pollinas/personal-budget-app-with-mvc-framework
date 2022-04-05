@@ -291,7 +291,7 @@ class Income extends \Core\Model
     }
 
         /**
-     * Edit chosen expense category
+     * Edit chosen income category
      * 
      * @return boolean ; true if the method is saved, false otherwise
      */
@@ -316,6 +316,99 @@ class Income extends \Core\Model
             return false;
         }
     }
+
+
+    /**
+     * validate updated income
+     * 
+     * @return boolean ; true if all is ok, false otherwise 
+     */
+    protected static function validateUpdatedIncome($date, $amount, $category)
+    {
+        if ($amount == '') {
+           return false;
+        }
+
+        if ($amount < 0) {
+            return false;
+        }
+
+        // date
+        $date_now = date("Y-m-d"); 
+        if ($date > $date_now) {
+            return false;
+        }
+
+        if ($date == '') {
+            return false;
+        }
+    
+        //category
+        if ($category == '') {
+            return false;
+        }
+
+        return true;
+    }
+
+     /**
+     * Edit a single income in the incomes table , given the income id 
+     * 
+     * @return boolean; true if the income was updated, false otherwise 
+     */
+
+    public static function editSingleIncome($id, $date, $amount, $category, $comment)
+    {
+
+        $income_category_id = Income::extractCategoryIdByName($category);
+
+        if (Income::validateUpdatedIncome($date, $amount, $category))
+        {
+            $sql = 'UPDATE incomes
+                    SET  amount = :amount,
+                    date_of_income = :date,
+                    income_comment = :comment,
+                    income_category_assigned_to_user_id = :income_category_id';
+                
+                $sql .= "\nWHERE id = :id";
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->bindValue(':amount', $amount, PDO::PARAM_INT);
+            $stmt->bindValue(':date', $date, PDO::PARAM_STR);
+            $stmt->bindValue(':comment', $comment, PDO::PARAM_STR);
+            $stmt->bindValue(':income_category_id', $income_category_id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+
+        } else{
+
+            return false;
+        }
+    }
+
+    /**
+     * Delete a single income from incomes table , given the income id 
+     * 
+     * @return boolean; true if the income was deleted, false otherwise 
+     */
+
+    public static function deleteSingleIncome($id)
+    {
+        $sql = 'DELETE FROM incomes
+        WHERE id = :id ';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
+    
 
   
 }

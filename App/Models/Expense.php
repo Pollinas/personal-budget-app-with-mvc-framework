@@ -483,5 +483,105 @@ class Expense extends \Core\Model
             return false;
         }
     }
+
+       
+    /**
+     * Delete a single expense from expenses table , given the income id 
+     * 
+     * @return boolean; true if the expense was deleted, false otherwise 
+     */
+
+    public static function deleteSingleExpense($id)
+    {
+        $sql = 'DELETE FROM expenses
+        WHERE id = :id ';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
+
+    /**
+     * validate updated expense
+     * 
+     * @return boolean ; true if all is ok, false otherwise 
+     */
+    protected static function validateUpdatedExpense($date, $amount, $category, $method)
+    {
+        if ($amount == '') {
+           return false;
+        }
+
+        if ($amount < 0) {
+            return false;
+        }
+
+        // date
+        $date_now = date("Y-m-d"); 
+        if ($date > $date_now) {
+            return false;
+        }
+
+        if ($date == '') {
+            return false;
+        }
+    
+        //category
+        if ($category == '') {
+            return false;
+        }
+
+        //method
+        if ($method == '') {
+            return false ;
+        }
+
+        return true;
+    }
+    
+     /**
+     * Edit a single income expense in the expense table , given the expense id 
+     * 
+     * @return boolean; true if the expense was updated, false otherwise 
+     */
+
+    public static function editSingleExpense($id, $date, $amount, $category, $comment, $method)
+    {
+
+        $expense_category_id = Expense::extractCategoryIdByName($category);
+        $payment_method_id =  Expense::extractPaymentMethodIdByName($method);
+
+        if (Expense::validateUpdatedExpense($date, $amount, $category, $method))
+        {
+            $sql = 'UPDATE expenses
+                    SET  amount = :amount,
+                    date_of_expense = :date,
+                    expense_comment = :comment,
+                    expense_category_assigned_to_user_id = :expense_category_id,
+                    payment_method_assigned_to_user_id = :payment_method_id';
+                
+                $sql .= "\nWHERE id = :id";
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->bindValue(':amount', $amount, PDO::PARAM_INT);
+            $stmt->bindValue(':date', $date, PDO::PARAM_STR);
+            $stmt->bindValue(':comment', $comment, PDO::PARAM_STR);
+            $stmt->bindValue(':expense_category_id', $expense_category_id, PDO::PARAM_INT);
+            $stmt->bindValue(':payment_method_id', $payment_method_id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        }
+        else 
+        {
+            return false; 
+        }
+    }
  
 }

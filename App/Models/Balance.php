@@ -3,6 +3,7 @@
 namespace App\Models;
 use PDO;
 
+
 /**
  *Balance model
  *
@@ -658,46 +659,6 @@ class Balance extends \Core\Model
         $expenses_sums= $stmt->fetchAll();
 
         return $expenses_sums;
-    }
-
-
-    /**
-     * Delete a single income from incomes table , given the income id 
-     * 
-     * @return boolean; true if the income was deleted, false otherwise 
-     */
-
-     public static function deleteSingleIncome($id)
-    {
-        $sql = 'DELETE FROM incomes
-        WHERE id = :id ';
-
-        $db = static::getDB();
-        $stmt = $db->prepare($sql);
-
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-
-        return $stmt->execute();
-    }
-
-    
-    /**
-     * Delete a single expense from expenses table , given the income id 
-     * 
-     * @return boolean; true if the expense was deleted, false otherwise 
-     */
-
-    public static function deleteSingleExpense($id)
-    {
-        $sql = 'DELETE FROM expenses
-        WHERE id = :id ';
-
-        $db = static::getDB();
-        $stmt = $db->prepare($sql);
-
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-
-        return $stmt->execute();
     }
 
    
