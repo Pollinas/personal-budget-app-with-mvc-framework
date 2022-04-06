@@ -52,4 +52,17 @@ class AddExpense extends Authenticated
 
         }
     }
+
+    public function expensesAction()
+    {
+        $date = $this->route_params['date'];
+        $name = $this->route_params['category'];
+        echo json_encode(Expense::getMonthlyExpensesSumInGivenCategory($name, $date), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function limitAction()
+    {
+        $name = $this->route_params['category'];
+        echo json_encode(Expense::getCategoryLimit($name), JSON_UNESCAPED_UNICODE);
+    }
 }
