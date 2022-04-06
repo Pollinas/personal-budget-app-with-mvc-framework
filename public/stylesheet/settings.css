@@ -320,3 +320,7 @@ td {
   font-size: 22px;
   color: white;
 }
+
+#limitEdit {
+  display: none;
+}

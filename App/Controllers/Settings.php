@@ -276,12 +276,23 @@ class Settings extends Authenticated
 
         $category_id = $_POST['expenseCategoryId'];
 
+        if (isset($_POST['set_limit']))
+        {
+            $set_limit = $_POST['set_limit'];
+        }
+
+        if (isset($_POST['limit']))
+        {
+            $limit = $_POST['limit'];;
+
+        }
+
         if ($new_category_name != "Inne")
         {
     
             if(! Expense::CategoryExists($new_category_name, $category_id))
             {
-                if(Expense::updateExpenseCategory($new_category_name, $category_id))
+                if(Expense::updateExpenseCategory($new_category_name, $category_id, $set_limit ?? null, $limit ?? null))
                 {
                 Flash::addMessage('Zaktualizowano wybraną kategorię wydatków.');
                     $this->indexAction(); 

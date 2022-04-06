@@ -36,7 +36,7 @@ class Expense extends \Core\Model
     {
         $id= $_SESSION['user_id'];
 
-        $sql = 'SELECT id,name FROM expenses_category_assigned_to_users
+        $sql = 'SELECT id,name, expense_limit FROM expenses_category_assigned_to_users
         WHERE user_id = :id';
 
         $db = static::getDB();
@@ -44,7 +44,7 @@ class Expense extends \Core\Model
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
-        $categories = $stmt->fetchAll();
+        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
       
         return $categories;
     }
@@ -386,12 +386,13 @@ class Expense extends \Core\Model
      * 
      * @return boolean ; true if the method is saved, false otherwise
      */
-    public static function updateExpenseCategory($new_category_name, $category_id)
+    public static function updateExpenseCategory($new_category_name, $category_id, $set_limit = null, $limit = null)
     {
         if(Expense::validateNew($new_category_name))
         {
             $sql = 'UPDATE expenses_category_assigned_to_users
-            SET name = :new_category_name';
+            SET name = :new_category_name,
+            expense_limit = :limit';
             
             $sql .= "\nWHERE id = :category_id";
 
@@ -400,6 +401,21 @@ class Expense extends \Core\Model
 
             $stmt->bindValue(':new_category_name', $new_category_name, PDO::PARAM_STR);
             $stmt->bindValue(':category_id', $category_id, PDO::PARAM_INT);
+
+        
+            if($set_limit != null)
+            {
+                if($limit != null && $limit != '' && $limit > 0)
+                {
+                    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindValue(':limit',NULL, PDO::PARAM_STR);
+                }
+               
+            } else {
+                    
+                $stmt->bindValue(':limit',NULL, PDO::PARAM_STR);
+            }
 
             return $stmt->execute();
 
@@ -582,6 +598,60 @@ class Expense extends \Core\Model
         {
             return false; 
         }
+    }
+
+    /**
+     * get category limit given category name 
+     * 
+     * @return  value if the limit has been set or null if it hasn't
+     */
+    public static function getCategoryLimit($name)
+    {
+
+        $sql = 'SELECT expense_limit FROM expenses_category_assigned_to_users
+        WHERE user_id= :id AND name= :category_name limit 1';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':category_name', $name, PDO::PARAM_STR);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $row= $stmt->fetch();
+
+        return $row['expense_limit'];
+    }
+
+
+    /**
+     * get the sum of expenses in the given category in given month 
+     * 
+     * @return value or 0 if there hasn't been any expenses in the given category in the given month
+     */
+    public static function getMonthlyExpensesSumInGivenCategory($name, $date)
+    {
+
+        $id = Expense::extractCategoryIdByName($name);
+        $month = date("m",strtotime($date));
+        $year = date("Y", strtotime($date));
+
+        $sql = 'SELECT SUM(amount) AS sum
+        FROM expenses
+        WHERE expense_category_assigned_to_user_id= :id
+        AND EXTRACT(YEAR FROM date_of_expense) = :year
+        AND EXTRACT(MONTH FROM date_of_expense) = :month limit 1';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':month', $month, PDO::PARAM_INT);
+        $stmt->bindValue(':year', $year, PDO::PARAM_INT);
+      
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $row= $stmt->fetch();
+
+        return $row['sum'] ?? 0;
     }
  
 }

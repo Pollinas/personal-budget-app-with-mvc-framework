@@ -35,6 +35,15 @@ $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
 $router->add('password/reset/{token:[\da-f]+}', ['controller' => 'Password', 'action' => 'reset']);
 $router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'Signup', 'action' => 'activate']);
+
+$router->add('api/expenses' , ['controller' => 'AddExpense', 'action' => 'expenses']);
+
+$router->add('api/limit/{category:[A-Za-ząĄćĆęĘłŁńŃóÓśŚżŻźŹ\w]+}', ['controller' => 'AddExpense', 'action' => 'limit']);
+
+$router->add('api/expenses/{category:[A-Za-ząĄćĆęĘłŁńŃóÓśŚżŻźŹ\w]+}/{date:[\d+\-\d+\-\d+]+}', ['controller' => 'AddExpense', 'action' => 'expenses']);
+
+
+
 $router->add('{controller}/{action}');
 
     

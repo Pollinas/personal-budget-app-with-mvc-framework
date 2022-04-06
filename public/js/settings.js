@@ -87,6 +87,15 @@ function togglePasswordContainer() {
 
 }
 
+function checkLimit(e) {
+    if ($('#set_limit').is(':checked')) {
+        $('#limitEdit').show();
+    }
+    else {
+        $('#limitEdit').hide();
+    }
+}
+
 /**
  * incomes, expenses an payment methods
  */
@@ -132,7 +141,18 @@ $(document).ready(function () {
         }).get();
 
         $('#expenseCategoryModal').val(data[0]);
-        $('#expenseCategoryIdEditModal').val(data[2]);
+        $('#expenseCategoryIdEditModal').val(data[1]);
+        $('#limitEdit').val(data[2]);
+
+        if (data[2] != '') {
+            $('#set_limit').prop('checked', true);
+            $('#limitEdit').show();
+        }
+        else {
+            $('#set_limit').prop('checked', false);
+            $('#limitEdit').hide();
+        }
+
 
     });
 
@@ -221,6 +241,7 @@ $(document).ready(function () {
 
     //edytowanie istniejącej kategorii wydatków
     $('#editExpenseForm').validate({
+        ignore: '#limitEdit',
         rules: {
             new_category_name:
             {
