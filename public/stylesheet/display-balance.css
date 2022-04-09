@@ -1,22 +1,32 @@
-
-#time{
-	min-width: 20px;
+#time {
+  min-width: 20px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-#calculated{
-	color:white;
-	font-size: 25px;
+#calculated {
+  color: white;
+  font-size: 25px;
 }
 
-#when{
-  color:white;
+#when {
+  color: white;
   font-size: 20px;
 }
 
+.container {
+  z-index: 1000;
+}
 
+#home {
+  float: right;
+  color: white;
+}
+
+#home a:hover {
+  color: silver;
+}
 
 
 /** faces **/
@@ -44,7 +54,7 @@
   height: 100%;
   right: 12%;
   background: transparent;
- 
+
 }
 
 .two {
@@ -93,7 +103,7 @@
 }
 
 .mouth {
-  position:absolute;
+  position: absolute;
   top: 43%;
   left: 41%;
   width: 7px;
@@ -129,6 +139,7 @@
 .scale {
   animation: scale 1s ease-in infinite;
 }
+
 .move {
   animation: move 3s ease-in-out infinite;
 }
@@ -138,7 +149,7 @@
 
 @keyframes bounce {
   50% {
-     transform: translateY(-10px);
+    transform: translateY(-10px);
   }
 }
 
@@ -153,10 +164,12 @@
     transform: rotate(0deg);
     left: 25%;
   }
+
   50% {
     left: 60%;
     transform: rotate(168deg);
   }
+
   100% {
     transform: rotate(0deg);
     left: 25%;
@@ -167,9 +180,11 @@
   0% {
     left: 25%;
   }
+
   50% {
     left: 60%;
   }
+
   100% {
     left: 25%;
   }
@@ -199,8 +214,3 @@ p {
   color: white;
   letter-spacing: 1px;
 }
-
-
-
-
-

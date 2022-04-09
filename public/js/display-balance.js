@@ -238,33 +238,49 @@ $(document).ready(function () {
 
 
     $("#editSingleIncomeForm").validate({
-        ignore: '#incomeAmountEditModal',
         rules: {
+            amount: 'required',
             date: 'required',
             category: 'required'
         },
         messages: {
+            amount: 'Podaj kwotę wydatku w prawidłowej formie.',
             date: ' Podaj datę przychodu.',
             category: 'Wybierz kategorię.'
         },
         errorElement: "span",
-        errorClass: "help-inline",
+        errorClass: "help-block",
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
     });
 
     $("#editSingleExpenseForm").validate({
-        ignore: '#editExpenseAmount',
         rules: {
+            amount: 'required',
             date: 'required',
             method: 'required',
             category: 'required'
         },
         messages: {
+            amount: 'Podaj kwotę wydatku w prawidłowej formie.',
             date: ' Podaj datę wydatku.',
             method: 'Wybierz jedną z metod płatności.',
             category: 'Wybierz kategorię.'
         },
         errorElement: "span",
-        errorClass: "help-inline",
+        errorClass: "help-block",
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
     });
 
 

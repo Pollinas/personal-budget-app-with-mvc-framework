@@ -586,7 +586,7 @@ class Expense extends \Core\Model
             $stmt = $db->prepare($sql);
 
             $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-            $stmt->bindValue(':amount', $amount, PDO::PARAM_INT);
+            $stmt->bindValue(':amount', $amount, PDO::PARAM_STR);
             $stmt->bindValue(':date', $date, PDO::PARAM_STR);
             $stmt->bindValue(':comment', $comment, PDO::PARAM_STR);
             $stmt->bindValue(':expense_category_id', $expense_category_id, PDO::PARAM_INT);

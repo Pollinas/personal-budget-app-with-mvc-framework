@@ -13,7 +13,7 @@ use \App\Flash;
  *
  * PHP version 7.4
  */
-class DisplayBalance extends Authenticated
+class Displaybalance extends Authenticated
 {
 
     /**
@@ -21,9 +21,9 @@ class DisplayBalance extends Authenticated
      *
      * @return void
      */
-    public function newAction()
+    public function indexAction()
     {
-        View::renderTemplate('displayBalance/new.html', [
+        View::renderTemplate('displaybalance/index.html', [
             'incomes' => Balance::getCurrentMonthIncomes(),
             'expenses' => Balance::getCurrentMonthExpenses(),
             'balanceCalc' => Balance::getCurrentMonthBalance(),
@@ -45,7 +45,7 @@ class DisplayBalance extends Authenticated
 
         if ($balance->time ===  "current_month")
         {
-            $this->newAction();
+            $this->indexAction();
 
         }
 
@@ -69,7 +69,7 @@ class DisplayBalance extends Authenticated
 
     protected function showPreviousMonthDataAction()
     {
-        View::renderTemplate('displayBalance/new.html', [
+        View::renderTemplate('displayBalance/index.html', [
             'incomes' => Balance::getPreviousMonthIncomes(),
             'expenses' => Balance::getPreviousMonthExpenses(),
             'balanceCalc' => Balance::getPreviousMonthBalance(),
@@ -91,7 +91,7 @@ class DisplayBalance extends Authenticated
 
     protected function showCurrentYearDataAction()
     {
-        View::renderTemplate('displayBalance/new.html', [
+        View::renderTemplate('displayBalance/index.html', [
             'incomes' => Balance::getCurrentYearIncomes(),
             'expenses' => Balance::getCurrentYearExpenses(),
             'balanceCalc' => Balance::getCurrentYearBalance(),
@@ -117,7 +117,7 @@ class DisplayBalance extends Authenticated
         $begin = $balance->begin;
         $end = $balance->end;
       
-        View::renderTemplate('displayBalance/new.html', [
+        View::renderTemplate('displayBalance/index.html', [
             'balance' => $balance, 
             'incomes' => Balance::getCustomIncomes($begin, $end),
             'expenses' =>   Balance::getCustomExpenses($begin, $end),
@@ -146,7 +146,7 @@ class DisplayBalance extends Authenticated
         if(Income::deleteSingleIncome($id))
         {
             Flash::addMessage('Usunięto wybrany przychód.');    
-            $this->newAction();
+            $this->indexAction();
         }
         else
         {
@@ -167,7 +167,7 @@ class DisplayBalance extends Authenticated
         if(Expense::deleteSingleExpense($id))
         {
             Flash::addMessage('Usunięto wybrany wydatek.');    
-            $this->newAction();
+            $this->indexAction();
         }
         else
         {
@@ -188,12 +188,12 @@ class DisplayBalance extends Authenticated
         {
             
             Flash::addMessage('Edytowano wybrany przychód.');    
-            $this->newAction();
+            $this->indexAction();
         }
         else
         {
             Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawne dane w formularzu lub spróbuj ponownie później.' , $type='warning');  
-            $this->newAction();
+            $this->indexAction();
         }
     }
 
@@ -211,12 +211,12 @@ class DisplayBalance extends Authenticated
         {
             
             Flash::addMessage('Edytowano wybrany wydatek.');    
-            $this->newAction();
+            $this->indexAction();
         }
         else
         {
             Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawne dane w formularzu lub spróbuj ponownie później.' , $type='warning');  
-            $this->newAction();
+            $this->indexAction();
         }
     }
 

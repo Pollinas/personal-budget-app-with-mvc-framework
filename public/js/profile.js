@@ -1,18 +1,3 @@
-
-document.getElementById('toggleProfileInput').addEventListener('click', function () {
-    [].map.call(document.querySelectorAll('.profile'), function (el) {
-        el.classList.toggle('profile--open');
-    });
-});
-
-document.getElementById('togglePasswordInput').addEventListener('click', function () {
-    [].map.call(document.querySelectorAll('.passwordInput'), function (el) {
-        el.classList.toggle('passwordInput--open');
-    });
-});
-
-
-
 $(document).ready(function () {
 
     let userId = document.querySelector('#userId').innerHTML;
@@ -20,7 +5,7 @@ $(document).ready(function () {
     /**
      * Validate the form
      */
-    $('#formProfile').validate({
+    $('.formProfile').validate({
         rules: {
             name: 'required',
             email: {
@@ -37,9 +22,19 @@ $(document).ready(function () {
             }
         },
         messages: {
+            name: 'Podaj imię.',
             email: {
                 email: 'Podaj poprawny adres e-mail',
                 remote: 'Podany adres e-mail istnieje już w bazie danych.'
+            }
+        },
+        errorElement: "span",
+        errorClass: "help-block",
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
             }
         }
     });
@@ -68,12 +63,27 @@ $(document).ready(function () {
     /**
      * Validate the form
      */
-    $('#formPasswordReset').validate({
+    $('.formPasswordReset').validate({
         rules: {
             password: {
                 required: true,
                 minlength: 6,
                 validPassword: true
+            }
+        },
+        messages: {
+            password: {
+                required: 'To pole nie może być puste.',
+                minlength: 'Hasło jest zbyt krótkie.'
+            }
+        },
+        errorElement: "span",
+        errorClass: "help-block",
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
             }
         }
 

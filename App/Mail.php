@@ -32,7 +32,7 @@ class Mail
         try {
     
             $mail->isSMTP();
-            //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            //$mail->SMTPDebug = false;
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Port = 465;
@@ -40,7 +40,6 @@ class Mail
             $mail->Username = Config::EMAIL_USERNAME;
             $mail->Password = Config::EMAIL_PASSWORD;
            
-            // $mail->Password = $_SERVER['EMAIL_PASSWORD'];
 
         
             $mail->addAddress($to);    

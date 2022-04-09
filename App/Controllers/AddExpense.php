@@ -7,11 +7,11 @@ use \App\Models\Expense;
 use \App\Flash;
 
 /**
- * Add Expense controller
+ * Add expense controller
  *
  * PHP version 7.4
  */
-class AddExpense extends Authenticated
+class Addexpense extends Authenticated
 {
 
     /**
@@ -22,7 +22,7 @@ class AddExpense extends Authenticated
     public function newAction()
     {
 
-        View::renderTemplate('AddExpense/new.html',[
+        View::renderTemplate('Addexpense/new.html',[
             'categories' => Expense::getExpenseCategories(),
             'methods' => Expense::getPaymentMethods()
         ]);
@@ -40,11 +40,11 @@ class AddExpense extends Authenticated
           if($expense->save())
         {
             Flash::addMessage('Dodawanie wydatku zakończone sukcesem.');
-            $this->newAction();
+            $this->redirect('/');
 
         } else {
 
-            View::renderTemplate('AddExpense/new.html', [
+            View::renderTemplate('Addexpense/new.html', [
             'categories' => Expense::getExpenseCategories(),
              'methods' => Expense::getPaymentMethods(),
             'expense' => $expense

@@ -39,10 +39,73 @@ class Settings extends Authenticated
     {
 
         View::renderTemplate('Settings/index.html',[
-            'user' => $this->user,
-            'incomeCategories' => Income::getIncomeCategories(),
-            'expenseCategories' => Expense::getExpenseCategories(),
+            'user' => $this->user
+        ]);
+    }
+
+    /**
+     * show the profile settings page 
+     * 
+     * @return void
+     */
+
+    public function profileAction()
+    {
+        View::renderTemplate('Settings/profile.html',[
+            'user' => $this->user
+        ]);
+    }
+
+    /**
+     * show the password settings page 
+     * 
+     * @return void
+     */
+
+    public function passwordAction()
+    {
+        View::renderTemplate('Settings/password.html',[
+            'user' => $this->user
+        ]);
+    }
+
+     /**
+     * show the payment methods settings page 
+     * 
+     * @return void
+     */
+
+    public function methodsAction()
+    {
+        View::renderTemplate('Settings/methods.html',[
             'methods' => Expense::getPaymentMethods()
+        ]);
+    }
+
+    
+     /**
+     * show expense categories settings page 
+     * 
+     * @return void
+     */
+
+    public function expensesAction()
+    {
+        View::renderTemplate('Settings/expenses.html',[
+            'expenseCategories' => Expense::getExpenseCategories()
+        ]);
+    }
+    
+     /**
+     * show the income categories settings page 
+     * 
+     * @return void
+     */
+
+    public function incomesAction()
+    {
+        View::renderTemplate('Settings/incomes.html',[
+            'incomeCategories' => Income::getIncomeCategories()
         ]);
     }
 

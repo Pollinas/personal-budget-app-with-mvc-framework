@@ -42,30 +42,7 @@ class Login extends \Core\Controller
 
             Flash::addMessage('Logowanie zakończone sukcesem.');
 
-            if(! isset($_POST['direction'])) 
-            {
             $this->redirect(Auth::getReturnToPage());
-
-            } else if($_POST['direction'] == 'home')
-            {
-                $this->redirect('/');
-
-            } else if($_POST['direction'] == 'balance')
-            {
-                $this->redirect('/displaybalance/new');
-
-            }else if($_POST['direction'] == 'income')
-            {
-                $this->redirect('/addincome/new');
-
-            } else if($_POST['direction'] == 'expense')
-            {
-                $this->redirect('/addexpense/new');
-
-            } else if($_POST['direction'] == 'settings')
-            {
-                $this->redirect('/settings/index');
-            }
 
         } else {
 

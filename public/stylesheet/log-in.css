@@ -1,19 +1,27 @@
-h1{
-    color: white;
-	position: absolute;
-	top: 0;
-	left: 0;
-	line-height: 1em;
-	margin: 0;
-	font-size: 12em;
-	opacity: 0.1;
-	font-weight: 900;
+#forgot {
+	color: black;
+	margin-top: 10%;
 }
 
-#forgot{
-    color:black;
+#forgot:hover {
+	color: #E8B4BC;
 }
 
-#forgot:hover{
-    color: #E8B4BC;
+#msform {
+	background-color: white;
+	z-index: 1000;
+}
+
+
+.input-group {
+	width: 75%;
+	margin-left: 13%;
+}
+
+@media (max-width: 800px) {
+
+	.input-group {
+		width: 100%;
+		margin-left: 0;
+	}
 }
