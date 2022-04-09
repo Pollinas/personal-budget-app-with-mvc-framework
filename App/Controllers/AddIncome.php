@@ -7,11 +7,11 @@ use \App\Models\Income;
 use \App\Flash;
 
 /**
- * Add Income controller
+ * Add income controller
  *
  * PHP version 7.4
  */
-class AddIncome extends Authenticated
+class Addincome extends Authenticated
 {
 
     /**
@@ -23,7 +23,7 @@ class AddIncome extends Authenticated
     {
         $id= $_SESSION['user_id'];
 
-        View::renderTemplate('AddIncome/new.html',[
+        View::renderTemplate('Addincome/new.html',[
             'categories' => Income::getIncomeCategories()
         ]);
     }
@@ -40,11 +40,11 @@ class AddIncome extends Authenticated
           if($income->save())
         {
             Flash::addMessage('Dodawanie przychodu zakończone sukcesem.');
-            $this->newAction();
+            $this->redirect('/');
 
         } else {
 
-            View::renderTemplate('AddIncome/new.html', [
+            View::renderTemplate('Addincome/new.html', [
             'categories' => Income::getIncomeCategories(),
             'income' => $income
             ]);

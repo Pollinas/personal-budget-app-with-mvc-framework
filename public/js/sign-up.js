@@ -33,13 +33,26 @@ $(document).ready(function () {
             }
         },
         messages: {
+            name: 'Podaj imię.',
             email: {
+                required: 'Podaj adres e-mail.',
                 email: 'Podaj poprawny adres e-mail',
                 remote: 'Podany adres e-mail istnieje już w bazie danych.'
+            },
+            password: {
+                required: 'Podaj hasło.',
+                minlegth: 'Podane hasło jest za krótkie.'
             }
         },
         errorElement: "span",
-        errorClass: "help-inline",
+        errorClass: "help-block",
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
     });
 
 

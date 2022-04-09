@@ -1,92 +1,3 @@
-let button = document.getElementById('hamburger-menu'),
-    section = button.getElementsByTagName('section')[0];
-
-button.onclick = function () {
-    section.classList.toggle('hamburger-menu-button-close');
-};
-
-$('#hamburger-menu').on('click', toggleOnClass);
-
-function toggleOnClass(event) {
-    let toggleElementId = '#' + $(this).data('toggle'),
-        element = $(toggleElementId);
-
-    element.toggleClass('on');
-
-}
-
-// close hamburger menu after click a
-$('.menu li a').on("click", function () {
-    $('#hamburger-menu').click();
-});
-
-
-
-/**
- * toggle different settings
- */
-
-let incomesContainer = document.querySelector('#incomesContainer');
-let expensesContainer = document.querySelector('#expensesContainer');
-let methodsContainer = document.querySelector('#methodsContainer');
-let profileContainer = document.querySelector('#profileContainer');
-let passwordContainer = document.querySelector('#passwordContainer');
-let guideContainer = document.querySelector('#guideContainer');
-
-function choiceReset() {
-
-    if (incomesContainer.style.display === 'flex') { incomesContainer.style.display = 'none'; }
-    if (expensesContainer.style.display === 'flex') { expensesContainer.style.display = 'none'; }
-    if (methodsContainer.style.display === 'flex') { methodsContainer.style.display = 'none'; }
-    if (profileContainer.style.display === 'flex') { profileContainer.style.display = 'none'; }
-    if (passwordContainer.style.display === 'flex') { passwordContainer.style.display = 'none'; }
-    guideContainer.style.display = 'none';
-}
-
-// toggle income settings 
-
-function toggleIncomes() {
-
-    choiceReset();
-    incomesContainer.style.display = 'flex';
-}
-
-//toggle expense settings 
-
-function toggleExpenses() {
-
-    choiceReset();
-    expensesContainer.style.display = 'flex';
-
-}
-
-//toggle methods settings 
-
-function toggleMethods() {
-
-    choiceReset();
-    methodsContainer.style.display = 'flex';
-
-}
-
-//toggle profile settings 
-
-function toggleProfile() {
-
-    choiceReset();
-    profileContainer.style.display = 'flex';
-
-}
-
-//toggle password settings 
-
-function togglePasswordContainer() {
-
-    choiceReset();
-    passwordContainer.style.display = 'flex';
-
-}
-
 function checkLimit(e) {
     if ($('#set_limit').is(':checked')) {
         $('#limitEdit').show();
@@ -230,7 +141,14 @@ $(document).ready(function () {
                 }
             },
             errorElement: "span",
-            errorClass: "help-inline"
+            errorClass: "help-block",
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            }
         });
     }
 
@@ -268,7 +186,14 @@ $(document).ready(function () {
             }
         },
         errorElement: "span",
-        errorClass: "help-inline"
+        errorClass: "help-block",
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
     });
 
 
@@ -300,13 +225,20 @@ $(document).ready(function () {
             }
         },
         errorElement: "span",
-        errorClass: "help-inline"
+        errorClass: "help-block",
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
     });
 
 
 
 
-    //payment method
+    //add payment method
     $('#addPaymentMethodForm').validate({
         rules: {
             new_method_name:
@@ -321,16 +253,24 @@ $(document).ready(function () {
         },
         messages: {
             new_method_name: {
+                required: 'To pole jest obowiązkowe.',
                 remote: 'Metoda płatności o takiej nazwie już istnieje.',
                 maxlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.',
                 minlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.'
             }
         },
         errorElement: "span",
-        errorClass: "help-inline"
+        errorClass: "help-block",
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
     });
 
-    //payment method
+    //edit payment method
     $('#editPaymentMethodForm').validate({
         rules: {
             new_method_name:
@@ -352,13 +292,21 @@ $(document).ready(function () {
         },
         messages: {
             new_method_name: {
+                required: 'To pole jest obowiązkowe.',
                 remote: 'Metoda płatności o takiej nazwie już istnieje.',
                 maxlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.',
                 minlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.'
             }
         },
         errorElement: "span",
-        errorClass: "help-inline"
+        errorClass: "help-block",
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
     });
 
 

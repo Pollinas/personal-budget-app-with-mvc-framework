@@ -1,137 +1,102 @@
-a {
-  text-decoration: none;
+/* main settings */
+.wrapper {
+  max-width: 960px;
 }
 
-.hamburger-menu-button {
-  width: 40px;
-  height: 40px;
-  padding: 6px;
-  display: block;
+.tab {
   position: relative;
-  margin-top: 35px;
-  z-index: 100;
-  background: #086375;
-  border: 5px solid white;
-  box-sizing: content-box;
-  border-radius: 50%;
-  text-indent: 100%;
-  color: transparent;
-  white-space: nowrap;
-  cursor: pointer;
+  margin-bottom: 1px;
+  width: 100%;
+  color: #005bab;
   overflow: hidden;
-  outline: 0;
 }
 
-.hamburger-menu-button-open {
-  top: 50%;
-  margin-top: -1px;
-  left: 50%;
-  margin-left: -12px;
-}
-
-.hamburger-menu-button-open,
-.hamburger-menu-button-open::before,
-.hamburger-menu-button-open::after {
+.input {
   position: absolute;
-  width: 24px;
-  height: 2px;
-  background: #fff;
-  border-radius: 4px;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  opacity: 0;
+  z-index: -1;
 }
 
-.hamburger-menu-button-open::before,
-.hamburger-menu-button-open::after {
+.label {
+  position: relative;
+  text-align: center;
+  display: block;
+  padding: 0 0 0 1em;
+  background: black;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: white;
+  line-height: 6;
+  cursor: pointer;
+}
+
+.tab-content {
+  max-height: 0;
+  overflow: hidden;
+  background: #f4f8fc;
+  transform: scale(0.35);
+  webkit-transform: scale(0.35);
+  opacity: 0;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.tab-content p {
+  margin: 1em;
+}
+
+/* :checked */
+.input:checked~.tab-content {
+  max-height: 10em;
+  opacity: 1;
+  transform: scale(1);
+  webkit-transform: scale(1);
+}
+
+/* Icon */
+.label::after {
+  position: absolute;
   left: 0;
+  top: 0;
+  display: block;
+  width: 3em;
+  height: 3em;
+  line-height: 3;
+  text-align: center;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
+}
+
+.input[type=checkbox]+.label::after {
+  content: "+";
+  font-size: 150%;
+}
+
+.input[type=radio]+.label::after {
   content: "";
 }
 
-.hamburger-menu-button-open::before {
-  top: 6px;
+.input[type=checkbox]:checked+.label::after {
+  transform: rotate(315deg);
 }
 
-.hamburger-menu-button-open::after {
-  bottom: 6px;
+.input[type=radio]:checked+.label::after {
+  transform: rotateX(180deg);
 }
 
-.hamburger-menu-button-close {
-  background: transparent;
-  -webkit-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
 
-.hamburger-menu-button-close::before {
-  -webkit-transform: translateY(-6px) rotate(45deg);
-  transform: translateY(-6px) rotate(45deg);
-}
-
-.hamburger-menu-button-close::after {
-  -webkit-transform: translateY(6px) rotate(-45deg);
-  transform: translateY(6px) rotate(-45deg);
-}
-
-.ham-menu {
-  position: absolute;
-  top: 42px;
-  left: 48px;
-  margin: auto;
-  max-width: 570px;
-  overflow: hidden;
-}
-
-.ham-menu ul {
-  -webkit-transform: translateX(-110%);
-  transform: translateX(-110%);
-  background-color: #98f5e18f;
-  -webkit-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-}
-
-.ham-menu.on ul {
-  -webkit-transform: translateX(0px);
-  transform: translateX(0px);
-}
-
-.ham-menu ul {
-  font-size: 0;
-}
-
-.ham-menu ul li {
-  display: inline-block;
-}
-
-.ham-menu ul li:first-child .ham-menu ul li a {
-  padding-left: 30px;
-}
-
-.ham-menu ul li a {
-  padding: 15px;
-  display: block;
-  background-color: transparent;
-  color: #fff;
-  text-transform: uppercase;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  font-size: 13px;
-}
-
-.active,
-.ham-menu ul li a:hover {
-  background-color: #086375;
-  color: #fff;
-}
-
-/* incomes */
+/* end of main settings */
 
 #incomesContainer,
 #expensesContainer,
 #methodsContainer,
 #profileContainer,
 #passwordContainer {
-  display: none;
-  color: white;
-  font-size: 40px;
+  display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
@@ -139,170 +104,25 @@ a {
   flex-direction: column;
 }
 
-/* guide */
+/*password and profile */
 
-#guideContainer {
-  display: flex;
-  letter-spacing: 2px;
-  line-height: 150%;
-  font-size: 25px;
-  font-weight: bold;
-  color: white;
-  margin-top: 5%;
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  flex-direction: column;
+#msform {
+  background-color: white;
 }
 
-#gear {
-  width: 72px;
-  height: 48px;
-  position: relative;
-  margin: 30px;
-  display: inline-block;
-  box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.2);
-  vertical-align: middle;
+#msform {
+  z-index: 2000;
 }
 
-#gear:before,
-#gear:after {
-  content: "";
-  display: block;
-  position: absolute;
-}
-
-
-@-webkit-keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-#gear {
-  border-radius: 100%;
-  width: 48px;
-  height: 48px;
-  box-shadow: 0 0 0 4px #b9b6ad, inset 0 0 0 8px #b9b6ad, inset 0 0 0 15px #e7e5d8;
-  animation: rotate 45s infinite linear;
-  top: 12px;
-  left: 42px;
-}
-
-/* Teeth */
-#gear:after,
-#gear:before {
-  height: 14px;
-  width: 14px;
-  background: #b9b6ad;
-  border-radius: 2px;
-  z-index: -1;
-  box-shadow: 0 62px 0 0 #b9b6ad, -31px 31px 0 0 #b9b6ad, 31px 31px 0 0 #b9b6ad;
-}
-
-#gear:after {
-  top: -15px;
-  left: 17px;
-}
-
-#gear:before {
-  top: -5px;
-  left: 39px;
-  transform: rotateZ(45deg);
-}
-
-/*******************************************************************/
-/* profile an password */
-hr {
+#goback {
   color: black;
+  margin-top: 10%;
 }
 
-*,
-*:after,
-*:before {
-  box-sizing: border-box;
+#goback:hover {
+  color: #E8B4BC;
 }
 
-img {
-  vertical-align: middle;
-  max-width: 100%;
-}
-
-.passwordInput {
-  position: relative;
-  min-width: 20%;
-  max-height: 50%;
-}
-
-.profile {
-  position: relative;
-  min-width: 30%;
-  max-height: 50%;
-}
-
-.profile--open .profile__form,
-.passwordInput--open .password__form {
-  visibility: visible;
-  height: auto;
-  opacity: 1;
-  transform: translateY(-3em);
-  margin-top: 7%;
-  padding-top: 5em;
-}
-
-
-.profile--open .profile__avatar,
-.passwordInput--open .password__avatar {
-  transform: translate(-50%, -1.5em);
-  border-radius: 50%;
-}
-
-.profile__form,
-.password__form {
-  position: relative;
-  background: white;
-  visibility: hidden;
-  border-radius: .25em;
-  -webkit-filter: drop-shadow(0 0 2em rgba(0, 0, 0, 0.2));
-  transition:
-    opacity .4s ease-in-out,
-    height .4s ease-in-out,
-    transform .4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    padding .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.profile__avatar,
-.password__avatar {
-  position: absolute;
-  z-index: 1;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  overflow: hidden;
-  width: 4.5em;
-  height: 4.5em;
-  display: block;
-  transition: transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  will-change: transform;
-}
-
-.profile__avatar:focus,
-.password__avatar:focus {
-  outline: 0;
-}
-
-
-@keyframes intro {
-  from {
-    opacity: 0;
-    top: 0;
-  }
-
-  to {
-    opacity: 1;
-    top: 50%;
-  }
-}
 
 /* icomes, expenses, payment methods */
 

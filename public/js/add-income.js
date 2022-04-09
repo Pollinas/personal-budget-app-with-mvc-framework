@@ -25,45 +25,28 @@ function myFunction(e) {
 $(document).ready(function () {
 
     let v = $("#msform").validate({
-        ignore: '#amount',
+
         rules: {
             date: 'required',
-            category: 'required'
+            category: 'required',
+            amount: 'required'
         },
         messages: {
+            amount: 'Podaj kwotę przychodu',
             date: ' Podaj datę przychodu.',
             category: 'Wybierz kategorię.'
         },
         errorElement: "span",
-        errorClass: "help-inline",
-    });
-
-
-
-    $(".open1").click(function () {
-        if (v.form()) {
-            $("#sf2").show("slow");
+        errorClass: "help-block",
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
         }
     });
-
-    // Binding next button on second step
-    $(".open2").click(function () {
-        if (v.form()) {
-            $("#sf3").show("slow");
-        }
-    });
-
-
-    // Binding back button on second step
-    $(".back2").click(function () {
-        $("#sf1").show("slow");
-    });
-
-    // Binding back button on third step
-    $(".back3").click(function () {
-        $("#sf2").show("slow");
-    });
-
 
 });
+
 

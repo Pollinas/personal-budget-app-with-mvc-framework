@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block title %}Ustawienia{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="/stylesheet/settings.css" />
+{% endblock %}
+
+{% block footer %}
+{{ parent() }}
+<script src="https://kit.fontawesome.com/e2d73f7922.js" crossorigin="anonymous"></script>
+<script src="/js/modal.js"></script>
+<script src="/js/settings.js"></script>
+{% endblock %}
+
+{% block body %}
+
+<h1>Personal Budget App</h1>
+
+<!-- navbar -->
+
+<div id="incomesContainer" class="text-center">
+
+    <table id="tableOfIncomesCategories" class="table table-hover table-dark w-50 table-sm">
+
+        <thead>
+            <tr>
+                <th scope="col">Kategoria</th>
+                <th scope="col" width="7%"></th>
+                <th scope="col" style="display:none;">ID</th>
+                <th scope="col" width="7%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for incomeCategory in incomeCategories %}
+            <tr>
+                <td>{{ incomeCategory.name }}</td>
+                <td class="editIncomeBtn" style="cursor: pointer;"><i class="fas fa-edit"></i></td>
+                <td style="display:none;">{{ incomeCategory.id }}</td>
+                <td class="deleteIncomeCategoryBtn" style="cursor: pointer;"><i class="fa-solid fa-trash-can"></i></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="modal-button btn btn-success btn-lg  mt-5" href="#addIncomeCategoryModal">Dodaj nową
+        kategorię</button>
+
+</div>
+
+<!--edit income category modal-->
+<div class="modal fade" id="editIncomeModal" tabindex="-1" role="dialog" aria-labelledby="edytujKategoriePrzychodu"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edytujesz nazwę kategorii przychodu</h5>
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/Settings/updateIncomeCategory" method="post" id='editIncomeForm'>
+                <div class="modal-body">
+
+                    <input type="hidden" id="incomeCategoryIdModal" name="incomeCategoryId">
+
+                    <div class="input-group my-4">
+                        <span class="input-group-text"><svg xmlns="https://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg></span>
+
+                        <input type="text" id="incomeCategoryModal" class="form-control"
+                            placeholder="Kategoria przychodów" maxlength="40" step="any" aria-label="KategoriaPrzychodu"
+                            name="new_category_name" required>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-success">Zapisz zmiany</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- delete single income category modal-->
+<div class="modal fade" id="deleteIncomeCategoryModal" tabindex="-1" role="dialog"
+    aria-labelledby="usunKategoriePrzychodu" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/Settings/deleteIncomeCategory" method="post" id='deleteIncomeCategoryForm'>
+                <div class="modal-body text-center">
+
+                    <input type="hidden" id="incomeCategoryIdDeleteModal" name="incomeCategoryId">
+                    <input type="hidden" id="incomeCategoryNameDeleteModal" name="incomeCategoryName">
+                    Czy na pewno chcesz usunąć tę kategorię przychodu?
+                    <br> <br>
+                    Jeśli to zrobisz, wszystkim powiązanym z nią przychodom zostanie przypisana kategoria o nazwie
+                    "Inne".
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-danger">Usuń</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+<!--end of delete single income category modal-->
+
+<!--add new income category modal-->
+<div class="modal" id="addIncomeCategoryModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dodaj nową kategorię przychodów</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <form method="post" action="/Settings/addNewIncomeCategory" id="addIncomeCategoryForm">
+                <div class="modal-body text-center">
+
+                    <div class="input-group my-4">
+                        <span class="input-group-text"><svg xmlns="https://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg></span>
+                        <input type="text" class="form-control" placeholder="Wpisz nazwę." maxlength="20"
+                            aria-label="NowaKategoriaPrzychodu" name="new_category_name" required>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-success">Dodaj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--end of add new income category modal-->
+
+
+
+
+
+
+
+
+{% endblock %}

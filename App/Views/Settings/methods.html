@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block title %}Ustawienia{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="/stylesheet/settings.css" />
+{% endblock %}
+
+{% block footer %}
+{{ parent() }}
+<script src="https://kit.fontawesome.com/e2d73f7922.js" crossorigin="anonymous"></script>
+<script src="/js/modal.js"></script>
+<script src="/js/settings.js"></script>
+{% endblock %}
+
+{% block body %}
+
+<h1>Personal Budget App</h1>
+
+<!-- navbar -->
+
+<div id="methodsContainer" class="text-center">
+    <table id="tableOfPaymenthMethods" class="table table-hover table-dark w-50 table-sm">
+
+        <thead>
+            <tr>
+                <th scope="col">Metody płatności</th>
+                <th scope="col" width="5%"></th>
+                <th scope="col" style="display:none;">ID</th>
+                <th scope="col" width="5%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for method in methods %}
+            <tr>
+                <td>{{ method.name }}</td>
+                <td class="editMethodBtn" style="cursor: pointer;"><i class="fas fa-edit"></i></td>
+                <td style="display:none;">{{ method.id }}</td>
+                <td class="deleteMethodBtn" style="cursor: pointer;"><i class="fa-solid fa-trash-can"></i></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="modal-button btn btn-success btn-lg  mt-5" href="#addMethodModal">
+        Dodaj nową metodę płatności</button>
+
+</div>
+
+
+<!--edit payment method modal-->
+<div class="modal fade" id="editPaymentModal" tabindex="-1" role="dialog" aria-labelledby="edytujMetodePlatnosci"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edytujesz nazwę metody płatności</h5>
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/Settings/updatePaymentMethod" method="post" id='editPaymentMethodForm'>
+                <div class="modal-body">
+
+                    <input type="hidden" id="paymentIdModal" name="paymentId">
+                    <div class="input-group my-4">
+                        <span class="input-group-text"><svg xmlns="https://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-credit-card-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0V4zm0 3v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7H0zm3 2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z" />
+                            </svg></span>
+                        <input type="text" id="paymentModal" class="form-control" placeholder="Metoda płatności"
+                            maxlength="40" step="any" aria-label="MetodaPłatności" name="new_method_name" required>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-success">Zapisz zmiany</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+<!--end of edit payment method modal-->
+
+<!--delete payment method modal-->
+<div class="modal fade" id="deleteMethodModal" tabindex="-1" role="dialog" aria-labelledby="usunMetodePlatnosci"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/Settings/deletePaymentMethod" method="post" id='deletePaymentForm'>
+                <div class="modal-body text-center">
+
+                    <input type="hidden" id="methodIdModal" name="methodId">
+                    <input type="hidden" id="methodName" name="methodName">
+                    Czy na pewno chcesz usunąć tę metodę płatności?
+                    <br> <br>
+                    Jeśli to zrobisz, wszystkim powiązanym z nią wydatkom zostanie przypisana metoda o nazwie "Inne".
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-danger">Usuń</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- end of delete single method modal-->
+
+<!--add new payment method modal-->
+<div class="modal" id="addMethodModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dodaj nową metodę płatności</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <form method="post" action="/Settings/addNewPaymentMethod" id="addPaymentMethodForm">
+                <div class="modal-body text-center">
+
+                    <div class="input-group my-4">
+                        <span class="input-group-text"><svg xmlns="https://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-credit-card-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0V4zm0 3v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7H0zm3 2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z" />
+                            </svg></span>
+                        <input type="text" class="form-control" placeholder="Wpisz nazwę." maxlength="20"
+                            aria-label="NowaMetodaPłatności" name="new_method_name" required>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-success">Dodaj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--end of add new payment method modal-->
+
+
+<!-- end of methods settings -->
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+
+{% block title %}Ustawienia{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="/stylesheet/settings.css" />
+{% endblock %}
+
+{% block footer %}
+{{ parent() }}
+<script src="https://kit.fontawesome.com/e2d73f7922.js" crossorigin="anonymous"></script>
+<script src="/js/modal.js"></script>
+<script src="/js/settings.js"></script>
+{% endblock %}
+
+{% block body %}
+
+<h1>Personal Budget App</h1>
+
+<!-- navbar -->
+<div id="expensesContainer" class="text-center">
+
+    <table id="tableOfExpensesCategories" class="table table-hover table-dark w-50 table-sm">
+
+        <thead>
+            <tr>
+                <th scope="col">Kategoria</th>
+                <th scope="col" style="display:none;">ID</th>
+                <th scope="col">Limit</th>
+                <th scope="col" width="7%"></th>
+                <th scope="col" width="7%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expenseCategory in expenseCategories %}
+            <tr>
+                <td>{{ expenseCategory.name }}</td>
+                <td style="display:none;">{{ expenseCategory.id }}</td>
+                <td>{% if expenseCategory.expense_limit != NULL %}{{ expenseCategory.expense_limit }}{%
+                    endif %}</td>
+                <td class="editExpenseBtn" style="cursor: pointer;"><i class="fas fa-edit"></i></td>
+                <td class="deleteExpenseCatgedoryBtn" style="cursor: pointer;"><i class="fa-solid fa-trash-can"></i>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="modal-button btn btn-success btn-lg  mt-5" href="#addExpenseCategoryModal">Dodaj
+        nową kategorię</button>
+
+</div>
+
+<!--edit expense category modal-->
+<div class="modal fade" id="editExpenseModal" tabindex="-1" role="dialog" aria-labelledby="edytujKategorieWydatku"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edytujesz kategorię wydatków</h5>
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/Settings/updateExpenseCategory" method="post" id='editExpenseForm'>
+                <div class="modal-body">
+
+                    <input type="hidden" id="expenseCategoryIdEditModal" name="expenseCategoryId">
+
+                    <div class="input-group  my-4">
+                        <span class="input-group-text"><svg xmlns="https://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg></span>
+
+                        <input type="text" id="expenseCategoryModal" class="form-control"
+                            placeholder="Kategoria wydatków" maxlength="40" step="any" aria-label="KategoriaWydatku"
+                            name="new_category_name" required>
+                    </div>
+
+                    <div class="form-check d-flex justify-content-start align-items-start my-2">
+                        <input class="form-check-input mx-1" type="checkbox" id="set_limit" name="set_limit"
+                            onchange="checkLimit(event)">
+                        <label class="form-check-label mx-1" for="set_limit">
+                            Ustaw limit miesięczny
+                        </label>
+                    </div>
+
+                    <input type="number" name="limit" id="limitEdit" class="mx-5" min="0.1" step="0.1"
+                        class="form-control">
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-success">Zapisz zmiany</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+<!--end of edit expense category modal-->
+
+<!-- delete single expense category modal-->
+<div class="modal fade" id="deleteExpenseCategoryModal" tabindex="-1" role="dialog"
+    aria-labelledby="usunKategorieWydatku" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/Settings/deleteExpenseCategory" method="post" id='deleteExpenseCategoryForm'>
+                <div class="modal-body text-center">
+
+                    <input type="hidden" id="expenseCategoryIdModal" name="expenseCategoryId">
+                    <input type="hidden" id="expenseCategoryNameModal" name="expenseCategoryName">
+                    Czy na pewno chcesz usunąć tę kategorię wydatku?
+                    <br> <br>
+                    Jeśli to zrobisz, wszystkim powiązanym z nią wydatkom zostanie przypisana kategoria o nazwie "Inne".
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-danger">Usuń</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+<!--end of delete single expense category modal -->
+
+<!--add new expense category modal-->
+<div class="modal" id="addExpenseCategoryModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dodaj nową kategorię wydatku</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <form method="post" action="/Settings/addNewExpenseCategory" id="addExpenseCategoryForm">
+                <div class="modal-body text-center">
+
+                    <div class="input-group my-4">
+                        <span class="input-group-text"><svg xmlns="https://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg></span>
+                        <input type="text" class="form-control" placeholder="Wpisz nazwę." maxlength="20"
+                            aria-label="NowaKategoriaWydatku" name="new_category_name" required>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button submit" class="btn btn-success">Dodaj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--end of add new expense category modal-->
+
+
+<!-- end of methods settings -->
+
+
+
+
+
+
+
+
+{% endblock %}

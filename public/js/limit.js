@@ -32,7 +32,6 @@ function checkDate(e) {
 function checkAmount(e) {
     let expenses = $('#monthlyExpenses').html()
     let amount = $('#amount').val()
-    console.log(amount)
     let sum = calculateSum(expenses, amount)
     $('#calculated').html(sum);
     changeColor();
@@ -72,7 +71,6 @@ async function check() {
 * @return value 
  */
 async function getSumOfExpensesForSelectedMonth(category, date) {
-
     try {
         const response = await fetch(`/api/expenses/${category}/${date}`);
         const expenses = await response.json();
