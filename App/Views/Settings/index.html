@@ -4,7 +4,6 @@
 
 {% block stylesheets %}
 {{ parent() }}
-<link rel="stylesheet" type="text/css" href="/stylesheet/icon.css" />
 <link rel="stylesheet" type="text/css" href="/stylesheet/panel.css" />
 <link rel="stylesheet" type="text/css" href="/stylesheet/settings.css" />
 {% endblock %}
@@ -12,12 +11,39 @@
 {% block footer %}
 {{ parent() }}
 <script src="https://kit.fontawesome.com/e2d73f7922.js" crossorigin="anonymous"></script>
-<script src="/js/panel.js"></script>
 <script src="/js/modal.js"></script>
 <script src="/js/settings.js"></script>
 {% endblock %}
 
 {% block body %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/"><span class="material-icons">home</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/income"><span class="material-icons">attach_money</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/expense"><span class="material-icons">shopping_cart</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/balance"><span class="material-icons">query_stats</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout"><span class="material-icons">logout</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <h1>Personal Budget App</h1>
 <div class="d-none" id="userId">{{ user.id }}</div>
@@ -25,30 +51,30 @@
 <div class="wrapper mx-auto my-5">
     <div class="tab">
         <input name="tabs" class="input" id="tab-one" type="checkbox" />
-        <label class="label" for="tab-one">Profil</label>
-        <div class="tab-content d-flex flex-column justify-content-evelny align-items-center">
-            <div><button>Edytuj dane profilowe</button></div>
-            <div><button>Zmień hasło</button></div>
-            <div><button class="modal-button btn btn-danger my-4" href="#deleteAccount">Usuń konto</button></div>
+        <label class="label one" for="tab-one">Profil</label>
+        <div class="tab-content d-flex flex-row justify-content-evenly align-items-center">
+            <a href="/settings/profile">Edytuj dane profilowe</a>
+            <a href="/settings/password">Zmień hasło</a>
+            <button class="modal-button btn my-4" href="#deleteAccount">Usuń konto</button>
         </div>
     </div>
     <div class="tab">
         <input name="tabs" class="input" id="tab-two" type="checkbox" />
-        <label class="label" for="tab-two">Wydatki</label>
-        <div class="tab-content d-flex flex-column justify-content-evelny align-items-center">
-            <div><button>Edytuj kategorie wydatków</button></div>
-            <div><button>Edytuj metody płatności</button></div>
-            <div><button class="btn modal-button btn-danger text-white my-5" href="#deleteAllExpenses">Usuń
-                    wszystkie wydatki</button></div>
+        <label class="label two" for="tab-two">Wydatki</label>
+        <div class="tab-content d-flex flex-row justify-content-evenly align-items-center">
+            <a href="/settings/expenses">Edytuj kategorie wydatków</a>
+            <a href="/settings/methods">Edytuj metody płatności</a>
+            <button class="btn modal-button my-4" href="#deleteAllExpenses">Usuń
+                wszystkie wydatki</button>
         </div>
     </div>
     <div class="tab">
         <input name="tabs" class="input" id="tab-three" type="checkbox" />
-        <label class="label" for="tab-three">Przychody</label>
-        <div class="tab-content  d-flex flex-column justify-content-evelny align-items-center">
-            <div><button>Edytuj kategorie przychodów</button></div>
-            <div><button class="btn modal-button btn-danger text-white my-5" href="#deleteAllIncomes">Usuń
-                    wszystkie przychody</button></div>
+        <label class="label three" for="tab-three">Przychody</label>
+        <div class="tab-content  d-flex flex-row justify-content-evenly align-items-center">
+            <a href="/settings/incomes">Edytuj kategorie przychodów</a>
+            <button class="btn modal-button my-4" href="#deleteAllIncomes">Usuń
+                wszystkie przychody</button>
         </div>
     </div>
 </div>

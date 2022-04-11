@@ -35,7 +35,7 @@ class Signup extends \Core\Controller
         if ($user->save()) {
 
             $user->sendActivationEmail();
-
+            http_response_code(201);
             $this->redirect('/Signup/success');
 
         } else {

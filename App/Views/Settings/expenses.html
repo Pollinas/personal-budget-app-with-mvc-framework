@@ -18,8 +18,41 @@
 
 <h1>Personal Budget App</h1>
 
-<!-- navbar -->
-<div id="expensesContainer" class="text-center">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/settings" class="float-start">Wróć do menu ustawień</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="d-flex">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="/"><span class="material-icons">home</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/income"><span class="material-icons">attach_money</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/expense"><span class="material-icons">shopping_cart</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/balance"><span class="material-icons">query_stats</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout"><span class="material-icons">logout</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div id="expensesContainer" class="text-center mb-5">
+
+    <button class="modal-button btn btn-success btn-lg  mb-5" href="#addExpenseCategoryModal">Dodaj
+        nową kategorię</button>
 
     <table id="tableOfExpensesCategories" class="table table-hover table-dark w-50 table-sm">
 
@@ -46,9 +79,6 @@
             {% endfor %}
         </tbody>
     </table>
-
-    <button class="modal-button btn btn-success btn-lg  mt-5" href="#addExpenseCategoryModal">Dodaj
-        nową kategorię</button>
 
 </div>
 
@@ -86,7 +116,7 @@
                         </label>
                     </div>
 
-                    <input type="number" name="limit" id="limitEdit" class="mx-5" min="0.1" step="0.1"
+                    <input type="number" name="limit" id="limitEdit" class="mx-5" min="0.01" step="0.01"
                         class="form-control">
 
                 </div>

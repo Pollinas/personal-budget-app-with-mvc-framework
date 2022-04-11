@@ -21,7 +21,6 @@ class Addexpense extends Authenticated
      */
     public function newAction()
     {
-
         View::renderTemplate('Addexpense/new.html',[
             'categories' => Expense::getExpenseCategories(),
             'methods' => Expense::getPaymentMethods()
@@ -40,6 +39,7 @@ class Addexpense extends Authenticated
           if($expense->save())
         {
             Flash::addMessage('Dodawanie wydatku zakończone sukcesem.');
+            http_response_code(201);
             $this->redirect('/');
 
         } else {
