@@ -23,23 +23,49 @@
 
 <h1>Personal Budget App</h1>
 
-<nav class="navbar navbar-dark d-flex align-items-center justify-content-evenly p-3">
-    <form method="post" class="d-flex" action="/displaybalance/create">
-        <select class="form-select fs-4" id="time" name="time" onchange='myFunction(event)'
-            aria-label="Default select example">
-            <option selected value="current_month"> Bieżący miesiąc </option>
-            <option value="previous_month"> Ubiegły miesiąc </option>
-            <option value="current_year"> Bieżący rok </option>
-            <option value="custom"> Niestandardowy </option>
-        </select>
-        <button class="btn btn-outline-success m-3" type="submit"><svg xmlns="://www.w3.org/2000/svg" width="16"
-                height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-                <path
-                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
-            </svg></button>
-    </form>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+    <div class="container-fluid">
+        <form method="post" class="d-flex mx-md-5" action="/displaybalance/create">
+            <select class="form-select fs-4" id="time" name="time" onchange='myFunction(event)'
+                aria-label="Default select example">
+                <option selected value="current_month"> Bieżący miesiąc </option>
+                <option value="previous_month"> Ubiegły miesiąc </option>
+                <option value="current_year"> Bieżący rok </option>
+                <option value="custom"> Niestandardowy </option>
+            </select>
+            <button class="btn btn-outline-success m-3" type="submit"><svg xmlns="://www.w3.org/2000/svg" width="16"
+                    height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                    <path
+                        d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                </svg></button>
+        </form>
 
-    <div id="home"><a href="/"><i class="fa-solid fa-2xl fa-house"></i></a></div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="d-flex">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="/"><span class="material-icons">home</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/income"><span class="material-icons">attach_money</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/expense"><span class="material-icons">shopping_cart</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/balance"><span class="material-icons">query_stats</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout"><span class="material-icons">logout</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </nav>
 
 
@@ -104,8 +130,9 @@
                     <td>{{ income.amount }}</td>
                     <td>{{ income.name }}</td>
                     <td>{% if income.income_comment != '' %}{{ income.income_comment }} {% endif %}</td>
-                    <td class="editSingleIncomeBtn" style="cursor: pointer;"><i class="fas fa-edit"></i></td>
-                    <td class="deleteSingleIncomeBtn" style="cursor: pointer;"><i class="fa-solid fa-trash-can"></i>
+                    <td class="editSingleIncomeBtn" style="cursor: pointer; width:5%"><i class="fas fa-edit"></i></td>
+                    <td class="deleteSingleIncomeBtn" style="cursor: pointer;width:5%;"><i
+                            class="fa-solid fa-trash-can"></i>
                     </td>
                 </tr>
                 {% endfor %}
@@ -178,7 +205,7 @@
                 </tr>
                 <tr>
                     <th scope="col" style="display:none;">ID</th>
-                    <th scope="col">Data</th>
+                    <th scope="col" style="width:20%;">Data</th>
                     <th scope="col">Kwota [PLN]</th>
                     <th scope="col">Kategoria</th>
                     <th scope="col">Metoda płatności</th>
