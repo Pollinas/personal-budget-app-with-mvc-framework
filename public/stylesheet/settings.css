@@ -87,6 +87,15 @@
   margin: 1em;
 }
 
+.tab-content .btn {
+  font-weight: bold;
+}
+
+.tab-content .btn:hover,
+.tab-content a:hover {
+  color: #E8B4BC;
+}
+
 
 .input:checked~.tab-content {
   max-height: 10em;
@@ -182,4 +191,18 @@ td {
 
 #limitEdit {
   display: none;
+}
+
+.add-category-btn {
+  flex: auto;
+  background: #7DCFB6;
+  font-weight: 600;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 20px 25px 0;
+  border-radius: 4px;
+  z-index: 1;
 }

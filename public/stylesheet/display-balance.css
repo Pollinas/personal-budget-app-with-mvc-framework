@@ -1,3 +1,27 @@
+.navbar {
+  z-index: 10;
+}
+
+.navbar ul li {
+  margin: 0 10px;
+}
+
+.navbar ul li a {
+  color: white;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  text-decoration: none;
+}
+
+.navbar ul li a:hover {
+  border-color: #fbc2eb;
+  box-shadow: 0 9px 12px -9px #fbc2eb;
+}
+
 #time {
   min-width: 20px;
   font-weight: bold;
