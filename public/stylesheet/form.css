@@ -1,7 +1,7 @@
 /*form styles*/
 #msform {
 	max-width: 600px;
-	min-height: 480px;
+	/* min-height: 480px;  */
 	margin: 100px auto;
 	text-align: center;
 	position: relative;
@@ -35,8 +35,8 @@
 /*headings*/
 .step-title {
 	font-size: 20px;
-    font-weight:bold;
-    letter-spacing: 2px;
+	font-weight: bold;
+	letter-spacing: 2px;
 	text-transform: uppercase;
 	color: black;
 	margin-bottom: 10px;
@@ -79,7 +79,8 @@
 	border-radius: 3px;
 	margin: 0 auto 5px auto;
 	position: relative;
-	z-index: 2; /* Push the numbers over the progress line. */
+	z-index: 2;
+	/* Push the numbers over the progress line. */
 }
 
 /*progressbar connectors*/
@@ -147,6 +148,7 @@
 	width: 80px;
 	height: 80px;
 }
+
 .lds-ripple div {
 	position: absolute;
 	border: 4px solid #fff;
@@ -154,9 +156,11 @@
 	border-radius: 50%;
 	animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
+
 .lds-ripple div:nth-child(2) {
 	animation-delay: -0.5s;
 }
+
 @keyframes lds-ripple {
 	0% {
 		top: 36px;
@@ -165,6 +169,7 @@
 		height: 0;
 		opacity: 1;
 	}
+
 	100% {
 		top: 0px;
 		left: 0px;

@@ -192,6 +192,7 @@ class Settings extends Authenticated
             if(Income::addNewIncomeCategory($new_category_name))
             {
                Flash::addMessage('Dodano nową kategorię przychodów.');
+               http_response_code(201);
                 $this->indexAction(); 
 
             } else {
@@ -313,6 +314,7 @@ class Settings extends Authenticated
             if(Expense::addNewExpenseCategory($new_category_name))
             {
                Flash::addMessage('Dodano nową kategorię wydatków.');
+               http_response_code(201);
                 $this->indexAction(); 
 
             } else {
@@ -346,7 +348,7 @@ class Settings extends Authenticated
 
         if (isset($_POST['limit']))
         {
-            $limit = $_POST['limit'];;
+            $limit = $_POST['limit'];
 
         }
 
@@ -425,6 +427,7 @@ class Settings extends Authenticated
             if(Expense::addNewPaymentMethod($new_method_name))
             {
                Flash::addMessage('Dodano nową metodę płatności.');
+               http_response_code(201);
                 $this->indexAction(); 
 
             } else {

@@ -39,29 +39,36 @@ function checkAmount(e) {
 
 async function check() {
     let category = $('#category').val()
-    let limit = await getLimitForCategory(category);
 
-    if (limit !== null) {
+    if (category !== '') {
+        let limit = await getLimitForCategory(category);
 
-        let date = $('#date').val()
+        if (limit !== null) {
 
-        if (date !== null) {
-            let expenses = await getSumOfExpensesForSelectedMonth(category, date);
-            let difference = calculateDifference(limit, expenses)
+            let date = $('#date').val()
 
-            let amount = $('#amount').val()
-            let sum = calculateSum(expenses, amount)
-            renderOnDOM(limit, expenses, difference, sum)
-        } else {
+            if (date !== null) {
+                let expenses = await getSumOfExpensesForSelectedMonth(category, date);
+                let difference = calculateDifference(limit, expenses)
+
+                let amount = $('#amount').val()
+                let sum = calculateSum(expenses, amount)
+                renderOnDOM(limit, expenses, difference, sum)
+            } else {
+
+                $('#limitContainer').hide();
+            }
+        }
+        else {
 
             $('#limitContainer').hide();
         }
     }
-
     else {
 
         $('#limitContainer').hide();
     }
+
 }
 
 
