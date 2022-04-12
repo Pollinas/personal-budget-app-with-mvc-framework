@@ -59,8 +59,10 @@ $(document).ready(function () {
 
     $(".open1").click(function () {
         if (v.form()) {
+
             $("#sf2").show("slow");
         }
+
     });
 
     // Binding next button on second step

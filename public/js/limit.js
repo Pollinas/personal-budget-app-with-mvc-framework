@@ -6,10 +6,9 @@ Date.prototype.toDateInputValue = (function () {
 
 document.getElementById('date').value = new Date().toDateInputValue();
 
-
 // Zmiana kategorii 
 function checkCategory(e) {
-    check();
+    checkLimit();
 };
 
 
@@ -25,7 +24,7 @@ function checkDate(e) {
         document.getElementById("date").valueAsDate = null;
     }
 
-    check();
+    checkLimit();
 }
 
 // zmiana kwoty
@@ -33,11 +32,12 @@ function checkAmount(e) {
     let expenses = $('#monthlyExpenses').html()
     let amount = $('#amount').val()
     let sum = calculateSum(expenses, amount)
-    $('#calculated').html(sum);
+    let sumOk = (Math.round(sum * 100) / 100).toFixed(2);
+    $('#calculated').html(sumOk);
     changeColor();
 }
 
-async function check() {
+async function checkLimit() {
     let category = $('#category').val()
 
     if (category !== '') {
@@ -51,9 +51,14 @@ async function check() {
                 let expenses = await getSumOfExpensesForSelectedMonth(category, date);
                 let difference = calculateDifference(limit, expenses)
 
-                let amount = $('#amount').val()
-                let sum = calculateSum(expenses, amount)
-                renderOnDOM(limit, expenses, difference, sum)
+                if ($('#amount').val() !== '') {
+                    let amount = $('#amount').val()
+                    let sum = calculateSum(expenses, amount);
+                    renderOnDOM(limit, expenses, difference, sum);
+                } else {
+                    renderOnDOM(limit, expenses, difference, expenses);
+                }
+
             } else {
 
                 $('#limitContainer').hide();
@@ -109,15 +114,20 @@ const calculateDifference = (limit, expenses) => {
 };
 
 const calculateSum = (expenses, amount) => {
-    return (parseFloat(expenses) + parseFloat(amount));
+    sum = (parseFloat(expenses) + parseFloat(amount));
+    return sum;
 }
 
 
 const renderOnDOM = (limit, expenses, difference, sum) => {
+
+    let sumOk = (Math.round(sum * 100) / 100).toFixed(2);
     $('#monthlyLimit').html(limit);
     $('#monthlyExpenses').html(expenses);
     $('#difference').html(difference);
-    $('#calculated').html(sum);
+
+    $('#calculated').html(sumOk);
+
 
     changeColor();
     $('#limitContainer').show();

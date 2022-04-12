@@ -21,8 +21,6 @@
 
 {% block body %}
 
-<h1>Personal Budget App</h1>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
     <div class="container-fluid">
         <form method="post" class="d-flex mx-md-5" action="/displaybalance/create">
@@ -57,7 +55,7 @@
                         <a href="/expense"><span class="material-icons">shopping_cart</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="/balance"><span class="material-icons">query_stats</span></a>
+                        <a href="/settings"><span class="material-icons">settings_suggest</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="/logout"><span class="material-icons">logout</span></a>
@@ -635,7 +633,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Wybierz przedział czasowy</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="post" action="/displaybalance/createcustom">
+            <form method="post" action="/Displaybalance/createcustom">
                 <div class="modal-body container d-flex flex-md-row flex-column text-center">
                     <div class="container d-flex flex-column">
                         <label for="begin" class="form-label">DATA POCZĄTKOWA</label>
@@ -663,7 +661,7 @@
             <div class="modal-header">
                 <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/DisplayBalance/deleteSingleIncome" method="post">
+            <form action="/Displaybalance/deleteSingleIncome" method="post">
                 <div class="modal-body text-center my-4">
                     <input type="hidden" id="incomeIdDeleteModal" name="income_id">
                     Czy na pewno chcesz usunąć ten przychód?
@@ -687,7 +685,7 @@
                 <h5>Edytujesz wybrany przychód</h5>
                 <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/DisplayBalance/editSingleIncome" method="post" id="editSingleIncomeForm">
+            <form action="/Displaybalance/editSingleIncome" method="post" id="editSingleIncomeForm">
                 <div class="modal-body text-center">
                     <input type="hidden" id="incomeIdEditModal" name="income_id">
 
@@ -741,7 +739,7 @@
             <div class="modal-header">
                 <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/DisplayBalance/deleteSingleExpense" method="post">
+            <form action="/Displaybalance/deleteSingleExpense" method="post">
                 <div class="modal-body text-center my-4">
                     <input type="hidden" id="expenseIdDeleteModal" name="expense_id">
                     Czy na pewno chcesz usunąć ten wydatek?
@@ -765,7 +763,7 @@
                 <h5>Edytujesz wybrany wydatek</h5>
                 <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/DisplayBalance/editSingleExpense" method="post" id="editSingleExpenseForm">
+            <form action="/Displaybalance/editSingleExpense" method="post" id="editSingleExpenseForm">
                 <div class="modal-body text-center">
                     <input type="hidden" id="expenseIdEditModal" name="expense_id">
 

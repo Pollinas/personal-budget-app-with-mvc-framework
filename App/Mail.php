@@ -7,6 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+
 /**
  * Mail
  *
@@ -32,7 +33,6 @@ class Mail
         try {
     
             $mail->isSMTP();
-            //$mail->SMTPDebug = false;
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Port = 465;
@@ -49,8 +49,8 @@ class Mail
             $mail->Body=$html;
 
             $mail->send();
-            echo '<div class="alert alert-info alert-dismissible text-center" role="alert"> Wiadomość e-mail została wysłana.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';
+            // echo '<div class="alert alert-info alert-dismissible text-center" role="alert"> Wiadomość e-mail została wysłana.
+            // <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }

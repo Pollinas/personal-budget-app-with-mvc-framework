@@ -23,7 +23,7 @@ class Displaybalance extends Authenticated
      */
     public function indexAction()
     {
-        View::renderTemplate('displaybalance/index.html', [
+        View::renderTemplate('Displaybalance/index.html', [
             'incomes' => Balance::getCurrentMonthIncomes(),
             'expenses' => Balance::getCurrentMonthExpenses(),
             'balanceCalc' => Balance::getCurrentMonthBalance(),
@@ -69,7 +69,7 @@ class Displaybalance extends Authenticated
 
     protected function showPreviousMonthDataAction()
     {
-        View::renderTemplate('displayBalance/index.html', [
+        View::renderTemplate('DisplayBalance/index.html', [
             'incomes' => Balance::getPreviousMonthIncomes(),
             'expenses' => Balance::getPreviousMonthExpenses(),
             'balanceCalc' => Balance::getPreviousMonthBalance(),
@@ -91,7 +91,7 @@ class Displaybalance extends Authenticated
 
     protected function showCurrentYearDataAction()
     {
-        View::renderTemplate('displayBalance/index.html', [
+        View::renderTemplate('DisplayBalance/index.html', [
             'incomes' => Balance::getCurrentYearIncomes(),
             'expenses' => Balance::getCurrentYearExpenses(),
             'balanceCalc' => Balance::getCurrentYearBalance(),
@@ -117,7 +117,7 @@ class Displaybalance extends Authenticated
         $begin = $balance->begin;
         $end = $balance->end;
       
-        View::renderTemplate('displayBalance/index.html', [
+        View::renderTemplate('DisplayBalance/index.html', [
             'balance' => $balance, 
             'incomes' => Balance::getCustomIncomes($begin, $end),
             'expenses' =>   Balance::getCustomExpenses($begin, $end),
