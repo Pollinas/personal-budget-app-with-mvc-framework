@@ -42,9 +42,9 @@ $router->add('balance' , ['controller' => 'Displaybalance', 'action' => 'index']
 $router->add('expense' , ['controller' => 'Addexpense', 'action' => 'new']);
 $router->add('income' , ['controller' => 'Addincome', 'action' => 'new']);
 
-$router->add('api/limit/{category:[A-Za-ząĄćĆęĘłŁńŃóÓśŚżŻźŹ\w]+}', ['controller' => 'AddExpense', 'action' => 'limit']);
+$router->add('api/limit/{category:[A-Za-ząĄćĆęĘłŁńŃóÓśŚżŻźŹ\w]+}', ['controller' => 'Addexpense', 'action' => 'limit']);
 
-$router->add('api/expenses/{category:[A-Za-ząĄćĆęĘłŁńŃóÓśŚżŻźŹ\w]+}/{date:[\d+\-\d+\-\d+]+}', ['controller' => 'AddExpense', 'action' => 'expenses']);
+$router->add('api/expenses/{category:[A-Za-ząĄćĆęĘłŁńŃóÓśŚżŻźŹ\w]+}/{date:[\d+\-\d+\-\d+]+}', ['controller' => 'Addexpense', 'action' => 'expenses']);
 
 
 

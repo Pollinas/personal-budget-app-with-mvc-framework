@@ -405,7 +405,7 @@ class Expense extends \Core\Model
         
             if($set_limit != null)
             {
-                if($limit != null && $limit != '' && $limit > 0)
+                if($limit != null && $limit !== '')
                 {
                     $stmt->bindValue(':limit', $limit, PDO::PARAM_STR);
                 } else {

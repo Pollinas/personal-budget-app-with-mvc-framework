@@ -1,4 +1,3 @@
-
 Date.prototype.toDateInputValue = (function () {
     let local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
@@ -32,7 +31,7 @@ $(document).ready(function () {
             amount: 'required'
         },
         messages: {
-            amount: 'Podaj kwotę przychodu',
+            amount: 'Podaj kwotę przychodu w poprawnej formie.',
             date: ' Podaj datę przychodu.',
             category: 'Wybierz kategorię.'
         },
@@ -48,5 +47,10 @@ $(document).ready(function () {
     });
 
 });
+
+
+
+
+
 
 

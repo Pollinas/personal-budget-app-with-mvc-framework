@@ -548,3 +548,11 @@ h1 {
 #card-6 .back {
     background: #e8b4bcd8;
 }
+
+@media (max-width: 800px) {
+
+    .motivation-panel-container,
+    .floating-btn {
+        display: none;
+    }
+}
