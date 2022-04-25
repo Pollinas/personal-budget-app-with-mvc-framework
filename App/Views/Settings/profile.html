@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Ustawienia{% endblock %}
+{% block title %}Settings{% endblock %}
 
 {% block stylesheets %}
 {{ parent() }}
@@ -42,7 +42,7 @@
 
     <form method="post" action="/Settings/updateProfile" id="msform" class="p-5 formProfile">
 
-        <h2 class="step-title mt-5">Edytuj dane profilowe</h2>
+        <h2 class="step-title mt-5">Edit your profile data</h2>
 
         <div class="input-group align-self-center mx-auto mt-5 mb-3">
             <label for="name" class="form-label"> </label>
@@ -52,21 +52,21 @@
                         d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                 </svg></span>
             <input type="text" name="name" minlength="2" maxlength="20" class="form-control rounded" id="name"
-                aria-describedby="name" placeholder="Wpisz swoje imię." value="{{ user.name }}" required>
+                aria-describedby="name" placeholder="Enter your name." value="{{ user.name }}" required>
         </div>
 
         <div class="input-group align-self-center mx-auto mb-4">
             <label for="email" class="form-label"> </label>
             <span class="input-group-text">@</span>
             <input type="email" name="email" class="form-control rounded" id="email" aria-describedby="email" required
-                placeholder="Wpisz swój adres e-mail." value="{{ user.email }}" required>
+                placeholder="Enter your e-mail address." value="{{ user.email }}" required>
         </div>
 
         <div class="button-wrapper">
-            <input type="submit" name="submit" class="submit action-button mt-4" value="Zapisz zmiany" />
+            <input type="submit" name="submit" class="submit action-button mt-4" value="Save changes" />
         </div>
 
-        <a href="/settings" id="goback">Wróć do menu ustawień</a>
+        <a href="/settings" id="goback">Return to settings menu</a>
 
     </form>
 
@@ -85,9 +85,8 @@
         <button class="close-btn"><span class="material-icons">
                 close
             </span></button>
-        <h4 class="text-center m-2">HEJ{% if current_user %}, {{ current_user.name}}{% endif %}! <br> DOKĄD
-            CHCESZ
-            PÓJŚĆ?
+        <h4 class="text-center m-2">HEY{% if current_user %}, {{ current_user.name}}{% endif %}! <br> WHERE DO YOU WANT
+            TO GO?
         </h4>
         <ul>
             <li>
