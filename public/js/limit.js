@@ -20,7 +20,7 @@ function checkDate(e) {
     let today = new Date();
 
     if (letDate > today) {
-        alert("Data wydatku nie może być późniejsza od dzisiejszej daty!");
+        alert("The date of the expense must not be later than today's date!");
         document.getElementById("date").valueAsDate = null;
     }
 
