@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Resetowanie hasła{% endblock %}
+{% block title %}Password reset{% endblock %}
 
 {% block stylesheets %}
 {{ parent() }}
@@ -17,16 +17,15 @@
         alt="" class="img-fluid order-lg-first order-last">
     <div class="container align-items-center justify-content-center align-self-center d-flex flex-column text-center py-5 px-4 my-5"
         id="content">
-        <h2>Resetowanie hasła</h2>
+        <h2>Password reset</h2>
 
-        <span class="text-center w-75 mb-3">Link do resetowania hasła wygasł lub jest nieprawidłowy. Kliknij poniżej
-            ,aby
-            uzyskać
-            kolejny.</span>
+        <span class="text-center w-75 mb-3">The link to reset your password has expired or is invalid. Click below
+            to get the next one.
+        </span>
 
         <div class="button-container d-flex mx-auto align-items-center justify-center flex-column">
             <a href="/password/forgot" class="shiny-btn signup">
-                RESETUJ HASŁO
+                RESET PASSWORD
             </a>
         </div>
     </div>

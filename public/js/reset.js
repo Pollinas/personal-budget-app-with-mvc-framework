@@ -11,7 +11,7 @@ $.validator.addMethod('validPassword',
 
         return true;
     },
-    'Hasło musi zawierać przynajmniej 1 literę i 1 cyfrę.'
+    'The password must contain at least 1 letter and 1 number.'
 );
 
 
