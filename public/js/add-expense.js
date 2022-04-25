@@ -8,10 +8,10 @@ $(document).ready(function () {
             category: 'required'
         },
         messages: {
-            amount: 'Podaj kwotę wydatku w prawidłowej formie.',
-            date: ' Podaj datę wydatku.',
-            method: 'Wybierz jedną z metod płatności.',
-            category: 'Wybierz kategorię.'
+            amount: 'Enter the amount of the expense in the correct form.',
+            date: 'Set the date of the expense.',
+            method: 'Choose one of the payment methods.',
+            category: 'Select a category.'
         },
         errorElement: "span",
         errorClass: "help-block",

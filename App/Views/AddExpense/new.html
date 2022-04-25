@@ -20,10 +20,10 @@
 
 <div class="text-center alert p-5 mb-5" role="alert" id="limitContainer">
     <div class="row">
-        <div class="col">Limit miesięczny: <span id="monthlyLimit"></span></div>
-        <div class="col">Wydatki w tym miesiącu: <span id="monthlyExpenses"></span></div>
-        <div class="col">Różnica: <span id="difference"></span></div>
-        <div class="col">Wydatki + wpisana kwota: <span id="calculated"></span></div>
+        <div class="col">Monthly limit: <span id="monthlyLimit"></span></div>
+        <div class="col">This month's expenses: <span id="monthlyExpenses"></span></div>
+        <div class="col">Difference: <span id="difference"></span></div>
+        <div class="col">Expenses + entered amount: <span id="calculated"></span></div>
     </div>
 </div>
 
@@ -44,15 +44,14 @@
 <!-- form -->
 <form id="msform" method="post" action="/addexpense/create" class="p-5">
 
-    <h2 class="step-title text-center">Wpisz kwotę wydatku</h2>
+    <h2 class="step-title text-center">Enter amount of expense</h2>
     <div class="input-group mx-5 mt-5 w-75">
         <label for="amount" class="form-label align-self-center m-1"></label>
-        <span class="input-group-text">PLN</span>
         <input type="number" min="0.01" step="0.01" name="amount" class="form-control" id="amount"
             onchange="checkAmount(event)" value="{{ expense.amount }}" required>
     </div>
 
-    <h2 class="step-title mt-5">Ustaw datę wydatku</h2>
+    <h2 class="step-title mt-5">Set the expense date</h2>
 
     <div class="input-group m-5 w-75">
         <label for="date" class="form-label align-self-center m-1 m-md-2"></label>
@@ -61,8 +60,8 @@
     </div>
 
 
-    <h2 class="step-title">Wybierz jedną z kategorii oraz metod płatności.</h2>
-    <h3 class="step-subtitle">I wpisz komentarz poniżej, jeśli chcesz.</h3>
+    <h2 class="step-title">Select one of the categories and payment methods.</h2>
+    <h3 class="step-subtitle">And enter a comment below if you like.</h3>
 
 
     <div class="input-group my-4">
@@ -74,7 +73,7 @@
             </svg></span>
         <select class="form-select" id="category" name="category" aria-label="Default select example"
             onchange="checkCategory(event)">
-            <option selected value="">KATEGORIE WYDATKÓW</option>
+            <option selected value="">EXPENSE CATEGORIES</option>
             {% for category in categories %}
             <option value="{{ category.name }}"> {{ category.name }}</option>
             {% endfor %}
@@ -83,7 +82,7 @@
 
 
     <div class="container d-flex my-4 mx-auto flex-column text-center justify-content-center w-75">
-        <label class="form-label m-3">METODY PŁATNOŚCI</label>
+        <label class="form-label m-3">PAYMENT METHODS</label>
         {% for method in methods %}
         <div class="form-check form-check-inline">
             <input class="form-check-input payment-methods" type="radio" name="method" id="{{ method.name }}"
@@ -95,11 +94,11 @@
         {% endfor %}
     </div>
 
-    <textarea type="text" class="form-control" name="comment" id="comment" rows="4" cols="15"
-        placeholder="Miejsce na ewentualny komentarz"></textarea>
+    <textarea type="text" class="form-control" name="comment" id="comment" rows="4" cols="15" placeholder="Space for a possible comment
+        "></textarea>
 
     <div class="button-wrapper">
-        <input type="submit" name="submit" class="submit action-button" value="Dodaj wydatek" />
+        <input type="submit" name="submit" class="submit action-button" value="Submit" />
     </div>
 
 </form>
@@ -115,8 +114,8 @@
         <button class="close-btn"><span class="material-icons">
                 close
             </span></button>
-        <h4 class="text-center m-2">HEJ{% if current_user %}, {{ current_user.name}}{% endif %}! <br> DOKĄD CHCESZ
-            PÓJŚĆ?
+        <h4 class="text-center m-2">HEY{% if current_user %}, {{ current_user.name}}{% endif %}! <br> WHERE DO YOU WANT
+            TO GO?
         </h4>
         <ul>
             <li>

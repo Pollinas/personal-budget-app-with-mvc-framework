@@ -38,7 +38,7 @@ class Addexpense extends Authenticated
 
           if($expense->save())
         {
-            Flash::addMessage('Dodawanie wydatku zakończone sukcesem.');
+            Flash::addMessage('Expense added successfully.');
             http_response_code(201);
             $this->redirect('/');
 

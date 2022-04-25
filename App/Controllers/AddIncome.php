@@ -39,7 +39,7 @@ class Addincome extends Authenticated
 
           if($income->save())
         {
-            Flash::addMessage('Dodawanie przychodu zakończone sukcesem.');
+            Flash::addMessage('Income added successfully.');
             http_response_code(201);
             $this->redirect('/');
 
