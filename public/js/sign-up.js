@@ -14,7 +14,7 @@ $(document).ready(function () {
 
             return true;
         },
-        'Hasło musi zawierać przynajmniej 1 literę i 1 cyfrę.'
+        'The password must contain at least 1 letter and 1 number.'
     );
 
 
@@ -33,15 +33,15 @@ $(document).ready(function () {
             }
         },
         messages: {
-            name: 'Podaj imię.',
+            name: 'Enter your name.',
             email: {
-                required: 'Podaj adres e-mail.',
-                email: 'Podaj poprawny adres e-mail',
-                remote: 'Podany adres e-mail istnieje już w bazie danych.'
+                required: 'Enter your e-mail address.',
+                email: 'Enter a valid e-mail address',
+                remote: 'The email address you entered already exists in the database.'
             },
             password: {
-                required: 'Podaj hasło.',
-                minlegth: 'Podane hasło jest za krótkie.'
+                required: 'Enter password.',
+                minlegth: 'The given password is too short.'
             }
         },
         errorElement: "span",
