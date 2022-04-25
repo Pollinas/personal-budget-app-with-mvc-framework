@@ -145,12 +145,12 @@ class Displaybalance extends Authenticated
 
         if(Income::deleteSingleIncome($id))
         {
-            Flash::addMessage('Usunięto wybrany przychód.');    
+            Flash::addMessage('The selected income has been deleted.');    
             $this->indexAction();
         }
         else
         {
-            Flash::addMessage('Ups! Coś poszło nie tak.' , $type='info');  
+            Flash::addMessage('Oops! Something went wrong. Please try again later.' , $type='info');  
         }
       
     }
@@ -166,12 +166,12 @@ class Displaybalance extends Authenticated
 
         if(Expense::deleteSingleExpense($id))
         {
-            Flash::addMessage('Usunięto wybrany wydatek.');    
+            Flash::addMessage('The selected expense has been removed.');    
             $this->indexAction();
         }
         else
         {
-            Flash::addMessage('Ups! Coś poszło nie tak. Spróbuj ponownie później.' , $type='info');  
+            Flash::addMessage('Oops! Something went wrong. Please try again later.' , $type='info');  
         }
       
     }
@@ -187,12 +187,12 @@ class Displaybalance extends Authenticated
         if(Income::editSingleIncome($id, $date, $amount, $category, $comment))
         {
             
-            Flash::addMessage('Edytowano wybrany przychód.');    
+            Flash::addMessage('The selected income has been updated.');    
             $this->indexAction();
         }
         else
         {
-            Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawne dane w formularzu lub spróbuj ponownie później.' , $type='warning');  
+            Flash::addMessage('Oops! Something went wrong. Please try again later.' , $type='warning');  
             $this->indexAction();
         }
     }
@@ -210,12 +210,12 @@ class Displaybalance extends Authenticated
         if(Expense::editSingleExpense($id, $date, $amount, $category, $comment, $method))
         {
             
-            Flash::addMessage('Edytowano wybrany wydatek.');    
+            Flash::addMessage('The selected expense has been updated.');    
             $this->indexAction();
         }
         else
         {
-            Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawne dane w formularzu lub spróbuj ponownie później.' , $type='warning');  
+            Flash::addMessage('Oops! Something went wrong. Please try again later.' , $type='warning');  
             $this->indexAction();
         }
     }

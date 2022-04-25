@@ -13,7 +13,7 @@ function checkDate(date, id) {
     let today = new Date();
 
     if (date > today) {
-        alert("Data nie może być późniejsza od dzisiejszej daty!");
+        alert("The date cannot be later than today's date!");
         document.getElementById(id).valueAsDate = null;
     }
 }
@@ -28,7 +28,7 @@ function checkEndDate(e) {
     checkDate(endDate, "end");
 
     if (beginDate > endDate) {
-        alert("Data końcowa bilansu nie może być wcześniejsza od jego daty początkowej!");
+        alert("The end date of the balance cannot be earlier than its start date!");
         document.getElementById("end").valueAsDate = null;
     }
 }
@@ -244,9 +244,9 @@ $(document).ready(function () {
             category: 'required'
         },
         messages: {
-            amount: 'Podaj kwotę wydatku w prawidłowej formie.',
-            date: ' Podaj datę przychodu.',
-            category: 'Wybierz kategorię.'
+            amount: 'Enter the amount of the income in the correct form',
+            date: 'Enter the date of the income.',
+            category: 'Select a category.'
         },
         errorElement: "span",
         errorClass: "help-block",
@@ -267,10 +267,10 @@ $(document).ready(function () {
             category: 'required'
         },
         messages: {
-            amount: 'Podaj kwotę wydatku w prawidłowej formie.',
-            date: ' Podaj datę wydatku.',
-            method: 'Wybierz jedną z metod płatności.',
-            category: 'Wybierz kategorię.'
+            amount: 'Enter the amount of the expense in the correct form.',
+            date: ' Enter the date of the expense.',
+            method: 'Select a payment method.',
+            category: 'Select a category.'
         },
         errorElement: "span",
         errorClass: "help-block",
