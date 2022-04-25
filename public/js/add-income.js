@@ -13,7 +13,7 @@ function myFunction(e) {
 
 
     if (letDate > today) {
-        alert("Data przychodu nie może być późniejsza od dzisiejszej daty!");
+        alert("The income date cannot be later than today's date!");
         document.getElementById("date").valueAsDate = null;
     }
 
@@ -31,9 +31,9 @@ $(document).ready(function () {
             amount: 'required'
         },
         messages: {
-            amount: 'Podaj kwotę przychodu w poprawnej formie.',
-            date: ' Podaj datę przychodu.',
-            category: 'Wybierz kategorię.'
+            amount: 'Enter the income amount in the correct form.',
+            date: 'Specify the date of the income.',
+            category: 'Select a category.'
         },
         errorElement: "span",
         errorClass: "help-block",
