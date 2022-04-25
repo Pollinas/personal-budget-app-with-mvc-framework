@@ -135,9 +135,9 @@ $(document).ready(function () {
             },
             messages: {
                 new_category_name: {
-                    remote: 'Kategoria o takiej nazwie już istnieje.',
-                    maxlength: 'Kategoria może zawierać 4-20 liter polskiego alfabetu.',
-                    minlength: 'Kategoria może zawierać 4-20 liter polskiego alfabetu.'
+                    remote: 'Category with that name already exists.',
+                    maxlength: 'A category can contain 4-20 letters. ',
+                    minlength: 'A category can contain 4-20 letters.'
                 }
             },
             errorElement: "span",
@@ -180,9 +180,9 @@ $(document).ready(function () {
         },
         messages: {
             new_category_name: {
-                remote: 'Kategoria wydatków o takiej nazwie już istnieje.',
-                maxlength: 'Kategoria wydatków może zawierać 4-20 liter polskiego alfabetu.',
-                minlength: 'Kategoria wydatków może zawierać 4-20 liter polskiego alfabetu.'
+                remote: 'Expense category with that name already exists.',
+                maxlength: 'An expense category can contain 4-20 letters.',
+                minlength: 'An expense category can contain 4-20 letters.'
             }
         },
         errorElement: "span",
@@ -219,9 +219,9 @@ $(document).ready(function () {
         },
         messages: {
             new_category_name: {
-                remote: 'Kategoria przychodu o takiej nazwie już istnieje.',
-                maxlength: 'Kategoria przychodu może zawierać 4-20 liter polskiego alfabetu.',
-                minlength: 'Kategoria przychodu może zawierać 4-20 liter polskiego alfabetu.'
+                remote: 'Income category with that name already exists.',
+                maxlength: 'An income category can contain 4-20 letters.',
+                minlength: 'An income category can contain 4-20 letters.'
             }
         },
         errorElement: "span",
@@ -253,10 +253,10 @@ $(document).ready(function () {
         },
         messages: {
             new_method_name: {
-                required: 'To pole jest obowiązkowe.',
-                remote: 'Metoda płatności o takiej nazwie już istnieje.',
-                maxlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.',
-                minlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.'
+                required: 'This field is required.',
+                remote: 'Payment method with that name already exists.',
+                maxlength: 'An payment method can contain 4-20 letters.',
+                minlength: 'An payment method can contain 4-20 letters.'
             }
         },
         errorElement: "span",
@@ -292,10 +292,10 @@ $(document).ready(function () {
         },
         messages: {
             new_method_name: {
-                required: 'To pole jest obowiązkowe.',
-                remote: 'Metoda płatności o takiej nazwie już istnieje.',
-                maxlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.',
-                minlength: 'Metoda płatności może zawierać 4-20 liter polskiego alfabetu.'
+                required: 'This field is required.',
+                remote: 'Payment method with that name already exists.',
+                maxlength: 'An payment method can contain 4-20 letters.',
+                minlength: 'An payment method can contain 4-20 letters.'
             }
         },
         errorElement: "span",

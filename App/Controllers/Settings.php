@@ -137,11 +137,11 @@ class Settings extends Authenticated
     {
         if(Income::deleteAllIncomes())
         {
-            Flash::addMessage('Przychody zostały usunięte.');
+            Flash::addMessage('All incomes have been deleted.');
             $this->indexAction();
         }
         else{
-            Flash::addMessage('Ups! Coś poszło nie tak.' , $type='info');  
+            Flash::addMessage('Oops! Something went wrong. Please try again later.' , $type='info');  
             $this->indexAction();
         }
     }
@@ -160,12 +160,12 @@ class Settings extends Authenticated
            
           if( Income::deleteSingleIncomeCategory($income_category_id) )
              {
-                 Flash::addMessage('Wybrana kategoria przychodu została usunięta.');
+                 Flash::addMessage('The selected income category has been deleted.');
                  $this->indexAction();
  
              } else {
  
-                 Flash::addMessage('Ups! Coś poszło nie tak. spróbuj ponownie później.' , $type='info');
+                 Flash::addMessage('Oops! Something went wrong. Please try again later.' , $type='info');
                  $this->indexAction();
              }       
         
@@ -191,18 +191,18 @@ class Settings extends Authenticated
         {
             if(Income::addNewIncomeCategory($new_category_name))
             {
-               Flash::addMessage('Dodano nową kategorię przychodów.');
+               Flash::addMessage('A new income category has been added.');
                http_response_code(201);
                 $this->indexAction(); 
 
             } else {
-                Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawną nazwę nowej kategorii przychodów lub spróbuj ponownie później.' , $type='info');
+                Flash::addMessage('Oops! Something went wrong. Please enter a valid category name or try again later.' , $type='info');
                 $this->indexAction();
             }
            
         } else {
 
-            Flash::addMessage('Kategoria przychodów o takiej nazwie już istnieje.' , $type='warning');
+            Flash::addMessage('An income category with that name already exists.' , $type='warning');
             $this->indexAction();
         } 
     }
@@ -226,17 +226,17 @@ class Settings extends Authenticated
             {
                 if(Income::updateIncomeCategory($new_category_name, $category_id))
                 {
-                Flash::addMessage('Zaktualizowano wybraną kategorię przychodów.');
+                Flash::addMessage('The selected income category has been updated.');
                     $this->indexAction(); 
 
                 } else {
-                    Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawną nazwę dla edytowanej kategorii przychodów lub spróbuj ponownie później.' , $type='info');
+                    Flash::addMessage('Oops! Something went wrong. Please enter a valid category name or try again later.' , $type='info');
                     $this->indexAction();
                 }
            
         } else {
 
-            Flash::addMessage('Kategoria przychodów o takiej nazwie już istnieje.' , $type='warning');
+            Flash::addMessage('An income category with that name already exists.' , $type='warning');
             $this->indexAction();
         }
 
@@ -258,11 +258,11 @@ class Settings extends Authenticated
     {
         if(Expense::deleteAllExpenses())
         {
-            Flash::addMessage('Wydatki zostały usunięte.');
+            Flash::addMessage('All expenses have been deleted.');
             $this->indexAction();
            
         }else{
-            Flash::addMessage('Ups! Coś poszło nie tak.' , $type='info');
+            Flash::addMessage('Oops! Something went wrong. Please try again later.' , $type='info');
             $this->indexAction();
         }
     }
@@ -281,12 +281,12 @@ class Settings extends Authenticated
            
           if( Expense::deleteSingleExpenseCategory($expense_category_id) )
              {
-                 Flash::addMessage('Wybrana kategoria wydatku została usunięta.');
+                 Flash::addMessage('The selected expense category has been deleted.');
                  $this->indexAction();
  
              } else {
  
-                 Flash::addMessage('Ups! Coś poszło nie tak. spróbuj ponownie później.' , $type='info');
+                 Flash::addMessage('Oops! Something went wrong. Please try again later.' , $type='info');
                  $this->indexAction();
              }       
         
@@ -313,18 +313,18 @@ class Settings extends Authenticated
         {
             if(Expense::addNewExpenseCategory($new_category_name))
             {
-               Flash::addMessage('Dodano nową kategorię wydatków.');
+               Flash::addMessage('A new expense category has been added.');
                http_response_code(201);
                 $this->indexAction(); 
 
             } else {
-                Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawną nazwę nowej kategorii wydatków lub spróbuj ponownie później.' , $type='info');
+                Flash::addMessage('Oops! Something went wrong. Please enter a valid category name or try again later.' , $type='info');
                 $this->indexAction();
             }
            
         } else {
 
-            Flash::addMessage('Kategoria wydatków o takiej nazwie już istnieje.' , $type='warning');
+            Flash::addMessage('An expense category with that name already exists.' , $type='warning');
             $this->indexAction();
         } 
     }
@@ -359,17 +359,17 @@ class Settings extends Authenticated
             {
                 if(Expense::updateExpenseCategory($new_category_name, $category_id, $set_limit ?? null, $limit ?? null))
                 {
-                Flash::addMessage('Zaktualizowano wybraną kategorię wydatków.');
+                Flash::addMessage('The selected expense category has been updated.');
                     $this->indexAction(); 
 
                 } else {
-                    Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawną nazwę dla edytowanej kategorii wydatków lub spróbuj ponownie później.' , $type='info');
+                    Flash::addMessage('Oops! Something went wrong. Please enter a valid category name or try again later.' , $type='info');
                     $this->indexAction();
                 }
            
         } else {
 
-            Flash::addMessage('Kategoria wydatków o takiej nazwie już istnieje.' , $type='warning');
+            Flash::addMessage('An expense category with that name already exists.' , $type='warning');
             $this->indexAction();
         }
 
@@ -395,12 +395,12 @@ class Settings extends Authenticated
         {
          if(Expense::deleteSinglePaymentMethod( $payment_method_id))
             {
-                Flash::addMessage('Wybrana metoda płatności została usunięta.');
+                Flash::addMessage('The selected payment method has been deleted.');
                 $this->indexAction();
 
             } else {
 
-                Flash::addMessage('Ups! Coś poszło nie tak. spróbuj ponownie później.' , $type='info');
+                Flash::addMessage('Oops! Something went wrong. Please try again later.' , $type='info');
                 $this->indexAction();
             }
         }else{
@@ -426,18 +426,18 @@ class Settings extends Authenticated
         {
             if(Expense::addNewPaymentMethod($new_method_name))
             {
-               Flash::addMessage('Dodano nową metodę płatności.');
+               Flash::addMessage('A payment method has been added.');
                http_response_code(201);
                 $this->indexAction(); 
 
             } else {
-                Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawną nazwę nowej metody płatności lub spróbuj ponownie później.' , $type='info');
+                Flash::addMessage('Oops! Something went wrong. Please enter a valid method name or try again later.' , $type='info');
                 $this->indexAction();
             }
            
         } else {
 
-            Flash::addMessage('Metoda płatności o takiej nazwie już istnieje.' , $type='warning');
+            Flash::addMessage('A payment method with that name already exists.' , $type='warning');
             $this->indexAction();
         } 
     }
@@ -461,17 +461,17 @@ class Settings extends Authenticated
         {
             if(Expense::updatePaymentMethod($new_method_name,  $method_id))
             {
-               Flash::addMessage('Zaktualizowano wybraną metodę płatności.');
+               Flash::addMessage('The selected payment method has been updated.');
                 $this->indexAction(); 
 
             } else {
-                Flash::addMessage('Ups! Coś poszło nie tak. Wpisz poprawną nazwę dla edytowanej metody płatności lub spróbuj ponownie później.' , $type='info');
+                Flash::addMessage('Oops! Something went wrong. Please enter a valid method name or try again later.' , $type='info');
                 $this->indexAction();
             }
            
         } else {
 
-            Flash::addMessage('Metoda płatności o takiej nazwie już istnieje.' , $type='warning');
+            Flash::addMessage('A payment method with that name already exists.' , $type='warning');
             $this->indexAction();
         }
 
@@ -484,7 +484,7 @@ class Settings extends Authenticated
     
     protected function displayInfoWhenTryingToMessWithInneAction()
     {
-        Flash::addMessage('Metody płatności oraz kategorii przychodów i wydatków o nazwie "Inne" nie można usuwać ani edytować.' , $type='warning');
+        Flash::addMessage('Payment methods, income and expense categories named "Other" cannot be deleted or edited.' , $type='warning');
         $this->indexAction();
     }
 
@@ -501,11 +501,11 @@ class Settings extends Authenticated
     public function updateProfileAction()
     {
       if($this->user->updateProfile($_POST)){
-          Flash::addMessage('Nowe dane zostały zapisane.');
+          Flash::addMessage('The new data has been saved.');
          $this->indexAction();
       }
       else{
-         Flash::addMessage('Dane profilowe nie zostały zmienione.', $type='warning');
+         Flash::addMessage('The profile information has not been changed.', $type='warning');
          $this->indexAction();
       }
       
@@ -521,11 +521,11 @@ class Settings extends Authenticated
      {
          if($this->user->updatePassword($_POST['password']))
          {
-             Flash::addMessage('Hasło zostało zmienione.');
+             Flash::addMessage('The password has been changed.');
              $this->indexAction();
          }
          else{
-             Flash::addMessage('Hasło nie zostało zmienione.');
+             Flash::addMessage('Something went wrong. Your password hasn\'t been changed. Please try again later.');
             $this->indexAction();
          }
          
@@ -541,11 +541,11 @@ class Settings extends Authenticated
      {
          if($this->user->deleteAccount())
          {
-             Flash::addMessage('Konto i wszystkie dane z nim powiązane zostały usunięte.');
+             Flash::addMessage('The account and all data associated with it has been deleted.');
              $this->redirect('/');
          }
          else{
-             Flash::addMessage('Ups! Coś poszło nie tak.');
+             Flash::addMessage('Oops! Something went wrong. Please try again later.');
             $this->redirect('/');
          }
      }
