@@ -22,10 +22,10 @@ $(document).ready(function () {
             }
         },
         messages: {
-            name: 'Podaj imię.',
+            name: 'Enter a name.',
             email: {
-                email: 'Podaj poprawny adres e-mail',
-                remote: 'Podany adres e-mail istnieje już w bazie danych.'
+                email: 'Enter a valid e-mail address.',
+                remote: 'The email address you entered already exists in the database.'
             }
         },
         errorElement: "span",
@@ -53,7 +53,7 @@ $.validator.addMethod('validPassword',
 
         return true;
     },
-    'Hasło musi zawierać przynajmniej 1 literę i 1 cyfrę.'
+    'Password must contain at least 1 letter and 1 number.'
 );
 
 $(document).ready(function () {
@@ -73,8 +73,8 @@ $(document).ready(function () {
         },
         messages: {
             password: {
-                required: 'To pole nie może być puste.',
-                minlength: 'Hasło jest zbyt krótkie.'
+                required: 'This field cannot be empty.',
+                minlength: 'The password is too short.'
             }
         },
         errorElement: "span",
