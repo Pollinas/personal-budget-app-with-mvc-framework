@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Dodaj przychód{% endblock %}
+{% block title %}Add income{% endblock %}
 {% block stylesheets %}
 {{ parent() }}
 <link rel="stylesheet" type="text/css" href="/stylesheet/icon.css" />
@@ -36,16 +36,15 @@
 
 <form id="msform" method="post" action="/addincome/create" class="p-5">
 
-    <h2 class=" step-title text-center">Wpisz kwotę przychodu</h2>
+    <h2 class=" step-title text-center">Enter the income amount</h2>
     <div class="input-group m-5 w-75">
         <label for="amount" class="form-label align-self-center"></label>
-        <span class="input-group-text">PLN</span>
         <input type="number" step="0.01" min="0.01" class="form-control" name="amount" id="amount"
             value="{{ income.amount }}" required>
     </div>
 
 
-    <h2 class="step-title">Ustaw datę przychodu</h2>
+    <h2 class="step-title">Set income date</h2>
 
     <div class="input-group m-5 w-75">
         <label for="date" class="form-label align-self-center m-1"></label>
@@ -53,8 +52,8 @@
             value="{{ income.date }}">
     </div>
 
-    <h2 class="step-title">Wybierz jedną z kategorii</h2>
-    <h3 class="step-subtitle">I wpisz komentarz poniżej, jeśli chcesz.</h3>
+    <h2 class="step-title">Choose one of the categories.</h2>
+    <h3 class="step-subtitle">And enter a comment below if you like.</h3>
     <div class="input-group my-4">
 
         <label for="category"></label>
@@ -64,7 +63,7 @@
                     d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
             </svg></span>
         <select class="form-select" id="category" name="category" aria-label="Default select example">
-            <option selected value="">KATEGORIE PRZYCHODÓW</option>
+            <option selected value="">INCOME CATEGORIES</option>
             {% for category in categories %}
             <option value="{{ category.name }}"> {{ category.name }}</option>
             {% endfor %}
@@ -72,11 +71,11 @@
     </div>
 
     <textarea type="text" class="form-control" name="comment" id="comment" rows="4" cols="15"
-        placeholder="Miejsce na ewentualny komentarz"></textarea>
+        placeholder="Space for possible comment."></textarea>
 
 
     <div class="button-wrapper">
-        <input type="submit" name="submit" class="submit action-button" value="Dodaj przychód" />
+        <input type="submit" name="submit" class="submit action-button" value="Submit" />
     </div>
 
 </form>
@@ -92,8 +91,8 @@
         <button class="close-btn"><span class="material-icons">
                 close
             </span></button>
-        <h4 class="text-center m-2">HEJ{% if current_user %}, {{ current_user.name}}{% endif %}! <br> DOKĄD CHCESZ
-            PÓJŚĆ?
+        <h4 class="text-center m-2">HEY{% if current_user %}, {{ current_user.name}}{% endif %}! <br> WHERE DO YOU WANT
+            TO GO?
         </h4>
         <ul>
             <li>
