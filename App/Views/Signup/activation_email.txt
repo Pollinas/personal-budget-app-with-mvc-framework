@@ -1,5 +1,5 @@
-Accont activation
+Account activation
 
-Dziękujemy za rejestrację. Click on the link to activate your account:
+Thank you for registering.  Click on the link to activate your account:
 
 {{ url }}
