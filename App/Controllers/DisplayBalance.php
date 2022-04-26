@@ -166,7 +166,7 @@ class Displaybalance extends Authenticated
 
         if(Expense::deleteSingleExpense($id))
         {
-            Flash::addMessage('The selected expense has been removed.');    
+            Flash::addMessage('The selected expense has been deleted.');    
             $this->indexAction();
         }
         else
