@@ -87,10 +87,10 @@ class User extends \Core\Model
         
         // email address
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
-            $this->errors[] = 'Nieprawidłowy adres e-mail.';
+            $this->errors[] = 'Invalid email address.';
         }
         if (static::emailExists($this->email, $this->id ?? null)) {
-            $this->errors[] = 'Podany adres e-mail istnieje już w bazie danych.';
+            $this->errors[] = 'The email address you entered already exists in the database.';
         }
     }
 
@@ -98,15 +98,15 @@ class User extends \Core\Model
         if (isset($this->password)) {
 
         if (strlen($this->password) < 6) {
-            $this->errors[] = 'Hasło musi zawierać co najmniej 6 znaków.';
+            $this->errors[] = 'Password must be at least 6 characters.';
         }
 
         if (preg_match('/.*[a-z]+.*/i', $this->password) == 0) {
-            $this->errors[] = 'Hasło musi zawierać co najmniej jedną literę.';
+            $this->errors[] = 'The password must contain at least one letter.';
         }
 
         if (preg_match('/.*\d+.*/i', $this->password) == 0) {
-            $this->errors[] = 'Hasło musi zawierać co najmniej jedną cyfrę.';
+            $this->errors[] = 'The password must contain at least one number.';
         }
 
         }

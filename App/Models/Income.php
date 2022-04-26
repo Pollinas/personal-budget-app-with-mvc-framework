@@ -98,26 +98,26 @@ class Income extends \Core\Model
     {
         // amount
         if ($this->amount == '') {
-            $this->errors[] = 'Podaj kwotę.';
+            $this->errors[] = 'Enter amount.';
         }
 
         if ($this->amount < 0) {
-            $this->errors[] = 'Kwota przychodu nie może być mniejsza od 0.';
+            $this->errors[] = 'The amount of the income cannot be less than 0.';
         }
 
         // date
         $date_now = date("Y-m-d"); 
         if ($this->date > $date_now) {
-            $this->errors[] = 'Data przychodu nie może być późniejsza od dzisiejszej';
+            $this->errors[] = 'The date of the income cannot be later than today.';
         }
 
         if ($this->date == '') {
-            $this->errors[] = 'Podaj datę przychodu.';
+            $this->errors[] = 'Enter the date of the income.';
         }
        
         //category
         if ($this->category == '') {
-            $this->errors[] = 'Wybierz kategorię.';
+            $this->errors[] = 'Select a category.';
         }
 
     }

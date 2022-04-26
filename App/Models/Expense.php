@@ -113,26 +113,26 @@ class Expense extends \Core\Model
     {
         // amount
         if ($this->amount == '') {
-            $this->errors[] = 'Podaj kwotę.';
+            $this->errors[] = 'Enter amount.';
         }
 
         if ($this->amount < 0) {
-            $this->errors[] = 'Kwota wydatku nie może być mniejsza od 0.';
+            $this->errors[] = 'The amount of the expense cannot be less than 0.';
         }
 
         // date
         $date_now = date("Y-m-d"); 
         if ($this->date > $date_now) {
-            $this->errors[] = 'Data wydatku nie może być późniejsza od dzisiejszej';
+            $this->errors[] = 'The date of the expense cannot be later than today.';
         }
 
         if ($this->date == '') {
-            $this->errors[] = 'Podaj datę wydatku.';
+            $this->errors[] = 'Enter the date of the expense.';
         }
        
         //category
         if ($this->category == '') {
-            $this->errors[] = 'Wybierz kategorię.';
+            $this->errors[] = 'Select a category.';
         }
 
     }
