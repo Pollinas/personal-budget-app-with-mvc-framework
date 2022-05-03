@@ -155,7 +155,7 @@ class Settings extends Authenticated
     {
         $income_category_id = $_POST['incomeCategoryId'];
         
-        if ($_POST['incomeCategoryName'] != "Inne")
+        if ($_POST['incomeCategoryName'] != "Other")
          {
            
           if( Income::deleteSingleIncomeCategory($income_category_id) )
@@ -219,7 +219,7 @@ class Settings extends Authenticated
 
         $category_id = $_POST['incomeCategoryId'];
 
-        if ($new_category_name != "Inne")
+        if ($new_category_name != "Other")
         {
     
             if(! Income::CategoryExists($new_category_name, $category_id))
@@ -276,7 +276,7 @@ class Settings extends Authenticated
     {
         $expense_category_id = $_POST['expenseCategoryId'];
         
-        if ($_POST['expenseCategoryName'] != "Inne")
+        if ($_POST['expenseCategoryName'] != "Other")
          {
            
           if( Expense::deleteSingleExpenseCategory($expense_category_id) )
@@ -352,7 +352,7 @@ class Settings extends Authenticated
 
         }
 
-        if ($new_category_name != "Inne")
+        if ($new_category_name != "Other")
         {
     
             if(! Expense::CategoryExists($new_category_name, $category_id))
@@ -391,7 +391,7 @@ class Settings extends Authenticated
     {
         $payment_method_id = $_POST['methodId'];
         
-       if ($_POST['methodName'] != "Inne")
+       if ($_POST['methodName'] != "Other")
         {
          if(Expense::deleteSinglePaymentMethod( $payment_method_id))
             {
@@ -454,7 +454,7 @@ class Settings extends Authenticated
 
         $method_id = $_POST['paymentId'];
 
-        if ($new_method_name != "Inne")
+        if ($new_method_name != "Other")
         {
     
         if(!Expense::MethodExists($new_method_name, $method_id))

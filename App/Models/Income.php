@@ -189,7 +189,7 @@ class Income extends \Core\Model
      */
     public static function deleteSingleIncomeCategory($income_category_id)
     {
-        $incomeCategoryOtherId = Income::extractCategoryIdByName('Inne');
+        $incomeCategoryOtherId = Income::extractCategoryIdByName('Other');
 
         $sql = 'UPDATE incomes
         SET  income_category_assigned_to_user_id = :other_id';
