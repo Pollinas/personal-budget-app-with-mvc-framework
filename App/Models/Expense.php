@@ -244,7 +244,7 @@ class Expense extends \Core\Model
      */
     public static function deleteSinglePaymentMethod($payment_method_id)
     {
-        $paymentMethodOtherId = Expense::extractPaymentMethodIdByName('Inne');
+        $paymentMethodOtherId = Expense::extractPaymentMethodIdByName('Other');
 
         $sql = 'UPDATE expenses
         SET  payment_method_assigned_to_user_id = :other_id';
@@ -279,7 +279,7 @@ class Expense extends \Core\Model
      */
     public static function deleteSingleExpenseCategory($expense_category_id)
     {
-       $expenseCategoryOtherId = Expense::extractCategoryIdByName('Inne');
+       $expenseCategoryOtherId = Expense::extractCategoryIdByName('Other');
 
         $sql = 'UPDATE expenses
         SET  expense_category_assigned_to_user_id = :other_id';
@@ -291,7 +291,6 @@ class Expense extends \Core\Model
 
         $stmt1->bindValue(':expense_category_id', $expense_category_id, PDO::PARAM_INT);
         $stmt1->bindValue(':other_id', $expenseCategoryOtherId, PDO::PARAM_INT);
-        
 
         if($stmt1->execute())
         {
@@ -365,7 +364,7 @@ class Expense extends \Core\Model
         {
             
             $sql = 'INSERT INTO expenses_category_assigned_to_users
-            VALUES ( NULL, :id , :category_name)';
+            VALUES ( NULL, :id , :category_name, NULL)';
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);

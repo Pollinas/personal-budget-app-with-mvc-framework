@@ -77,7 +77,7 @@ $(document).ready(function () {
         }).get();
 
         $('#expenseCategoryNameModal').val(data[0]);
-        $('#expenseCategoryIdModal').val(data[2]);
+        $('#expenseCategoryIdModal').val(data[1]);
 
     });
 
